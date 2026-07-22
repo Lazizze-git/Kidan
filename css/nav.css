@@ -1,0 +1,392 @@
+/* Navigation : des étiquettes de papier collées en haut du mur,
+   pas de bandeau plein — le grillage passe entre les étiquettes */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  /* La bande vide laisse passer les clics, seules les étiquettes
+     sont interactives */
+  pointer-events: none;
+}
+
+body.nav-open {
+  overflow: hidden;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0.9rem var(--space-gutter);
+}
+
+/* Étiquette logo */
+.nav__logo {
+  pointer-events: auto;
+  /* Reste visible au-dessus du panneau de menu ouvert */
+  position: relative;
+  z-index: 46;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.85rem;
+  font-size: clamp(0.95rem, 3vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  background: var(--color-paper);
+  box-shadow: 2px 3px 0 rgba(17, 17, 16, 0.14),
+    0 8px 18px rgba(17, 17, 16, 0.2);
+  transform: rotate(-1.2deg);
+  transition: transform var(--transition);
+}
+
+.nav__logo:hover {
+  transform: rotate(0deg);
+}
+
+/* Le disque 45 tours tourne au survol */
+.nav__logo-mark {
+  width: 26px;
+  height: 26px;
+  transition: transform 600ms ease-out;
+}
+
+.nav__logo:hover .nav__logo-mark {
+  transform: rotate(180deg);
+}
+
+/* Étiquette du bouton menu (mobile) — la croix reste au-dessus
+   du panneau ouvert */
+.nav__toggle {
+  pointer-events: auto;
+  position: relative;
+  z-index: 46;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0.7rem 0.6rem;
+  background: var(--color-paper);
+  box-shadow: 2px 3px 0 rgba(17, 17, 16, 0.14),
+    0 8px 18px rgba(17, 17, 16, 0.2);
+  transform: rotate(1.4deg);
+  transition: transform var(--transition);
+}
+
+.nav__toggle:hover {
+  transform: rotate(0deg);
+}
+
+.nav__toggle-line {
+  width: 22px;
+  height: 2px;
+  background: var(--color-ink);
+  transition: transform var(--transition);
+}
+
+.nav__toggle[aria-expanded="true"] .nav__toggle-line:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.nav__toggle[aria-expanded="true"] .nav__toggle-line:last-child {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+/* Menu mobile : le mur se vide, il ne reste que les flyers
+   des rubriques, aux couleurs du site ------------------------ */
+.nav__menu {
+  pointer-events: auto;
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  padding: 5.5rem clamp(1.5rem, 6vw, 3rem) 2rem;
+  /* Le même mur de grillage que le reste du site */
+  background-color: var(--color-bg);
+  background-image: var(--fence-tile, none);
+  background-size: var(--fence-size, auto);
+  background-repeat: repeat;
+  image-rendering: pixelated;
+  overflow-y: auto;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity var(--transition), visibility var(--transition);
+}
+
+.nav__menu.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.nav__menu li {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 350ms ease-out, transform 350ms ease-out;
+}
+
+.nav__menu.is-open li {
+  opacity: 1;
+  transform: none;
+}
+
+.nav__menu.is-open li:nth-child(2) {
+  transition-delay: 40ms;
+}
+
+.nav__menu.is-open li:nth-child(3) {
+  transition-delay: 80ms;
+}
+
+.nav__menu.is-open li:nth-child(4) {
+  transition-delay: 120ms;
+}
+
+.nav__menu.is-open li:nth-child(5) {
+  transition-delay: 160ms;
+}
+
+.nav__menu.is-open li:nth-child(6) {
+  transition-delay: 200ms;
+}
+
+/* Chaque lien est un flyer collé de travers */
+.nav__menu a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  padding: 0.9rem 1.1rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  text-decoration: none;
+  color: var(--color-ink);
+  background: var(--color-paper);
+  box-shadow: 2px 3px 0 rgba(17, 17, 16, 0.14),
+    0 10px 22px rgba(17, 17, 16, 0.22);
+}
+
+/* Les couleurs des rubriques, comme les flyers de l'accueil */
+.nav__menu li:nth-child(1) a {
+  transform: rotate(-1.2deg);
+  margin-right: 2rem;
+}
+
+.nav__menu li:nth-child(2) a {
+  background: var(--color-green);
+  transform: rotate(1deg);
+  margin-left: 2rem;
+}
+
+.nav__menu li:nth-child(3) a {
+  background: var(--color-pink);
+  transform: rotate(-0.9deg);
+  margin-right: 1.25rem;
+}
+
+.nav__menu li:nth-child(4) a {
+  background: var(--color-blue);
+  transform: rotate(1.3deg);
+  margin-left: 1.25rem;
+}
+
+.nav__menu a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 3px;
+}
+
+/* Numéro de piste sur chaque flyer */
+.nav__num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(17, 17, 16, 0.55);
+  font-variant-numeric: tabular-nums;
+}
+
+/* CTA Soutenir : flyer rouge, texte blanc */
+.nav__item-cta {
+  margin-top: 0.5rem;
+}
+
+.nav__menu .nav__cta {
+  justify-content: center;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  transform: rotate(-1deg);
+  margin-right: 1.5rem;
+}
+
+.nav__menu .nav__cta:hover {
+  background: var(--color-ink);
+  color: #fff;
+}
+
+/* Pied de panneau : petite étiquette contact */
+.nav__menu-meta {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 1.25rem;
+  padding: 0.9rem 1rem;
+  background: var(--color-paper);
+  box-shadow: 2px 3px 0 rgba(17, 17, 16, 0.12),
+    0 8px 16px rgba(17, 17, 16, 0.16);
+  transform: rotate(0.8deg);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-gray);
+}
+
+.nav__menu-meta a {
+  display: inline;
+  padding: 0;
+  font-size: inherit;
+  font-weight: 700;
+  letter-spacing: inherit;
+  color: var(--color-ink);
+  background: none;
+  box-shadow: none;
+  transform: none;
+  margin: 0;
+}
+
+.nav__menu-radio {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav__menu-radio-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-gray);
+  animation: radio-pulse 2s ease-out infinite;
+}
+
+/* Compteur panier */
+.nav__cart-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.3rem;
+  height: 1.3rem;
+  padding: 0 0.3rem;
+  margin-left: 0.25rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--color-paper);
+  background: var(--color-ink);
+  border-radius: 999px;
+}
+
+/* Desktop : une rangée d'étiquettes ---------------------------- */
+@media (min-width: 900px) {
+  .nav__toggle {
+    display: none;
+  }
+
+  .nav__menu {
+    position: static;
+    inset: auto;
+    z-index: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.6rem;
+    padding: 0;
+    background: none;
+    overflow: visible;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .nav__menu li {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .nav__num {
+    display: none;
+  }
+
+  .nav__item-cta {
+    margin-top: 0;
+  }
+
+  .nav__menu-meta {
+    display: none;
+  }
+
+  /* Petites étiquettes de papier, chacune posée de travers */
+  .nav__menu a,
+  .nav__menu li:nth-child(1) a,
+  .nav__menu li:nth-child(2) a,
+  .nav__menu li:nth-child(3) a,
+  .nav__menu li:nth-child(4) a {
+    display: inline-flex;
+    padding: 0.45rem 0.75rem;
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--color-ink);
+    background: var(--color-paper);
+    box-shadow: 2px 2px 0 rgba(17, 17, 16, 0.14),
+      0 6px 14px rgba(17, 17, 16, 0.18);
+    transform: rotate(var(--chip-tilt, -1.1deg));
+    transition: transform var(--transition), background-color var(--transition),
+      color var(--transition);
+  }
+
+  .nav__menu li:nth-child(even) a {
+    --chip-tilt: 1.1deg;
+  }
+
+  .nav__menu a:hover {
+    transform: rotate(0deg) translateY(-2px);
+  }
+
+  /* Page courante : étiquette noire */
+  .nav__menu a[aria-current="page"] {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    text-decoration: none;
+  }
+
+  /* Le CTA Soutenir reste l'étiquette rouge */
+  .nav__menu .nav__cta,
+  .nav__menu li:nth-child(5) a {
+    background: var(--color-accent);
+    color: #fff;
+    justify-content: center;
+  }
+
+  .nav__menu .nav__cta:hover {
+    background: var(--color-ink);
+    color: #fff;
+  }
+
+  .nav__cart-count {
+    color: var(--color-paper);
+    background: var(--color-ink);
+  }
+
+  .nav__menu a[aria-current="page"] .nav__cart-count {
+    color: var(--color-ink);
+    background: var(--color-paper);
+  }
+}

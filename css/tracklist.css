@@ -1,0 +1,324 @@
+/* Les flyers de navigation : chaque rubrique est une petite affiche
+   colorée collée sur le grillage, à des hauteurs et inclinaisons
+   variées. La platine "joue" le flyer survolé. */
+
+.flyers {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  width: var(--frame-width);
+  margin: clamp(2rem, 5vw, 3rem) auto 0;
+}
+
+/* Les flyers vivent dans la grille : elle décide de leur place */
+.flyers > .index-row {
+  width: auto;
+  margin: 0;
+}
+
+/* Un flyer ------------------------------------------------------ */
+.index-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  gap: 0.35rem 1rem;
+  align-items: start;
+  padding: clamp(1.1rem, 3vw, 1.5rem) clamp(1.1rem, 3vw, 1.6rem);
+  text-decoration: none;
+  color: var(--color-ink);
+}
+
+.index-row__num {
+  grid-column: 1;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-gray);
+  font-variant-numeric: tabular-nums;
+}
+
+.index-row__num::after {
+  content: "/";
+}
+
+.index-row__body {
+  grid-column: 1;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.index-row__title {
+  font-size: clamp(1.6rem, 5.5vw, 2.4rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.index-row__label {
+  font-size: 0.78rem;
+  color: var(--color-gray);
+}
+
+/* Le 45 tours du flyer, en haut à droite */
+.index-row__disc {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  position: relative;
+  width: clamp(2.5rem, 7vw, 3.25rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at center,
+    #191917 0,
+    #191917 2px,
+    #2a2a25 2px,
+    #2a2a25 4px
+  );
+}
+
+/* Étiquette centrale : la couleur du flyer voisin */
+.index-row__disc::after {
+  content: "";
+  position: absolute;
+  inset: 30%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    var(--color-paper) 0 18%,
+    var(--disc-color, var(--color-accent)) 18% 100%
+  );
+}
+
+/* Repère clair sur le sillon : rend la rotation visible */
+.index-row__disc::before {
+  content: "";
+  position: absolute;
+  top: 7%;
+  left: 47%;
+  width: 6%;
+  height: 14%;
+  background: rgba(245, 245, 242, 0.55);
+}
+
+a.index-row:hover .index-row__disc {
+  animation: disc-spin 1.6s linear infinite;
+}
+
+/* Couleur de chaque flyer et de son étiquette de disque -------- */
+.flyers > .index-row:nth-child(1) {
+  --poster-bg: var(--color-pink);
+  --disc-color: var(--color-pink);
+  --color-gray: #4a3038;
+}
+
+.flyers > .index-row:nth-child(2) {
+  --poster-bg: var(--color-blue);
+  --disc-color: var(--color-blue);
+  --color-gray: #34434c;
+}
+
+.flyers > .index-row:nth-child(3) {
+  --poster-bg: var(--color-green);
+  --disc-color: var(--color-green);
+  --color-gray: #3c4630;
+}
+
+/* Soutenir : flyer rouge, texte papier */
+.index-row--accent {
+  --poster-bg: var(--color-accent);
+  --disc-color: var(--color-accent);
+
+  color: var(--color-paper);
+}
+
+.index-row--accent .index-row__num,
+.index-row--accent .index-row__label {
+  color: rgba(245, 245, 242, 0.8);
+}
+
+/* Radio : à venir, flyer gris en retrait */
+.index-row--ghost {
+  --poster-bg: #dcdcd7;
+  --disc-color: var(--color-gray);
+
+  color: var(--color-gray);
+}
+
+.index-row--ghost .index-row__disc {
+  background: transparent;
+  border: 2px dashed var(--color-gray);
+}
+
+.index-row--ghost .index-row__disc::before {
+  content: none;
+}
+
+/* Point radio qui pulse au centre du disque fantôme */
+.index-row--ghost .index-row__disc::after {
+  inset: 40%;
+  background: var(--color-gray);
+  animation: radio-pulse 2s ease-out infinite;
+}
+
+/* La platine : grand 45 tours qui tourne en continu (desktop) --- */
+.universe__player {
+  display: none;
+}
+
+.player-disc {
+  position: relative;
+  width: min(100%, clamp(13rem, 20vw, 17rem));
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at center,
+    #191917 0,
+    #191917 3px,
+    #26261f 3px,
+    #26261f 6px
+  );
+  box-shadow: 6px 6px 0 rgba(17, 17, 16, 0.2);
+  animation: disc-spin 9s linear infinite;
+}
+
+/* Repère clair : rend la rotation perceptible */
+.player-disc::before {
+  content: "";
+  position: absolute;
+  top: 4%;
+  left: 48.5%;
+  width: 3%;
+  height: 9%;
+  background: rgba(245, 245, 242, 0.4);
+}
+
+.player-disc__label {
+  position: absolute;
+  inset: 31%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-pink);
+  transition: background-color var(--transition);
+}
+
+/* Trou central du disque */
+.player-disc__label::after {
+  content: "";
+  position: absolute;
+  width: 12%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-paper);
+}
+
+.player-disc__num {
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.player__caption {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.player__caption-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  animation: radio-pulse 2s ease-out infinite;
+}
+
+@keyframes disc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 900px) {
+  .universe__player {
+    display: grid;
+    justify-items: center;
+    gap: 1.5rem;
+  }
+
+  /* Les flyers en quinconce : tailles, colonnes et hauteurs variées */
+  .flyers {
+    grid-template-columns: repeat(6, 1fr);
+    align-items: start;
+  }
+
+  .flyers > .index-row:nth-child(1) {
+    grid-column: 1 / span 3;
+    --tilt: -1.2deg;
+  }
+
+  .flyers > .index-row:nth-child(2) {
+    grid-column: 4 / span 3;
+    margin-top: 2.5rem;
+    --tilt: 0.9deg;
+  }
+
+  .flyers > .index-row:nth-child(3) {
+    grid-column: 1 / span 4;
+    margin-top: -0.75rem;
+    --tilt: 0.6deg;
+  }
+
+  .flyers > .index-row:nth-child(4) {
+    grid-column: 5 / span 2;
+    margin-top: 1.75rem;
+    --tilt: -1.5deg;
+  }
+
+  .flyers > .index-row:nth-child(5) {
+    grid-column: 2 / span 3;
+    margin-top: 0.75rem;
+    --tilt: 1.2deg;
+  }
+}
+
+/* Mobile : flyers nettement plus petits, empilés, décalés en alternance */
+@media (max-width: 899px) {
+  .flyers {
+    gap: 1rem;
+  }
+
+  .index-row {
+    padding: 0.8rem 0.95rem;
+    gap: 0.25rem 0.75rem;
+  }
+
+  .index-row__num {
+    font-size: 0.68rem;
+  }
+
+  .index-row__title {
+    font-size: 1.2rem;
+  }
+
+  .index-row__label {
+    font-size: 0.7rem;
+  }
+
+  .index-row__disc {
+    width: 1.9rem;
+  }
+
+  .flyers > .index-row:nth-child(odd) {
+    margin-right: 3.25rem;
+    --tilt: -1deg;
+  }
+
+  .flyers > .index-row:nth-child(even) {
+    margin-left: 3.25rem;
+    --tilt: 1deg;
+  }
+}

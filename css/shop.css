@@ -1,0 +1,414 @@
+/* Boutique : les vinyles sont des petites affiches individuelles
+   collées sur le grillage ------------------------------------ */
+.shop {
+  width: var(--frame-width);
+  margin: clamp(2rem, 5vw, 3rem) auto 0;
+}
+
+/* Le label "Catalogue" : petite étiquette de papier scotchée */
+.shop .section-label {
+  display: inline-block;
+  background: var(--color-paper);
+  padding: 0.6rem 1rem;
+  margin-bottom: clamp(1.5rem, 4vw, 2.25rem);
+  box-shadow: 2px 3px 0 rgba(17, 17, 16, 0.14),
+    0 8px 18px rgba(17, 17, 16, 0.18);
+  transform: rotate(-1.2deg);
+}
+
+/* Grille des affiches-vinyles : le grillage respire entre elles */
+.shop-grid {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2.25rem);
+  grid-template-columns: repeat(2, 1fr);
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .shop-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Carte produit = affiche ------------------------------------ */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(0.9rem, 2.5vw, 1.5rem);
+  cursor: pointer;
+}
+
+/* Dans la grille, c'est elle qui décide de la place */
+.shop-grid .product-card {
+  width: auto;
+  margin: 0;
+}
+
+/* Couleurs, inclinaisons et hauteurs variées */
+.shop-grid .product-card:nth-child(6n + 1) {
+  --tilt: -1.2deg;
+}
+
+.shop-grid .product-card:nth-child(6n + 2) {
+  --poster-bg: var(--color-yellow);
+  --color-gray: #45453a;
+  --tilt: 0.9deg;
+
+  margin-top: 1.5rem;
+}
+
+.shop-grid .product-card:nth-child(6n + 3) {
+  --poster-bg: var(--color-pink);
+  --color-gray: #4a3038;
+  --tilt: 1.3deg;
+
+  margin-top: 0.5rem;
+}
+
+.shop-grid .product-card:nth-child(6n + 4) {
+  --poster-bg: var(--color-blue);
+  --color-gray: #34434c;
+  --tilt: 0.7deg;
+
+  margin-top: 0.75rem;
+}
+
+.shop-grid .product-card:nth-child(6n + 5) {
+  --tilt: -0.9deg;
+
+  margin-top: 1.75rem;
+}
+
+.shop-grid .product-card:nth-child(6n + 6) {
+  --poster-bg: var(--color-green);
+  --color-gray: #3c4630;
+  --tilt: -1.4deg;
+}
+
+/* Le titre est un bouton qui ouvre la fiche produit */
+.product-card__more {
+  font: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  text-align: left;
+  color: inherit;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.product-card__more:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Référence catalogue façon pressage : REF 45S-01.
+   Masquée sur mobile — visible dans la fiche produit */
+.product-card__ref {
+  display: none;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-gray);
+  margin-bottom: 0.4rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.product-card__artist {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-gray);
+}
+
+.product-card__title {
+  font-size: clamp(1rem, 2.6vw, 1.25rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0.25rem 0 0.75rem;
+}
+
+/* Description masquée sur mobile — visible dans la fiche produit */
+.product-card__desc {
+  display: none;
+  font-size: clamp(0.85rem, 2.2vw, 0.95rem);
+  color: var(--color-gray);
+  flex-grow: 1;
+}
+
+/* Sur grand écran, la carte affiche tout */
+@media (min-width: 960px) {
+  .product-card__ref,
+  .product-card__desc {
+    display: block;
+  }
+}
+
+.product-card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.product-card__price {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.product-card__add {
+  padding: 0.6rem 1.25rem;
+  font-size: 0.8rem;
+}
+
+.product-card__soldout {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-gray);
+}
+
+/* Visuel vinyle en pur CSS ----------------------------------- */
+.vinyl {
+  position: relative;
+  aspect-ratio: 1;
+  margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
+  border-radius: 2px;
+  background: linear-gradient(135deg, #ecece6 0%, #dcdad2 100%);
+  overflow: hidden;
+}
+
+.vinyl__disc {
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at center,
+    #191917 0,
+    #191917 3px,
+    #24241f 3px,
+    #24241f 6px
+  );
+}
+
+.vinyl__label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 34%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+/* Fiche produit : fenêtre modale ------------------------------ */
+.product-dialog {
+  width: min(92vw, 24rem);
+  margin: auto;
+  padding: 0;
+}
+
+.product-dialog::backdrop {
+  background: rgba(17, 17, 16, 0.55);
+}
+
+.product-dialog__close {
+  font: inherit;
+  font-weight: 700;
+  padding: 0 0.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.product-dialog__body {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1.25rem;
+}
+
+.product-dialog .vinyl {
+  margin-bottom: 1rem;
+}
+
+.product-dialog__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.product-dialog__desc {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--color-gray);
+}
+
+.product-dialog__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+/* Barre panier fixe ------------------------------------------- */
+.cart-bar {
+  position: fixed;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translateX(-50%);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  width: min(92%, 34rem);
+  padding: 0.9rem 1.25rem;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border-radius: 2px;
+  box-shadow: 0 10px 30px rgba(17, 17, 16, 0.25);
+}
+
+/* L'attribut hidden doit gagner sur display: flex */
+.cart-bar[hidden] {
+  display: none;
+}
+
+.cart-bar__summary {
+  flex-grow: 1;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.cart-bar .btn {
+  padding: 0.6rem 1.25rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+/* Commande : pop-up qui monte quand on clique "Passer commande" */
+.order-dialog {
+  --tilt: 0.7deg;
+
+  width: min(92vw, 34rem);
+  max-height: 88svh;
+  margin: auto;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.order-dialog::backdrop {
+  background: rgba(17, 17, 16, 0.55);
+}
+
+.order-dialog__body {
+  padding: clamp(1.25rem, 3.5vw, 1.75rem);
+}
+
+/* La pop-up monte en apparaissant */
+.order-dialog[open],
+.product-dialog[open] {
+  animation: dialog-rise 280ms ease-out;
+}
+
+@keyframes dialog-rise {
+  from {
+    opacity: 0;
+    transform: translateY(2.5rem) rotate(var(--tilt));
+  }
+}
+
+.order__lines {
+  margin: 2rem 0 1rem;
+  border-top: 1px solid var(--color-line);
+}
+
+.order-line {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.order-line__name {
+  flex-grow: 1;
+  font-weight: 500;
+}
+
+.order-line__qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.order-line__qty button {
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+  font-weight: 700;
+  line-height: 1;
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.order-line__qty button:hover {
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+}
+
+.order-line__price {
+  font-weight: 700;
+  min-width: 5.5rem;
+  text-align: right;
+}
+
+.order__total {
+  text-align: right;
+  font-size: 1.15rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Confirmation -------------------------------------------------- */
+.order-confirm {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: #fff;
+  padding: 2.5rem 2rem;
+}
+
+.order-confirm__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.order-confirm__title span {
+  color: inherit;
+}
+
+.order-confirm .donate__details dt {
+  opacity: 1;
+  color: var(--color-gray);
+}
+
+.order-confirm .donate__note {
+  opacity: 1;
+  color: var(--color-gray);
+}

@@ -1,0 +1,196 @@
+/* Mission (page association) : accroche, intro et engagements dépliants */
+
+/* Grande phrase d'accroche : la conviction en très grand */
+.about-mission__lead {
+  max-width: 24ch;
+  font-size: clamp(1.6rem, 4.5vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.about-mission__lead em {
+  font-style: normal;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 2px;
+}
+
+.about-mission__intro {
+  max-width: 40rem;
+  margin-top: 1.5rem;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-gray);
+}
+
+/* Les trois engagements : chacun est sa propre petite affiche
+   accrochée sous le manifeste, accordéon à l'intérieur */
+.mission-point {
+  --poster-w: min(42rem, calc(100% - 2 * var(--frame-inline)));
+
+  padding: 0.4rem 1.25rem;
+  margin-top: 1.75rem;
+}
+
+.mission-points .mission-point:nth-child(1) {
+  --tilt: 0.8deg;
+
+  margin-left: max(var(--frame-inline), 10%);
+  margin-right: auto;
+}
+
+.mission-points .mission-point:nth-child(2) {
+  --poster-bg: var(--color-blue);
+  --color-gray: #34434c;
+  --tilt: -1.1deg;
+
+  margin-left: auto;
+  margin-right: max(var(--frame-inline), 9%);
+}
+
+.mission-points .mission-point:nth-child(3) {
+  --poster-bg: var(--color-green);
+  --color-gray: #3c4630;
+  --tilt: 1.2deg;
+
+  margin-left: max(var(--frame-inline), 16%);
+  margin-right: auto;
+}
+
+/* Mobile : petits tickets étroits, bien détachés du grillage */
+@media (max-width: 899px) {
+  .mission-point {
+    --poster-w: min(42rem, calc(100% - 5rem));
+
+    padding: 0.15rem 0.85rem;
+    margin-top: 1.1rem;
+  }
+
+  .mission-point__toggle {
+    padding: 0.85rem 0;
+    gap: 0.6rem;
+  }
+
+  .mission-point__index {
+    min-width: 2.4rem;
+    font-size: 0.62rem;
+  }
+
+  .mission-point__label {
+    font-size: 0.92rem;
+  }
+
+  .mission-point__icon {
+    width: 1.6rem;
+    height: 1.6rem;
+    font-size: 1rem;
+  }
+
+  .mission-point__text {
+    font-size: 0.88rem;
+    padding-bottom: 1.1rem;
+  }
+}
+
+.mission-point__toggle {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 3vw, 1.5rem);
+  width: 100%;
+  padding: clamp(1.1rem, 3.5vw, 1.6rem) 0;
+  text-align: left;
+  transition: color var(--transition);
+}
+
+.mission-point__toggle:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.mission-point__index {
+  min-width: 3.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-gray);
+  font-variant-numeric: tabular-nums;
+}
+
+.mission-point__label {
+  flex: 1;
+  font-size: clamp(1.02rem, 2.6vw, 1.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+/* Le bouton + sur le côté, devient × orange quand la section est ouverte */
+.mission-point__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--color-ink);
+  border-radius: 2px;
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1;
+  transition: transform var(--transition), background-color var(--transition),
+    border-color var(--transition), color var(--transition);
+}
+
+.mission-point__toggle:hover .mission-point__icon {
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+}
+
+.mission-point.is-open .mission-point__icon {
+  transform: rotate(45deg);
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: #fff;
+}
+
+/* Panneau dépliant : hauteur animée en pur CSS (0fr → 1fr) */
+.mission-point__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 400ms ease-out, visibility 0s linear 400ms;
+}
+
+.mission-point.is-open .mission-point__panel {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows 400ms ease-out;
+}
+
+.mission-point__panel-inner {
+  overflow: hidden;
+}
+
+.mission-point__text {
+  max-width: 60ch;
+  padding-bottom: clamp(1.5rem, 4vw, 2rem);
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  line-height: 1.75;
+  color: var(--color-gray);
+}
+
+.mission-point__text strong {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+@media (min-width: 720px) {
+  /* Aligne le texte ouvert sous le titre (après la colonne d'index) */
+  .mission-point__text {
+    margin-left: 5rem;
+  }
+}

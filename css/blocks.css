@@ -1,0 +1,176 @@
+/* Briques éditoriales partagées : bande de conviction, fiche technique, lieux */
+
+/* Panneau de conviction : affiche noire collée à droite ------ */
+.statement {
+  --poster-w: min(44rem, calc(100% - 2 * var(--frame-inline)));
+  --tilt: -1.4deg;
+
+  margin-top: calc(var(--space-section) * 0.55);
+  margin-left: auto;
+  margin-right: max(var(--frame-inline), 8%);
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.statement__inner {
+  padding: clamp(2rem, 5vw, 3rem) clamp(1.5rem, 4vw, 2.5rem);
+}
+
+/* Mobile : panneau noir plus petit et plus étroit */
+@media (max-width: 899px) {
+  .statement {
+    --poster-w: min(44rem, calc(100% - 4.5rem));
+  }
+
+  .statement__inner {
+    padding: 1.2rem 1.1rem;
+  }
+
+  .statement__text {
+    font-size: 0.95rem;
+    text-decoration-thickness: 2px;
+  }
+
+  .place {
+    padding: 1.2rem 1rem;
+  }
+
+  .place__name {
+    font-size: 1.05rem;
+  }
+
+  .place__desc {
+    font-size: 0.85rem;
+  }
+}
+
+.statement .section-label {
+  color: var(--color-paper);
+}
+
+.statement__text {
+  max-width: 30ch;
+  font-family: var(--font-mono);
+  font-size: clamp(1.2rem, 3.2vw, 2.1rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.statement__text em {
+  font-style: normal;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--color-yellow);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 3px;
+}
+
+/* Fiche technique : l'essentiel en quelques données ---------- */
+.specs {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 3rem) var(--space-gutter) 0;
+}
+
+.specs__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.5rem, 4vw, 2rem);
+}
+
+.spec {
+  border-left: 1px solid var(--color-line);
+  padding-left: clamp(0.9rem, 2.5vw, 1.25rem);
+}
+
+.spec dt {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-gray);
+  margin-bottom: 0.5rem;
+}
+
+.spec dd {
+  font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 900px) {
+  .specs__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Lieux : le siège et l'atelier, façon fiche signalétique ---- */
+.places__grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.place {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  border: var(--border-frame);
+  border-radius: var(--radius-card);
+  background: #fff;
+  padding: clamp(1.75rem, 4vw, 2.5rem) clamp(1.25rem, 3vw, 2rem);
+}
+
+.place__code {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-gray);
+  margin-bottom: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.place__name {
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.place__city {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-gray);
+}
+
+.place__desc {
+  margin: 1rem 0 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-gray);
+}
+
+.place__tag {
+  padding: 0.35rem 0.8rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-ink);
+  border: 1px solid var(--color-ink);
+  border-radius: 0;
+}
+
+@media (min-width: 720px) {
+  .places__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,138 @@
+/* Footer suisse : grille stricte alignée à gauche, lignes fines, 45 SYNDICATE géant */
+
+/* Aligne le contenu des bandeaux pleine largeur sur la grille du site */
+.site-footer {
+  --footer-gutter: max(var(--space-gutter), calc((100% - var(--max-width)) / 2 + var(--space-gutter)));
+
+  margin-top: var(--space-section);
+  border-top: var(--border-frame);
+  overflow: hidden;
+}
+
+.footer__radio {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.5rem var(--footer-gutter) 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.footer__radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-gray);
+  animation: radio-pulse 2s ease-out infinite;
+}
+
+@keyframes radio-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.footer__main {
+  display: grid;
+  gap: 2.5rem;
+  padding: clamp(2.5rem, 6vw, 4rem) var(--footer-gutter);
+}
+
+.footer__tagline {
+  font-family: var(--font-mono);
+  font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.footer__tagline span {
+  color: inherit;
+}
+
+.footer__block-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-gray);
+  margin-bottom: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Code de bloc façon fiche technique : 45.01, 45.02… */
+.footer__block-index {
+  color: var(--color-gray);
+  margin-right: 0.6rem;
+}
+
+.footer__list {
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-gray);
+}
+
+.footer__list a {
+  position: relative;
+  display: inline-block;
+  color: var(--color-ink);
+  text-decoration: none;
+  padding-bottom: 0.15rem;
+}
+
+.footer__list a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-ink);
+  transition: width var(--transition);
+}
+
+.footer__list a:hover::after {
+  width: 100%;
+}
+
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  padding: 0 var(--footer-gutter);
+  font-size: 0.75rem;
+  color: var(--color-gray);
+}
+
+/* Le 45 SYNDICATE géant, calé à gauche sur la grille, affiché en entier */
+.footer__brandmark {
+  padding: clamp(1.5rem, 4vw, 2.5rem) var(--footer-gutter) clamp(0.75rem, 2vw, 1.25rem);
+  font-family: var(--font-mono);
+  font-size: clamp(2.25rem, 10.3vw, 9.5rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.footer__brandmark span {
+  color: inherit;
+}
+
+@media (min-width: 720px) {
+  .footer__main {
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 2rem;
+  }
+}

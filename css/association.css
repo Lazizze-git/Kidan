@@ -1,0 +1,376 @@
+/* Page L'association : chaque section est une affiche du mur ----- */
+
+/* Fiche signalétique : petite affiche blanche à droite */
+.specs {
+  --poster-w: min(40rem, calc(100% - 2 * var(--frame-inline)));
+  --tilt: 1deg;
+
+  margin-top: calc(var(--space-section) * 0.5);
+  margin-left: auto;
+  margin-right: max(var(--frame-inline), 8%);
+  padding: clamp(1.5rem, 4vw, 2rem);
+}
+
+/* Manifeste : affiche jaune à gauche (les engagements sont des
+   affiches séparées, voir mission.css) */
+.about-mission {
+  --poster-w: min(46rem, calc(100% - 2 * var(--frame-inline)));
+  --tilt: -0.8deg;
+  --poster-bg: var(--color-yellow);
+  --color-gray: #45453a;
+
+  margin-top: calc(var(--space-section) * 0.7);
+  margin-left: max(var(--frame-inline), 4%);
+  margin-right: auto;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+/* Équipe : petite affiche-titre bleue, puis un portrait par affiche */
+.founders {
+  --poster-w: min(28rem, calc(100% - 2 * var(--frame-inline)));
+  --tilt: 0.9deg;
+  --poster-bg: var(--color-blue);
+  --color-gray: #34434c;
+
+  margin-top: calc(var(--space-section) * 0.6);
+  margin-left: auto;
+  margin-right: max(var(--frame-inline), 14%);
+  padding: clamp(1.25rem, 3.5vw, 1.75rem);
+}
+
+.founders .section-head {
+  margin-bottom: 0;
+}
+
+/* Lieux : affiche verte à gauche */
+.places {
+  --poster-w: min(52rem, calc(100% - 2 * var(--frame-inline)));
+  --tilt: -1.2deg;
+  --poster-bg: var(--color-green);
+  --color-gray: #3c4630;
+
+  margin-top: calc(var(--space-section) * 0.65);
+  margin-left: max(var(--frame-inline), 7%);
+  margin-right: auto;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+/* Statuts : petite affiche blanche à droite */
+.statutes {
+  --poster-w: min(46rem, calc(100% - 2 * var(--frame-inline)));
+  --tilt: 0.8deg;
+
+  margin-top: calc(var(--space-section) * 0.55);
+  margin-left: auto;
+  margin-right: max(var(--frame-inline), 10%);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+/* Mobile : affiches compactes */
+@media (max-width: 899px) {
+  .specs,
+  .about-mission,
+  .founders,
+  .places,
+  .statutes {
+    padding: 1.25rem;
+  }
+
+  .spec dt {
+    font-size: 0.6rem;
+  }
+
+  .spec dd {
+    font-size: 0.85rem;
+  }
+
+  .donate__block {
+    padding: 1.2rem 1rem;
+  }
+
+  .donate__details dd {
+    font-size: 0.92rem;
+  }
+}
+
+/* Fondateurs : trois petites affiches-portraits en quinconce -- */
+.founders__grid {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  width: var(--frame-width);
+  margin: 1.75rem auto 0;
+  align-items: start;
+}
+
+.founders__grid .founder-card {
+  width: auto;
+  margin: 0;
+  padding: 1.75rem 1.5rem;
+}
+
+.founders__grid .founder-card:nth-child(1) {
+  --tilt: -1.1deg;
+}
+
+.founders__grid .founder-card:nth-child(2) {
+  --poster-bg: var(--color-yellow);
+  --color-gray: #45453a;
+  --tilt: 0.8deg;
+}
+
+.founders__grid .founder-card:nth-child(3) {
+  --tilt: 1.3deg;
+}
+
+@media (min-width: 720px) {
+  .founders__grid .founder-card:nth-child(2) {
+    margin-top: 1.75rem;
+  }
+
+  .founders__grid .founder-card:nth-child(3) {
+    margin-top: 0.75rem;
+  }
+}
+
+/* Mobile : portraits côte à côte, en deux colonnes compactes */
+@media (max-width: 719px) {
+  .founders__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: calc(100% - 2rem);
+  }
+
+  .founders__grid .founder-card {
+    padding: 1.1rem 0.9rem;
+  }
+
+  .founders__grid .founder-card:nth-child(2) {
+    margin-top: 1.25rem;
+  }
+
+  .founders__grid .founder-card:nth-child(3) {
+    margin-top: -0.25rem;
+  }
+
+  .founder-card__portrait {
+    width: 3.25rem;
+    height: 3.25rem;
+    margin-bottom: 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  .founder-card__name {
+    font-size: 0.95rem;
+  }
+
+  .founder-card__role {
+    font-size: 0.62rem;
+    margin: 0.25rem 0 0;
+  }
+}
+
+.founder-card__portrait {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.5rem;
+  height: 5.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 50%;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+}
+
+.founder-card__name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.founder-card__role {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-gray);
+  margin: 0.35rem 0 1rem;
+}
+
+.founder-card__bio {
+  font-size: 0.95rem;
+  color: var(--color-gray);
+}
+
+@media (min-width: 720px) {
+  .founders__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Statuts --------------------------------------------------- */
+.statutes__inner {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+.statutes__inner p {
+  max-width: 34rem;
+  margin-top: 1rem;
+  color: var(--color-gray);
+}
+
+@media (min-width: 900px) {
+  .statutes__inner {
+    grid-template-columns: 1fr auto;
+  }
+}
+
+/* Dons : petite affiche-titre rose, puis un moyen de paiement
+   par affiche blanche ---------------------------------------- */
+.donate {
+  --poster-w: min(34rem, calc(100% - 2 * var(--frame-inline)));
+  --tilt: -1.2deg;
+  --poster-bg: var(--color-pink);
+  --color-gray: #4a3038;
+
+  margin-top: calc(var(--space-section) * 0.6);
+  margin-left: max(var(--frame-inline), 10%);
+  margin-right: auto;
+  padding: clamp(1.25rem, 3.5vw, 1.75rem);
+}
+
+.donate .section-label {
+  text-align: center;
+}
+
+.donate__title {
+  font-size: clamp(2rem, 5.5vw, 3.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.donate__title span {
+  color: var(--color-accent);
+}
+
+.donate__lead {
+  max-width: 30rem;
+  margin: 1rem auto 0;
+  text-align: center;
+  font-weight: 300;
+  color: var(--color-gray);
+}
+
+/* Les deux moyens de paiement : petites affiches blanches en quinconce */
+.donate__grid {
+  display: grid;
+  gap: clamp(1.25rem, 2.5vw, 1.75rem);
+  width: min(42rem, var(--frame-width));
+  margin: 1.5rem auto 0;
+  align-items: start;
+}
+
+.donate__grid .donate__block {
+  width: auto;
+  margin: 0;
+  padding: 1.4rem 1.25rem;
+}
+
+.donate__grid .donate__block:nth-child(1) {
+  --tilt: 1deg;
+}
+
+.donate__grid .donate__block:nth-child(2) {
+  --tilt: -1.3deg;
+}
+
+@media (min-width: 720px) {
+  .donate__grid .donate__block:nth-child(2) {
+    margin-top: 1.75rem;
+  }
+}
+
+/* Mobile : affiches de paiement compactes, décalées en alternance */
+@media (max-width: 719px) {
+  .donate__grid .donate__block {
+    padding: 1.2rem 1rem;
+  }
+
+  .donate__grid .donate__block:nth-child(odd) {
+    margin-right: 2rem;
+  }
+
+  .donate__grid .donate__block:nth-child(even) {
+    margin-left: 2rem;
+  }
+}
+
+.donate__block-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+.donate__details {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.donate__details dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-gray);
+  margin-top: 0.75rem;
+}
+
+.donate__details dd {
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.donate__qr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(8rem, 100%);
+  aspect-ratio: 1;
+  border: 2px dashed var(--color-line);
+  border-radius: var(--radius-card);
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-gray);
+}
+
+.donate__note {
+  margin-top: 0.75rem;
+  font-size: 0.78rem;
+  color: var(--color-gray);
+}
+
+@media (min-width: 720px) {
+  .donate__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile : affiche don compacte */
+@media (max-width: 899px) {
+  .donate {
+    padding: 1.25rem;
+  }
+
+  .donate__title {
+    font-size: 1.4rem;
+  }
+}

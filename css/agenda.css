@@ -1,0 +1,114 @@
+/* Agenda : affiche large, décalée à gauche + cartes événement */
+.agenda {
+  --poster-w: min(56rem, calc(100% - 2 * var(--frame-inline)));
+  --tilt: 0.9deg;
+  --poster-bg: var(--color-blue);
+  --color-gray: #34434c;
+
+  margin-left: max(var(--frame-inline), 5%);
+  margin-right: auto;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+/* Mobile : affiche agenda plus compacte */
+@media (max-width: 899px) {
+  .agenda {
+    padding: 1.25rem;
+  }
+
+  .event-card__day {
+    font-size: 1.5rem;
+  }
+
+  .event-card__title {
+    font-size: 1rem;
+  }
+}
+
+.events-list {
+  display: grid;
+  gap: 0;
+  max-width: 52rem;
+  /* Centrée quand elle ne remplit pas la largeur de la fenêtre */
+  margin-inline: auto;
+  border-top: 1px solid var(--color-ink);
+}
+
+/* Rangée de calendrier réglée, façon listing */
+.event-card {
+  display: grid;
+  gap: 1rem;
+  border-bottom: 1px solid var(--color-ink);
+  border-radius: var(--radius-card);
+  padding: 1.25rem 0.5rem;
+  transition: background-color var(--transition);
+}
+
+.event-card:hover {
+  background: rgba(17, 17, 16, 0.05);
+}
+
+.event-card__date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 5rem;
+}
+
+.event-card__day {
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.event-card__month {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-gray);
+}
+
+.event-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.event-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+  margin: 0.5rem 0 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-gray);
+}
+
+.event-card__desc {
+  font-size: 0.95rem;
+  color: var(--color-gray);
+}
+
+.event-card__tag {
+  justify-self: start;
+  align-self: start;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-ink);
+  border: 1px solid var(--color-ink);
+  border-radius: 0;
+  white-space: nowrap;
+}
+
+@media (min-width: 720px) {
+  .event-card {
+    grid-template-columns: auto 1fr auto;
+    align-items: start;
+  }
+}

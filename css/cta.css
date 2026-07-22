@@ -1,0 +1,40 @@
+/* Appel à l'action de fin de page : petite affiche à droite */
+.page-cta {
+  --poster-w: min(36rem, calc(100% - 2 * var(--frame-inline)));
+  --tilt: -1.5deg;
+  --poster-bg: var(--color-green);
+  --color-gray: #3c4630;
+
+  margin-left: auto;
+  margin-right: max(var(--frame-inline), 10%);
+  padding: clamp(1.75rem, 4.5vw, 2.5rem);
+  text-align: center;
+}
+
+.page-cta__title {
+  font-size: clamp(1.75rem, 4.5vw, 3rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  max-width: 22ch;
+  margin: 0 auto;
+}
+
+/* Mobile : affiche contact plus compacte */
+@media (max-width: 899px) {
+  .page-cta {
+    padding: 1.4rem 1.25rem;
+  }
+
+  .page-cta__title {
+    font-size: 1.3rem;
+  }
+}
+
+.page-cta__text {
+  max-width: 32rem;
+  margin: 1.25rem auto 2.25rem;
+  font-weight: 300;
+  color: var(--color-gray);
+}
