@@ -8,10 +8,11 @@
   <link rel="icon" type="image/png" href="./assets/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./css/styles.css" />
 </head>
 <body data-page="home">
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
 
   <header class="site-header">
     <nav class="nav" aria-label="Navigation principale">
@@ -36,7 +37,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="contenu" tabindex="-1">
     <div class="wall-top">
       <section class="intro window reveal" aria-label="45 Syndicate — Association musicale à Lausanne">
         <p class="page-hero__meta">Association musicale — Lausanne, CH — Est. 2026</p>
@@ -50,7 +51,7 @@
       <aside class="deck window reveal" aria-hidden="true">
         <div class="universe__player">
           <div class="player-disc">
-            <span class="player-disc__label"><span class="player-disc__num" data-disc-num>01</span></span>
+            <span class="player-disc__label"><img class="player-disc__logo" src="./assets/logo-mark.png" alt="" width="72" height="72" /></span>
           </div>
           <p class="player__caption">
             <span class="player__caption-dot"></span>

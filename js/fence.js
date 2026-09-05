@@ -3,10 +3,11 @@
 // image de fond sur toute la hauteur de chaque page. Statique.
 import { FENCE_TILE } from "./data/fence-tile.js";
 
-// 141px de large → 564px à l'écran, pixels apparents (image-rendering)
-const TILE_SCALE = 4;
-// Fondu pour que les affiches et le texte restent bien lisibles
-const TILE_ALPHA = 0.32;
+// Le grillage doit rester une matière de fond, pas un motif qui crie :
+// tuile réduite (maille plus fine, plus crédible à l'échelle d'un mur)
+// et fortement fondue dans le gris du mur.
+const TILE_SCALE = 2;
+const TILE_ALPHA = 0.14;
 
 export function initFence() {
   const { palette, rows } = FENCE_TILE;

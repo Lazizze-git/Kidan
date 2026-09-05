@@ -1,114 +1,168 @@
-/* Agenda : affiche large, décalée à gauche + cartes événement */
+/* Agenda : affiche bleue large, décalée à gauche, et une liste de dates
+   réglée comme un programme de salle — date à gauche, titre en grand,
+   informations pratiques sur une ligne, étiquette de type à droite. */
+
 .agenda {
-  --poster-w: min(56rem, calc(100% - 2 * var(--frame-inline)));
+  --poster-w: min(58rem, calc(100% - 2 * var(--frame-inline)));
   --tilt: 0.9deg;
-  --poster-bg: var(--color-blue);
-  --color-gray: #34434c;
 
   margin-left: max(var(--frame-inline), 5%);
   margin-right: auto;
-  padding: clamp(1.5rem, 4vw, 2.25rem);
-}
-
-/* Mobile : affiche agenda plus compacte */
-@media (max-width: 899px) {
-  .agenda {
-    padding: 1.25rem;
-  }
-
-  .event-card__day {
-    font-size: 1.5rem;
-  }
-
-  .event-card__title {
-    font-size: 1rem;
-  }
+  padding: clamp(1.75rem, 4vw, 2.5rem);
 }
 
 .events-list {
   display: grid;
   gap: 0;
-  max-width: 52rem;
-  /* Centrée quand elle ne remplit pas la largeur de la fenêtre */
-  margin-inline: auto;
   border-top: 1px solid var(--color-ink);
 }
 
-/* Rangée de calendrier réglée, façon listing */
+/* Une date ---------------------------------------------------- */
 .event-card {
   display: grid;
-  gap: 1rem;
-  border-bottom: 1px solid var(--color-ink);
+  gap: 0.35rem 1.5rem;
+  border-bottom: 1px solid rgba(20, 20, 15, 0.22);
   border-radius: var(--radius-card);
-  padding: 1.25rem 0.5rem;
+  padding: clamp(1.1rem, 2.5vw, 1.5rem) 0.35rem;
   transition: background-color var(--transition);
 }
 
 .event-card:hover {
-  background: rgba(17, 17, 16, 0.05);
+  background: rgba(20, 20, 15, 0.06);
 }
 
+/* Bloc date : le jour en très gros, le mois en petites capitales */
 .event-card__date {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-width: 5rem;
+  align-items: baseline;
+  gap: 0.5rem;
+  min-width: 4.5rem;
 }
 
 .event-card__day {
-  font-size: 1.9rem;
-  font-weight: 700;
-  line-height: 1;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.045em;
   font-variant-numeric: tabular-nums;
 }
 
 .event-card__month {
-  font-size: 0.8rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   color: var(--color-gray);
+}
+
+.event-card__body {
+  min-width: 0;
 }
 
 .event-card__title {
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
 }
 
+/* Informations pratiques : une seule ligne, séparateurs discrets */
 .event-card__meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem 1.25rem;
-  margin: 0.5rem 0 0.75rem;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--color-gray);
-}
-
-.event-card__desc {
-  font-size: 0.95rem;
-  color: var(--color-gray);
-}
-
-.event-card__tag {
-  justify-self: start;
-  align-self: start;
-  padding: 0.3rem 0.8rem;
-  font-size: 0.7rem;
+  gap: 0.2rem 0.7rem;
+  margin: 0.55rem 0 0.7rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-ink);
-  border: 1px solid var(--color-ink);
+  color: var(--color-gray);
+  font-variant-numeric: tabular-nums;
+}
+
+.event-card__meta span:not(:last-child)::after {
+  content: "·";
+  margin-left: 0.7rem;
+  opacity: 0.5;
+}
+
+.event-card__desc {
+  max-width: 60ch;
+  font-size: var(--fs-meta);
+  line-height: 1.75;
+  color: var(--color-gray);
+}
+
+/* Étiquette de type : atelier, concert, sortie */
+.event-card__tag {
+  justify-self: start;
+  align-self: start;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-paper);
+  background: var(--color-ink);
   border-radius: 0;
   white-space: nowrap;
 }
 
 @media (min-width: 720px) {
   .event-card {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: start;
+    padding-block: clamp(1.25rem, 2.6vw, 1.75rem);
+  }
+
+  .event-card__date {
+    display: grid;
+    gap: 0.4rem;
+    padding-top: 0.15rem;
+    min-width: 4rem;
+  }
+}
+
+/* Sur l'accueil, l'agenda est un teaser : deux dates, sans les
+   descriptions longues — le détail vit sur la page Agenda */
+.events-teaser .event-card {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+}
+
+.events-teaser .event-card__desc {
+  display: none;
+}
+
+.events-teaser .event-card__tag {
+  grid-column: 2;
+  margin-top: 0.25rem;
+}
+
+.events-teaser .event-card__meta {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.events-teaser .event-card__meta span:not(:last-child)::after {
+  content: none;
+}
+
+/* La date du teaser reste empilée à toutes les tailles : elle tient
+   dans une colonne étroite à côté du titre */
+.events-teaser .event-card__date {
+  display: grid;
+  gap: 0.4rem;
+  padding-top: 0.15rem;
+  min-width: 3.25rem;
+}
+
+/* Mobile : affiche agenda plus compacte */
+@media (max-width: 899px) {
+  .agenda {
+    padding: 1.5rem 1.35rem;
   }
 }

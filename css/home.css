@@ -1,13 +1,13 @@
 /* Page d'accueil — un mur de grillage sur lequel les sections sont
    collées comme des affiches : tailles, hauteurs et inclinaisons
-   différentes. */
+   différentes. Le titre d'accueil domine tout le reste. */
 
 /* Haut du mur : affiche titre + affiche platine côte à côte -- */
 .wall-top {
   display: grid;
   gap: clamp(1.5rem, 3vw, 2.5rem);
   width: var(--frame-width);
-  margin: clamp(1.25rem, 3.5vw, 2rem) auto 0;
+  margin: clamp(2rem, 5vw, 3.5rem) auto 0;
 }
 
 .wall-top > .window {
@@ -19,21 +19,26 @@
 .intro {
   --tilt: -0.8deg;
 
-  padding: clamp(1.5rem, 4vw, 2.5rem);
+  padding: clamp(1.75rem, 4vw, 3rem);
 }
 
 .intro .page-hero__meta {
   display: block;
-  margin-bottom: clamp(0.9rem, 2.5vw, 1.5rem);
+  padding-bottom: 0.9rem;
+  margin-bottom: clamp(1.25rem, 3vw, 1.75rem);
+  border-bottom: 1px solid var(--color-line);
 }
 
+/* Le titre d'accueil : la plus grosse voix de tout le site */
 .screen__title {
-  margin-bottom: clamp(1rem, 3vw, 1.75rem);
-  font-size: clamp(1.35rem, 4.2vw, 2.3rem);
-  font-weight: 700;
+  margin-bottom: clamp(1.25rem, 3vw, 1.75rem);
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  max-width: 15ch;
 }
 
 .screen__title em {
@@ -42,9 +47,9 @@
 }
 
 .screen__lead {
-  max-width: 34rem;
-  font-size: 0.9rem;
-  line-height: 1.75;
+  max-width: 44ch;
+  font-size: var(--fs-lead);
+  line-height: 1.7;
   color: var(--color-gray);
 }
 
@@ -53,17 +58,18 @@
   --tilt: 1.1deg;
 
   display: none;
-  padding: clamp(1.5rem, 3vw, 2rem);
+  padding: clamp(1.75rem, 3vw, 2.25rem);
 }
 
 @media (min-width: 900px) {
   .wall-top {
-    grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
-    align-items: start;
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    align-items: stretch;
   }
 
   .deck {
-    display: block;
+    display: grid;
+    align-content: center;
   }
 
   .deck .universe__player {
@@ -75,53 +81,38 @@
 /* Mobile : affiches plus compactes */
 @media (max-width: 899px) {
   .intro {
-    width: calc(100% - 2.5rem);
-    padding: 1.25rem;
+    padding: 1.5rem 1.35rem;
   }
 
-  .screen__lead {
-    font-size: 0.85rem;
+  .screen__title {
+    max-width: 12ch;
   }
 
-  .home-mission {
-    padding: 1.25rem;
-  }
-
-  .home-mission__text {
-    font-size: 0.95rem;
-    margin-bottom: 1.25rem;
-  }
-
+  .home-mission,
   .home-agenda {
-    padding: 1.25rem;
+    padding: 1.5rem 1.35rem;
   }
 
   .home-support {
-    padding: 1.4rem 1.25rem;
-  }
-
-  .home-support__title {
-    font-size: 1.3rem;
+    padding: 1.75rem 1.35rem;
   }
 }
 
 /* Affiche mission : papier jaune fluo, étroite, collée à gauche */
 .home-mission {
-  --poster-w: min(38rem, calc(100% - 2 * var(--frame-inline)));
+  --poster-w: min(40rem, calc(100% - 2 * var(--frame-inline)));
   --tilt: 1.1deg;
-  --poster-bg: var(--color-yellow);
-  --color-gray: #45453a;
 
-  margin-top: calc(var(--space-section) * 0.65);
-  margin-left: max(var(--frame-inline), 7%);
+  margin-top: calc(var(--space-section) * 0.6);
+  margin-left: max(var(--frame-inline), 6%);
   margin-right: auto;
-  padding: clamp(1.5rem, 4vw, 2.25rem);
+  padding: clamp(1.75rem, 4vw, 2.5rem);
 }
 
 .home-mission__text {
-  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
-  line-height: 1.6;
-  max-width: 36ch;
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  line-height: 1.55;
+  max-width: 34ch;
   margin-bottom: 1.75rem;
 }
 
@@ -129,24 +120,23 @@
 .home-agenda {
   --poster-w: min(58rem, calc(100% - 2 * var(--frame-inline)));
   --tilt: 0.8deg;
-  --poster-bg: var(--color-blue);
-  --color-gray: #34434c;
 
   margin-top: calc(var(--space-section) * 0.7);
   margin-left: max(var(--frame-inline), 4%);
   margin-right: auto;
-  padding: clamp(1.5rem, 4vw, 2.25rem);
+  padding: clamp(1.75rem, 4vw, 2.5rem);
 }
 
 .events-teaser {
   display: grid;
   gap: 0;
+  border-top: 1px solid var(--color-ink);
 }
 
 @media (min-width: 720px) {
   .events-teaser {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0 2.5rem;
+    column-gap: clamp(1.5rem, 3vw, 2.5rem);
   }
 }
 
@@ -154,31 +144,26 @@
 .home-support {
   --poster-w: min(34rem, calc(100% - 2 * var(--frame-inline)));
   --tilt: -1.6deg;
-  --poster-bg: var(--color-pink);
-  --color-gray: #4a3038;
 
-  margin-top: calc(var(--space-section) * 0.6);
+  margin-top: calc(var(--space-section) * 0.7);
   margin-left: auto;
-  margin-right: max(var(--frame-inline), 12%);
+  margin-right: max(var(--frame-inline), 10%);
   padding: clamp(1.75rem, 4.5vw, 2.5rem);
-  text-align: center;
-}
-
-.home-support .section-label {
-  text-align: left;
 }
 
 .home-support__title {
-  font-family: var(--font-mono);
-  font-size: clamp(1.5rem, 4.2vw, 2.4rem);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  line-height: 0.96;
+  max-width: 12ch;
 }
 
 .home-support__text {
-  max-width: 34rem;
-  margin: 1.25rem auto 2rem;
+  max-width: 40ch;
+  margin: 1.1rem 0 2rem;
   color: var(--color-gray);
 }
 
@@ -192,4 +177,3 @@
   background: var(--color-accent);
   border-color: var(--color-accent);
 }
-

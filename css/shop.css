@@ -1,18 +1,19 @@
-/* Boutique : les vinyles sont des petites affiches individuelles
-   collées sur le grillage ------------------------------------ */
+/* Boutique : chaque vinyle est une petite affiche collée sur le
+   grillage, avec sa pochette imprimée ------------------------- */
 .shop {
   width: var(--frame-width);
-  margin: clamp(2rem, 5vw, 3rem) auto 0;
+  margin: clamp(2.5rem, 5vw, 3.5rem) auto 0;
 }
 
 /* Le label "Catalogue" : petite étiquette de papier scotchée */
 .shop .section-label {
-  display: inline-block;
-  background: var(--color-paper);
+  display: inline-flex;
+  background-color: var(--color-paper);
+  background-image: var(--paper-grain);
+  background-blend-mode: multiply;
   padding: 0.6rem 1rem;
   margin-bottom: clamp(1.5rem, 4vw, 2.25rem);
-  box-shadow: 2px 3px 0 rgba(17, 17, 16, 0.14),
-    0 8px 18px rgba(17, 17, 16, 0.18);
+  box-shadow: var(--shadow-chip);
   transform: rotate(-1.2deg);
 }
 
@@ -34,7 +35,7 @@
 .product-card {
   display: flex;
   flex-direction: column;
-  padding: clamp(0.9rem, 2.5vw, 1.5rem);
+  padding: clamp(0.9rem, 2.2vw, 1.25rem);
   cursor: pointer;
 }
 
@@ -50,24 +51,18 @@
 }
 
 .shop-grid .product-card:nth-child(6n + 2) {
-  --poster-bg: var(--color-yellow);
-  --color-gray: #45453a;
   --tilt: 0.9deg;
 
   margin-top: 1.5rem;
 }
 
 .shop-grid .product-card:nth-child(6n + 3) {
-  --poster-bg: var(--color-pink);
-  --color-gray: #4a3038;
   --tilt: 1.3deg;
 
   margin-top: 0.5rem;
 }
 
 .shop-grid .product-card:nth-child(6n + 4) {
-  --poster-bg: var(--color-blue);
-  --color-gray: #34434c;
   --tilt: 0.7deg;
 
   margin-top: 0.75rem;
@@ -80,8 +75,6 @@
 }
 
 .shop-grid .product-card:nth-child(6n + 6) {
-  --poster-bg: var(--color-green);
-  --color-gray: #3c4630;
   --tilt: -1.4deg;
 }
 
@@ -100,6 +93,7 @@
 
 .product-card__more:hover {
   text-decoration: underline;
+  text-decoration-thickness: 2px;
   text-underline-offset: 4px;
 }
 
@@ -107,34 +101,38 @@
    Masquée sur mobile — visible dans la fiche produit */
 .product-card__ref {
   display: none;
-  font-size: 0.68rem;
-  font-weight: 600;
+  font-size: var(--fs-micro);
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   color: var(--color-gray);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.65rem;
   font-variant-numeric: tabular-nums;
 }
 
 .product-card__artist {
-  font-size: 0.8rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   color: var(--color-gray);
 }
 
 .product-card__title {
-  font-size: clamp(1rem, 2.6vw, 1.25rem);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+  font-weight: 800;
   text-transform: uppercase;
-  margin: 0.25rem 0 0.75rem;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0.4rem 0 0.75rem;
 }
 
 /* Description masquée sur mobile — visible dans la fiche produit */
 .product-card__desc {
   display: none;
-  font-size: clamp(0.85rem, 2.2vw, 0.95rem);
+  font-size: var(--fs-meta);
+  line-height: 1.7;
   color: var(--color-gray);
   flex-grow: 1;
 }
@@ -154,53 +152,93 @@
   justify-content: space-between;
   gap: 0.75rem;
   margin-top: clamp(1rem, 2.5vw, 1.5rem);
+  padding-top: clamp(0.75rem, 2vw, 1rem);
+  border-top: 1px solid var(--color-line);
 }
 
 .product-card__price {
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 
 .product-card__add {
-  padding: 0.6rem 1.25rem;
-  font-size: 0.8rem;
+  padding: 0.55rem 1.1rem;
+  font-size: var(--fs-micro);
 }
 
 .product-card__soldout {
-  font-size: 0.8rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.16em;
   color: var(--color-gray);
 }
 
-/* Visuel vinyle en pur CSS ----------------------------------- */
+/* Pochette de vinyle, en pur CSS ------------------------------ */
 .vinyl {
   position: relative;
   aspect-ratio: 1;
-  margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
-  border-radius: 2px;
-  background: linear-gradient(135deg, #ecece6 0%, #dcdad2 100%);
+  margin-bottom: clamp(0.9rem, 2.2vw, 1.25rem);
+  background: linear-gradient(150deg, #f2f0e8 0%, #dedbd0 62%, #d3d0c4 100%);
+  box-shadow: inset 0 0 0 1px rgba(20, 20, 15, 0.14),
+    inset 0 -14px 22px rgba(20, 20, 15, 0.07),
+    0 2px 6px rgba(20, 20, 15, 0.14);
   overflow: hidden;
 }
 
+/* L'ouverture de la pochette, en haut : un liseré plus sombre */
+.vinyl::after {
+  content: "";
+  position: absolute;
+  top: 5%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(20, 20, 15, 0.13);
+}
+
+/* Le disque : sillons fins et un reflet balayé */
 .vinyl__disc {
   position: absolute;
-  inset: 8%;
+  inset: 9%;
   border-radius: 50%;
   background: repeating-radial-gradient(
-    circle at center,
-    #191917 0,
-    #191917 3px,
-    #24241f 3px,
-    #24241f 6px
+      circle at center,
+      #17170f 0,
+      #17170f 2px,
+      #232319 2px,
+      #232319 4px
+    ),
+    #17170f;
+  box-shadow: 0 2px 8px rgba(20, 20, 15, 0.3);
+}
+
+.vinyl__disc::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 210deg,
+    rgba(255, 255, 255, 0) 0deg,
+    rgba(255, 255, 255, 0.16) 34deg,
+    rgba(255, 255, 255, 0) 78deg,
+    rgba(255, 255, 255, 0) 190deg,
+    rgba(255, 255, 255, 0.1) 216deg,
+    rgba(255, 255, 255, 0) 250deg
   );
 }
 
+/* L'étiquette centrale : la lettre du pressage, cerclée comme
+   sur un vrai 45 tours */
 .vinyl__label {
   position: absolute;
   top: 50%;
   left: 50%;
+  z-index: 1;
   width: 34%;
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
@@ -208,52 +246,101 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: var(--color-accent);
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.5rem;
+  background: var(--disc-color, var(--c-flossy));
+  color: var(--c-cherry);
+  box-shadow: 0 0 0 1px rgba(20, 20, 15, 0.3),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.18);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.1rem, 3.4vw, 1.7rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Le disque tourne quand on survole la carte : seul le reflet balaye
+   les sillons, l'étiquette reste lisible */
+.product-card:hover .vinyl__disc::after {
+  animation: disc-spin 6s linear infinite;
+}
+
+/* Une pop-up n'est pas une affiche qu'on décolle du mur : elle ne se
+   soulève pas et ne se redresse pas au survol */
+.product-dialog:hover {
+  --tilt: -0.8deg;
+  --lift: 0px;
+}
+
+.order-dialog:hover {
+  --tilt: 0.7deg;
+  --lift: 0px;
+}
+
+.product-dialog:hover,
+.order-dialog:hover {
+  box-shadow: 0 8px 20px rgba(20, 20, 15, 0.3),
+    0 32px 60px rgba(20, 20, 15, 0.35);
 }
 
 /* Fiche produit : fenêtre modale ------------------------------ */
 .product-dialog {
-  width: min(92vw, 24rem);
+  width: min(92vw, 25rem);
   margin: auto;
   padding: 0;
+  border: none;
+}
+
+.product-dialog,
+.order-dialog {
+  box-shadow: 0 8px 20px rgba(20, 20, 15, 0.3),
+    0 32px 60px rgba(20, 20, 15, 0.35);
 }
 
 .product-dialog::backdrop {
-  background: rgba(17, 17, 16, 0.55);
+  background: rgba(20, 20, 15, 0.6);
 }
 
+/* Cible de fermeture assez grande pour le doigt (44px) */
 .product-dialog__close {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: -0.75rem -0.75rem -0.75rem 0;
   font: inherit;
   font-weight: 700;
-  padding: 0 0.25rem;
   background: none;
   border: none;
   cursor: pointer;
+  transition: color var(--transition);
+}
+
+.product-dialog__close:hover {
+  color: var(--color-accent);
 }
 
 .product-dialog__body {
   display: grid;
   gap: 0.4rem;
-  padding: 1.25rem;
+  padding: clamp(1.25rem, 3.5vw, 1.6rem);
 }
 
 .product-dialog .vinyl {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .product-dialog__title {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
 }
 
 .product-dialog__desc {
-  font-size: 0.9rem;
-  line-height: 1.7;
+  margin-top: 0.5rem;
+  font-size: var(--fs-meta);
+  line-height: 1.75;
   color: var(--color-gray);
 }
 
@@ -263,7 +350,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-line);
 }
 
 /* Barre panier fixe ------------------------------------------- */
@@ -277,11 +366,20 @@
   align-items: center;
   gap: 1.25rem;
   width: min(92%, 34rem);
-  padding: 0.9rem 1.25rem;
+  padding: 0.85rem 0.85rem 0.85rem 1.35rem;
   background: var(--color-ink);
   color: var(--color-paper);
-  border-radius: 2px;
-  box-shadow: 0 10px 30px rgba(17, 17, 16, 0.25);
+  border-radius: 0;
+  box-shadow: 0 4px 10px rgba(20, 20, 15, 0.2),
+    0 18px 40px rgba(20, 20, 15, 0.35);
+  animation: cart-bar-rise 320ms var(--ease-settle);
+}
+
+@keyframes cart-bar-rise {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 1.25rem);
+  }
 }
 
 /* L'attribut hidden doit gagner sur display: flex */
@@ -291,14 +389,27 @@
 
 .cart-bar__summary {
   flex-grow: 1;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
 }
 
 .cart-bar .btn {
-  padding: 0.6rem 1.25rem;
-  font-size: 0.8rem;
+  padding: 0.6rem 1.15rem;
+  font-size: var(--fs-micro);
   white-space: nowrap;
+  background: var(--color-paper);
+  border-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.cart-bar .btn:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+  box-shadow: 5px 5px 0 rgba(247, 246, 241, 0.35);
 }
 
 /* Commande : pop-up qui monte quand on clique "Passer commande" */
@@ -309,32 +420,33 @@
   max-height: 88svh;
   margin: auto;
   padding: 0;
+  border: none;
   overflow-y: auto;
 }
 
 .order-dialog::backdrop {
-  background: rgba(17, 17, 16, 0.55);
+  background: rgba(20, 20, 15, 0.6);
 }
 
 .order-dialog__body {
-  padding: clamp(1.25rem, 3.5vw, 1.75rem);
+  padding: clamp(1.25rem, 3.5vw, 1.85rem);
 }
 
 /* La pop-up monte en apparaissant */
 .order-dialog[open],
 .product-dialog[open] {
-  animation: dialog-rise 280ms ease-out;
+  animation: dialog-rise 300ms var(--ease-settle);
 }
 
 @keyframes dialog-rise {
   from {
     opacity: 0;
-    transform: translateY(2.5rem) rotate(var(--tilt));
+    transform: translateY(2rem) rotate(var(--tilt, 0deg)) scale(0.98);
   }
 }
 
 .order__lines {
-  margin: 2rem 0 1rem;
+  margin: 1.75rem 0 1rem;
   border-top: 1px solid var(--color-line);
 }
 
@@ -348,59 +460,71 @@
 
 .order-line__name {
   flex-grow: 1;
-  font-weight: 500;
+  font-size: var(--fs-meta);
+  font-weight: 700;
 }
 
 .order-line__qty {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.55rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .order-line__qty button {
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 1.85rem;
+  height: 1.85rem;
   border: 1px solid var(--color-line);
   border-radius: 50%;
   font-weight: 700;
   line-height: 1;
-  transition: border-color var(--transition), color var(--transition);
+  transition: border-color var(--transition),
+    background-color var(--transition), color var(--transition);
 }
 
 .order-line__qty button:hover {
   border-color: var(--color-ink);
-  color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-paper);
 }
 
 .order-line__price {
   font-weight: 700;
   min-width: 5.5rem;
   text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 .order__total {
   text-align: right;
-  font-size: 1.15rem;
-  margin-bottom: 2.5rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Confirmation -------------------------------------------------- */
 .order-confirm {
   border: 1px solid var(--color-line);
   border-radius: var(--radius-card);
-  background: #fff;
-  padding: 2.5rem 2rem;
+  background: var(--color-paper);
+  padding: clamp(1.75rem, 4vw, 2.5rem);
 }
 
 .order-confirm__title {
+  font-family: var(--font-display);
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 900;
   text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1;
   margin-bottom: 1rem;
 }
 
 .order-confirm__title span {
-  color: inherit;
+  color: var(--color-accent);
 }
 
 .order-confirm .donate__details dt {

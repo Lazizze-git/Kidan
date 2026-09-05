@@ -1,0 +1,223 @@
+/* ============================================================
+   LES PAPIERS — toute la couleur du site est décidée ici.
+   Les autres fichiers CSS ne s'occupent que de mise en page.
+
+   Principe (repris de la référence de palette) : une affiche n'est
+   jamais « du texte noir sur un aplat ». C'est une paire fond +
+   encre de la même famille, comme une sérigraphie deux couleurs.
+
+   Chaque thème redéfinit quatre variables que tout le site utilise
+   déjà — --color-ink, --color-paper, --color-accent, --poster-bg —
+   donc les boutons, filets, étiquettes et badges s'adaptent tout
+   seuls, sans une seule règle en plus.
+
+   Contrastes vérifiés (WCAG, texte courant) :
+     papier blanc   bordeaux sur blanc ......... 11,0:1
+     jaune          bleu vinyle sur jaune ....... 6,5:1
+     bleu vinyle    jaune sur bleu .............. 6,5:1
+     vert           jaune sur vert .............. 6,0:1
+     bordeaux       jaune sur bordeaux ......... 10,9:1
+     bordeaux rose  rose sur bordeaux ........... 5,1:1
+     rouge          jaune sur rouge ............. 5,6:1
+   ============================================================ */
+
+/* --- Papier blanc ------------------------------------------
+   C'est le thème par défaut, défini dans base.css. On le
+   redéclare ici pour les îlots blancs posés SUR une affiche
+   colorée (fiches lieux, blocs de paiement, confirmation de
+   commande) : ils repartent de l'encre bordeaux. */
+.place,
+.donate__grid .donate__block,
+.order-confirm {
+  --poster-bg: var(--color-paper);
+  --color-ink: var(--c-cherry);
+  --color-paper: #f7f6f1;
+  --color-accent: var(--c-deepred);
+  --disc-color: var(--c-flossy);
+  --ink-soft: 78%;
+  --ink-line: 24%;
+
+  color: var(--color-ink);
+}
+
+/* --- Jaune : encre bleu vinyle ------------------------------ */
+.home-mission,
+.about-mission,
+.founders__grid .founder-card:nth-child(2),
+.shop-grid .product-card:nth-child(6n + 2) {
+  --poster-bg: var(--c-mellow);
+  --color-paper: var(--c-mellow);
+  --color-ink: var(--c-vinyl);
+  --color-accent: var(--c-deepred);
+  --disc-color: var(--c-flossy);
+  --ink-soft: 86%;
+  --ink-line: 28%;
+}
+
+/* --- Bleu vinyle : encre jaune ------------------------------ */
+.flyers > .index-row:nth-child(2),
+.home-agenda,
+.agenda,
+.founders,
+.mission-points .mission-point:nth-child(2),
+.shop-grid .product-card:nth-child(6n + 4) {
+  --poster-bg: var(--c-vinyl);
+  --color-paper: var(--c-vinyl);
+  --color-ink: var(--c-mellow);
+  --color-accent: var(--c-flossy);
+  --disc-color: var(--c-mellow);
+}
+
+/* --- Vert : encre jaune ------------------------------------- */
+.flyers > .index-row:nth-child(3),
+.places,
+.mission-points .mission-point:nth-child(3),
+.page-cta,
+.shop-grid .product-card:nth-child(6n + 6) {
+  --poster-bg: var(--c-green);
+  --color-paper: var(--c-green);
+  --color-ink: var(--c-mellow);
+  --color-accent: var(--c-flossy);
+  --disc-color: var(--c-mellow);
+}
+
+/* --- Bordeaux : encre jaune --------------------------------- */
+.flyers > .index-row:nth-child(1),
+.statement,
+.shop-grid .product-card:nth-child(6n + 3) {
+  --poster-bg: var(--c-cherry);
+  --color-paper: var(--c-cherry);
+  --color-ink: var(--c-mellow);
+  --color-accent: var(--c-flossy);
+  --disc-color: var(--c-flossy);
+}
+
+/* --- Bordeaux : encre rose ---------------------------------
+   Réservé aux deux affiches de don : c'est la seule paire chaude
+   du site, elle signale l'endroit où l'on donne. */
+.home-support,
+.donate {
+  --poster-bg: var(--c-cherry);
+  --color-paper: var(--c-cherry);
+  --color-ink: var(--c-flossy);
+  --color-accent: var(--c-mellow);
+}
+
+/* --- Rouge : encre jaune ------------------------------------ */
+.index-row--accent {
+  --poster-bg: var(--c-deepred);
+  --color-paper: var(--c-deepred);
+  --color-ink: var(--c-mellow);
+  --color-accent: var(--c-flossy);
+  --disc-color: var(--c-mellow);
+}
+
+/* --- Papier gris : la rubrique encore à venir ---------------- */
+.index-row--ghost {
+  --poster-bg: #d8d2ca;
+  --color-paper: #d8d2ca;
+  --color-ink: var(--c-cherry);
+  --color-accent: var(--c-cherry);
+  --disc-color: var(--c-taffy);
+  --ink-soft: 74%;
+  --ink-line: 30%;
+}
+
+/* --- Réglages communs à tous les fonds saturés --------------
+   Sur un fond sombre, le grain de papier doit éclaircir (screen)
+   et non assombrir (multiply), sinon il disparaît. Les filets
+   sont aussi un peu plus présents pour rester visibles. */
+.flyers > .index-row:nth-child(1),
+.flyers > .index-row:nth-child(2),
+.flyers > .index-row:nth-child(3),
+.index-row--accent,
+.statement,
+.home-agenda,
+.home-support,
+.agenda,
+.founders,
+.places,
+.donate,
+.page-cta,
+.mission-points .mission-point:nth-child(2),
+.mission-points .mission-point:nth-child(3),
+.shop-grid .product-card:nth-child(6n + 3),
+.shop-grid .product-card:nth-child(6n + 4),
+.shop-grid .product-card:nth-child(6n + 6) {
+  --paper-grain-blend: screen;
+  --ink-soft: 90%;
+  --ink-line: 34%;
+}
+
+/* Sur un fond saturé, l'encre ne peut pas être beaucoup diluée sans
+   devenir illisible : la hiérarchie se joue alors sur la taille et
+   l'interlettrage, pas sur la couleur. Les deux affiches de don, dont
+   l'encre rose a le moins de marge, gardent l'encre pleine. */
+.home-support,
+.donate {
+  --ink-soft: 100%;
+}
+
+/* Sur fond sombre, un mot mis en avant ne change pas de couleur
+   (le contraste ne le permettrait pas) : il se souligne. */
+.statement .statement__text em,
+.page-cta .page-cta__title em,
+.home-support .home-support__title em {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-underline-offset: 0.14em;
+  text-decoration-thickness: 4px;
+}
+
+/* Le disque des flyers : sillons sombres même sur fond sombre,
+   pour qu'il reste lisible comme un objet posé sur l'affiche */
+.index-row--accent .index-row__disc,
+.flyers > .index-row:nth-child(1) .index-row__disc,
+.flyers > .index-row:nth-child(2) .index-row__disc,
+.flyers > .index-row:nth-child(3) .index-row__disc {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-ink) 30%, transparent);
+}
+
+/* --- Le panneau de menu mobile ------------------------------
+   Là, chaque rubrique est un flyer de sa couleur. Sur grand écran
+   les étiquettes restent en papier blanc (voir nav.css) : une
+   barre de navigation ne doit pas rivaliser avec le mur. */
+@media (max-width: 899px) {
+  .nav__menu li:nth-child(2) a {
+    --poster-bg: var(--c-green);
+    --color-paper: var(--c-green);
+    --color-ink: var(--c-mellow);
+    --color-accent: var(--c-flossy);
+  }
+
+  .nav__menu li:nth-child(3) a {
+    --poster-bg: var(--c-cherry);
+    --color-paper: var(--c-cherry);
+    --color-ink: var(--c-mellow);
+    --color-accent: var(--c-flossy);
+  }
+
+  .nav__menu li:nth-child(4) a {
+    --poster-bg: var(--c-vinyl);
+    --color-paper: var(--c-vinyl);
+    --color-ink: var(--c-mellow);
+    --color-accent: var(--c-flossy);
+  }
+
+  .nav__menu .nav__cta {
+    --poster-bg: var(--c-deepred);
+    --color-paper: var(--c-deepred);
+    --color-ink: var(--c-mellow);
+    --color-accent: var(--c-flossy);
+  }
+
+  .nav__menu li:nth-child(2) a,
+  .nav__menu li:nth-child(3) a,
+  .nav__menu li:nth-child(4) a,
+  .nav__menu .nav__cta {
+    --paper-grain-blend: screen;
+    --ink-soft: 88%;
+    --ink-line: 34%;
+  }
+}

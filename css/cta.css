@@ -1,40 +1,34 @@
-/* Appel à l'action de fin de page : petite affiche à droite */
+/* Appel à l'action de fin de page : l'affiche verte collée à droite,
+   dernière chose qu'on lit avant le pied de page */
 .page-cta {
-  --poster-w: min(36rem, calc(100% - 2 * var(--frame-inline)));
+  --poster-w: min(38rem, calc(100% - 2 * var(--frame-inline)));
   --tilt: -1.5deg;
-  --poster-bg: var(--color-green);
-  --color-gray: #3c4630;
 
   margin-left: auto;
-  margin-right: max(var(--frame-inline), 10%);
-  padding: clamp(1.75rem, 4.5vw, 2.5rem);
-  text-align: center;
+  margin-right: max(var(--frame-inline), 8%);
+  padding: clamp(1.75rem, 4.5vw, 2.75rem);
 }
 
 .page-cta__title {
-  font-size: clamp(1.75rem, 4.5vw, 3rem);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: -0.01em;
-  line-height: 1.1;
-  max-width: 22ch;
-  margin: 0 auto;
+  letter-spacing: -0.035em;
+  line-height: 0.96;
+  max-width: 15ch;
+  text-wrap: balance;
+}
+
+.page-cta__text {
+  max-width: 44ch;
+  margin: 1.25rem 0 2rem;
+  color: var(--color-gray);
 }
 
 /* Mobile : affiche contact plus compacte */
 @media (max-width: 899px) {
   .page-cta {
-    padding: 1.4rem 1.25rem;
+    padding: 1.75rem 1.35rem;
   }
-
-  .page-cta__title {
-    font-size: 1.3rem;
-  }
-}
-
-.page-cta__text {
-  max-width: 32rem;
-  margin: 1.25rem auto 2.25rem;
-  font-weight: 300;
-  color: var(--color-gray);
 }

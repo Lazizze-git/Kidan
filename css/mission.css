@@ -2,37 +2,39 @@
 
 /* Grande phrase d'accroche : la conviction en très grand */
 .about-mission__lead {
-  max-width: 24ch;
-  font-size: clamp(1.6rem, 4.5vw, 2.75rem);
-  font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
+  max-width: 26ch;
+  font-size: clamp(1.45rem, 3.6vw, 2.35rem);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
 }
 
 .about-mission__lead em {
   font-style: normal;
   color: inherit;
   text-decoration: underline;
-  text-underline-offset: 0.18em;
-  text-decoration-thickness: 2px;
+  text-decoration-color: var(--color-accent);
+  text-underline-offset: 0.16em;
+  text-decoration-thickness: 3px;
 }
 
 .about-mission__intro {
-  max-width: 40rem;
-  margin-top: 1.5rem;
-  font-size: clamp(1rem, 2vw, 1.15rem);
-  font-weight: 300;
-  line-height: 1.7;
+  max-width: 58ch;
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(20, 20, 15, 0.2);
+  font-size: var(--fs-lead);
+  line-height: 1.75;
   color: var(--color-gray);
 }
 
 /* Les trois engagements : chacun est sa propre petite affiche
    accrochée sous le manifeste, accordéon à l'intérieur */
 .mission-point {
-  --poster-w: min(42rem, calc(100% - 2 * var(--frame-inline)));
+  --poster-w: min(44rem, calc(100% - 2 * var(--frame-inline)));
 
-  padding: 0.4rem 1.25rem;
-  margin-top: 1.75rem;
+  padding: 0.35rem clamp(1.25rem, 3vw, 1.75rem);
+  margin-top: 1.5rem;
 }
 
 .mission-points .mission-point:nth-child(1) {
@@ -43,8 +45,6 @@
 }
 
 .mission-points .mission-point:nth-child(2) {
-  --poster-bg: var(--color-blue);
-  --color-gray: #34434c;
   --tilt: -1.1deg;
 
   margin-left: auto;
@@ -52,8 +52,6 @@
 }
 
 .mission-points .mission-point:nth-child(3) {
-  --poster-bg: var(--color-green);
-  --color-gray: #3c4630;
   --tilt: 1.2deg;
 
   margin-left: max(var(--frame-inline), 16%);
@@ -63,10 +61,10 @@
 /* Mobile : petits tickets étroits, bien détachés du grillage */
 @media (max-width: 899px) {
   .mission-point {
-    --poster-w: min(42rem, calc(100% - 5rem));
+    --poster-w: min(44rem, calc(100% - 4rem));
 
-    padding: 0.15rem 0.85rem;
-    margin-top: 1.1rem;
+    padding: 0.15rem 1rem;
+    margin-top: 1rem;
   }
 
   .mission-point__toggle {
@@ -75,12 +73,12 @@
   }
 
   .mission-point__index {
-    min-width: 2.4rem;
-    font-size: 0.62rem;
+    min-width: 2.2rem;
+    font-size: 0.6rem;
   }
 
   .mission-point__label {
-    font-size: 0.92rem;
+    font-size: 1rem;
   }
 
   .mission-point__icon {
@@ -90,8 +88,7 @@
   }
 
   .mission-point__text {
-    font-size: 0.88rem;
-    padding-bottom: 1.1rem;
+    padding-bottom: 1.25rem;
   }
 }
 
@@ -111,21 +108,22 @@
 }
 
 .mission-point__index {
-  min-width: 3.5rem;
-  font-size: 0.75rem;
+  min-width: 3rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   color: var(--color-gray);
   font-variant-numeric: tabular-nums;
 }
 
 .mission-point__label {
   flex: 1;
-  font-size: clamp(1.02rem, 2.6vw, 1.5rem);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.4vw, 1.45rem);
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
 }
 
 /* Le bouton + sur le côté, devient × orange quand la section est ouverte */
@@ -134,15 +132,16 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 2rem;
-  height: 2rem;
-  border: 1px solid var(--color-ink);
-  border-radius: 2px;
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 2px solid var(--color-ink);
+  border-radius: 0;
   font-size: 1.15rem;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1;
-  transition: transform var(--transition), background-color var(--transition),
-    border-color var(--transition), color var(--transition);
+  transition: transform var(--transition-slow),
+    background-color var(--transition), border-color var(--transition),
+    color var(--transition);
 }
 
 .mission-point__toggle:hover .mission-point__icon {
@@ -176,10 +175,10 @@
 }
 
 .mission-point__text {
-  max-width: 60ch;
+  max-width: 62ch;
   padding-bottom: clamp(1.5rem, 4vw, 2rem);
-  font-size: clamp(0.95rem, 2vw, 1.05rem);
-  line-height: 1.75;
+  font-size: var(--fs-meta);
+  line-height: 1.8;
   color: var(--color-gray);
 }
 
@@ -191,6 +190,6 @@
 @media (min-width: 720px) {
   /* Aligne le texte ouvert sous le titre (après la colonne d'index) */
   .mission-point__text {
-    margin-left: 5rem;
+    margin-left: 4.5rem;
   }
 }
