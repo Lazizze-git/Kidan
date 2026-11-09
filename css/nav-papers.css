@@ -1,0 +1,43 @@
+/* --- Le panneau de menu mobile ------------------------------
+   Là, chaque rubrique est un flyer de sa couleur (mêmes paires que
+   papers.css). Sur grand écran les étiquettes restent en papier blanc
+   (voir nav-desktop.css) : une barre de navigation ne doit pas
+   rivaliser avec le mur. */
+@media (max-width: 899px) {
+  .nav__menu li:nth-child(2) a {
+    --poster-bg: var(--c-green);
+    --color-paper: var(--c-green);
+    --color-ink: var(--c-mellow);
+    --color-accent: var(--c-flossy);
+  }
+
+  .nav__menu li:nth-child(3) a {
+    --poster-bg: var(--c-cherry);
+    --color-paper: var(--c-cherry);
+    --color-ink: var(--c-mellow);
+    --color-accent: var(--c-flossy);
+  }
+
+  .nav__menu li:nth-child(4) a {
+    --poster-bg: var(--c-vinyl);
+    --color-paper: var(--c-vinyl);
+    --color-ink: var(--c-mellow);
+    --color-accent: var(--c-flossy);
+  }
+
+  .nav__menu .nav__cta {
+    --poster-bg: var(--c-deepred);
+    --color-paper: var(--c-deepred);
+    --color-ink: var(--c-mellow);
+    --color-accent: var(--c-flossy);
+  }
+
+  .nav__menu li:nth-child(2) a,
+  .nav__menu li:nth-child(3) a,
+  .nav__menu li:nth-child(4) a,
+  .nav__menu .nav__cta {
+    --paper-grain-blend: screen;
+    --ink-soft: 88%;
+    --ink-line: 34%;
+  }
+}

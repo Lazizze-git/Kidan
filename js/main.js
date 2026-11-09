@@ -1,14 +1,14 @@
-// Point d'entrée JS — initialise la navigation, les animations et la page courante
+// Point d'entrée JS : initialise la navigation, les copies d'IBAN et la page courante
 import { initAccordions } from "./accordion.js";
 import { initNav } from "./nav.js";
-import { initScrollReveal } from "./scroll-reveal.js";
+import { initCopyButtons } from "./copy.js";
 import { initFence } from "./fence.js";
 import { initHome } from "./pages/home.js";
 import { initShop } from "./pages/shop.js";
 import { initAgenda } from "./pages/agenda.js";
 
-// Signale que le JS est actif : les animations de reveal peuvent masquer
-// le contenu sans risque (sans JS, tout reste visible)
+// Signale que le JS est actif : le menu mobile peut se replier sans risque
+// (sans JS, il reste ouvert et la navigation reste utilisable)
 document.documentElement.classList.add("js");
 
 const PAGE_INITS = {
@@ -25,8 +25,7 @@ function start() {
   if (initPage) {
     initPage();
   }
-  // Après le rendu des contenus dynamiques, pour que tout soit observé
-  initScrollReveal();
+  initCopyButtons();
 }
 
 if (document.readyState === "loading") {

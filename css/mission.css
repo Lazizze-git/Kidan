@@ -9,15 +9,6 @@
   letter-spacing: -0.025em;
 }
 
-.about-mission__lead em {
-  font-style: normal;
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-color: var(--color-accent);
-  text-underline-offset: 0.16em;
-  text-decoration-thickness: 3px;
-}
-
 .about-mission__intro {
   max-width: 58ch;
   margin-top: 1.75rem;
@@ -72,11 +63,6 @@
     gap: 0.6rem;
   }
 
-  .mission-point__index {
-    min-width: 2.2rem;
-    font-size: 0.6rem;
-  }
-
   .mission-point__label {
     font-size: 1rem;
   }
@@ -97,23 +83,17 @@
   align-items: center;
   gap: clamp(0.75rem, 3vw, 1.5rem);
   width: 100%;
+  min-height: var(--target-min);
   padding: clamp(1.1rem, 3.5vw, 1.6rem) 0;
   text-align: left;
   transition: color var(--transition);
 }
 
-.mission-point__toggle:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-.mission-point__index {
-  min-width: 3rem;
-  font-size: var(--fs-micro);
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  color: var(--color-gray);
-  font-variant-numeric: tabular-nums;
+@media (hover: hover) and (pointer: fine) {
+  .mission-point__toggle:hover .mission-point__label {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
 }
 
 .mission-point__label {
@@ -144,16 +124,11 @@
     color var(--transition);
 }
 
-.mission-point__toggle:hover .mission-point__icon {
-  border-color: var(--color-ink);
-  color: var(--color-ink);
-}
-
 .mission-point.is-open .mission-point__icon {
   transform: rotate(45deg);
   background: var(--color-ink);
   border-color: var(--color-ink);
-  color: #fff;
+  color: var(--color-paper);
 }
 
 /* Panneau dépliant : hauteur animée en pur CSS (0fr → 1fr) */
@@ -161,13 +136,14 @@
   display: grid;
   grid-template-rows: 0fr;
   visibility: hidden;
-  transition: grid-template-rows 400ms ease-out, visibility 0s linear 400ms;
+  transition: grid-template-rows var(--transition-slow),
+    visibility 0s linear 250ms;
 }
 
 .mission-point.is-open .mission-point__panel {
   grid-template-rows: 1fr;
   visibility: visible;
-  transition: grid-template-rows 400ms ease-out;
+  transition: grid-template-rows var(--transition-slow);
 }
 
 .mission-point__panel-inner {
@@ -183,13 +159,8 @@
 }
 
 .mission-point__text strong {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-ink);
 }
 
-@media (min-width: 720px) {
-  /* Aligne le texte ouvert sous le titre (après la colonne d'index) */
-  .mission-point__text {
-    margin-left: 4.5rem;
-  }
-}
+

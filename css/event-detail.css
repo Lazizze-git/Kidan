@@ -1,0 +1,70 @@
+/* Fiche détaillée d'un événement (page Agenda) : programme en deux
+   colonnes, bouton d'inscription, affiche posée en petit format. */
+
+.event-card__program {
+  display: grid;
+  gap: 1.1rem 2rem;
+  margin: 1.1rem 0 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-line);
+}
+
+.event-card__program-title {
+  margin-bottom: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.event-card__program-list {
+  display: grid;
+  gap: 0.4rem;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-meta);
+  line-height: 1.6;
+  color: var(--color-gray);
+}
+
+.event-card__program-list li {
+  padding-left: 1.1rem;
+  text-indent: -1.1rem;
+}
+
+.event-card__program-list li::before {
+  content: "→";
+  display: inline-block;
+  width: 1.1rem;
+  text-indent: 0;
+  color: var(--color-ink);
+}
+
+.event-card__link {
+  max-width: 100%;
+  margin-bottom: 1.25rem;
+  white-space: normal;
+  text-align: center;
+}
+
+/* L'affiche : un petit format posé de travers, qui s'ouvre en grand */
+.event-card__poster {
+  display: block;
+  width: min(14rem, 62%);
+  margin-top: 0.25rem;
+  transform: rotate(-1.4deg);
+  box-shadow: var(--shadow-chip);
+  line-height: 0;
+}
+
+.event-card__poster img {
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 720px) {
+  .event-card__program {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

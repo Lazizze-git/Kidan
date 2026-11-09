@@ -1,15 +1,33 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr-CH">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>45 Syndicate — Association musicale à Lausanne</title>
+  <title>45 Syndicate | Association musicale à Lausanne</title>
   <meta name="description" content="45 Syndicate est une association musicale lausannoise à but non lucratif : soutien aux artistes indépendants, vinyles solidaires, événements et bientôt une webradio." />
   <link rel="icon" type="image/png" href="./assets/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/styles.css" />
+  <link rel="stylesheet" href="./css/jetons.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/poster.css" />
+  <link rel="stylesheet" href="./css/paper-texture.css" />
+  <link rel="stylesheet" href="./css/buttons.css" />
+  <link rel="stylesheet" href="./css/papers.css" />
+  <link rel="stylesheet" href="./css/nav-papers.css" />
+  <link rel="stylesheet" href="./css/nav.css" />
+  <link rel="stylesheet" href="./css/nav-menu.css" />
+  <link rel="stylesheet" href="./css/nav-flyers.css" />
+  <link rel="stylesheet" href="./css/nav-desktop.css" />
+  <link rel="stylesheet" href="./css/hero.css" />
+  <link rel="stylesheet" href="./css/home.css" />
+  <link rel="stylesheet" href="./css/tracklist.css" />
+  <link rel="stylesheet" href="./css/deck.css" />
+  <link rel="stylesheet" href="./css/blocks.css" />
+  <link rel="stylesheet" href="./css/agenda.css" />
+  <link rel="stylesheet" href="./css/footer.css" />
 </head>
 <body data-page="home">
   <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -18,20 +36,21 @@
     <nav class="nav" aria-label="Navigation principale">
       <a class="nav__logo" href="./index.html"><img class="nav__logo-mark" src="./assets/logo-mark.png" alt="" width="30" height="30" />45 SYNDICATE</a>
       <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
-        <span class="nav__toggle-line" aria-hidden="true"></span>
-        <span class="nav__toggle-line" aria-hidden="true"></span>
-        <span class="visually-hidden">Menu</span>
+        <span class="nav__toggle-lines" aria-hidden="true">
+          <span class="nav__toggle-line"></span>
+          <span class="nav__toggle-line"></span>
+        </span>
+        <span class="nav__toggle-label">Menu</span>
       </button>
       <ul id="nav-menu" class="nav__menu">
-        <li><a href="./index.html" aria-current="page"><span class="nav__num" aria-hidden="true">01</span>Accueil</a></li>
-        <li><a href="./association.html"><span class="nav__num" aria-hidden="true">02</span>L'association</a></li>
-        <li><a href="./shop.html"><span class="nav__num" aria-hidden="true">03</span>Boutique <span class="nav__cart-count" data-cart-count hidden>0</span></a></li>
-        <li><a href="./agenda.html"><span class="nav__num" aria-hidden="true">04</span>Agenda</a></li>
+        <li><a href="./index.html" aria-current="page">Accueil</a></li>
+        <li><a href="./association.html">L’association</a></li>
+        <li><a href="./shop.html">Boutique <span class="nav__cart-count" data-cart-count hidden>0</span></a></li>
+        <li><a href="./agenda.html">Agenda</a></li>
         <li class="nav__item-cta"><a class="nav__cta" href="./association.html#soutenir">Soutenir</a></li>
         <li class="nav__menu-meta">
           <a href="mailto:hello@45syndicate.ch">hello@45syndicate.ch</a>
           <span>Lausanne, Suisse</span>
-          <span class="nav__menu-radio"><span class="nav__menu-radio-dot" aria-hidden="true"></span>Webradio — bientôt en ondes</span>
         </li>
       </ul>
     </nav>
@@ -39,132 +58,117 @@
 
   <main id="contenu" tabindex="-1">
     <div class="wall-top">
-      <section class="intro window reveal" aria-label="45 Syndicate — Association musicale à Lausanne">
-        <p class="page-hero__meta">Association musicale — Lausanne, CH — Est. 2026</p>
-        <h1 class="screen__title">La musique qui <em>rassemble</em></h1>
+      <section class="intro window" aria-label="45 Syndicate, association musicale à Lausanne">
+        <p class="page-hero__meta">Association musicale à Lausanne, depuis 2026</p>
+        <h1 class="screen__title">La musique qui rassemble</h1>
         <p class="screen__lead">
           45 Syndicate est une association à but non lucratif qui soutient la
           scène musicale indépendante depuis Lausanne&nbsp;: vinyles solidaires,
           ateliers ouverts à toutes et tous, événements.
         </p>
       </section>
-      <aside class="deck window reveal" aria-hidden="true">
+      <aside class="deck window" aria-hidden="true">
         <div class="universe__player">
           <div class="player-disc">
             <span class="player-disc__label"><img class="player-disc__logo" src="./assets/logo-mark.png" alt="" width="72" height="72" /></span>
           </div>
           <p class="player__caption">
             <span class="player__caption-dot"></span>
-            En lecture&nbsp;— <span data-disc-caption>Boutique solidaire</span>
+            Sur la platine&nbsp;: <span data-disc-caption>Boutique solidaire</span>
           </p>
         </div>
       </aside>
     </div>
 
     <nav class="flyers" data-tracklist aria-label="Sections du site">
-      <a class="index-row window reveal is-active" href="./shop.html" data-track="01" data-track-label="Boutique solidaire">
-        <span class="index-row__num" aria-hidden="true">01</span>
+      <a class="index-row window is-active" href="./shop.html" data-track data-track-label="Boutique solidaire">
         <span class="index-row__body">
           <span class="index-row__title">Boutique</span>
           <span class="index-row__label">Des vinyles qui soutiennent les artistes</span>
         </span>
         <span class="index-row__disc" aria-hidden="true"></span>
       </a>
-      <a class="index-row window reveal" href="./agenda.html" data-track="02" data-track-label="Agenda">
-        <span class="index-row__num" aria-hidden="true">02</span>
+      <a class="index-row window" href="./agenda.html" data-track data-track-label="Agenda">
         <span class="index-row__body">
           <span class="index-row__title">Agenda</span>
           <span class="index-row__label">Ateliers &amp; concerts à Lausanne</span>
         </span>
         <span class="index-row__disc" aria-hidden="true"></span>
       </a>
-      <a class="index-row window reveal" href="./association.html" data-track="03" data-track-label="L'association">
-        <span class="index-row__num" aria-hidden="true">03</span>
+      <a class="index-row window" href="./association.html" data-track data-track-label="L’association">
         <span class="index-row__body">
-          <span class="index-row__title">L'association</span>
+          <span class="index-row__title">L’association</span>
           <span class="index-row__label">Qui nous sommes, ce que nous défendons</span>
         </span>
         <span class="index-row__disc" aria-hidden="true"></span>
       </a>
-      <a class="index-row index-row--accent window reveal" href="./association.html#soutenir" data-track="04" data-track-label="Soutenir">
-        <span class="index-row__num" aria-hidden="true">04</span>
+      <a class="index-row index-row--accent window" href="./association.html#soutenir" data-track data-track-label="Soutenir">
         <span class="index-row__body">
           <span class="index-row__title">Soutenir</span>
           <span class="index-row__label">Faire un don, en trente secondes</span>
         </span>
         <span class="index-row__disc" aria-hidden="true"></span>
       </a>
-      <div class="index-row index-row--ghost window reveal" data-track="05" data-track-label="Radio — bientôt en ondes">
-        <span class="index-row__num" aria-hidden="true">05</span>
+      <div class="index-row index-row--ghost window" data-track data-track-label="Radio, bientôt en ondes">
         <span class="index-row__body">
           <span class="index-row__title">Radio</span>
-          <span class="index-row__label">Webradio 45 Syndicate — bientôt en ondes</span>
+          <span class="index-row__label">Webradio 45 Syndicate&#8239;: bientôt en ondes</span>
         </span>
         <span class="index-row__disc" aria-hidden="true"></span>
       </div>
     </nav>
 
-    <section class="home-mission window reveal">
-      <p class="section-label"><span class="section-label__index" aria-hidden="true">01</span>Qui sommes-nous</p>
-      <p class="home-mission__text">
-        Une association à but non lucratif, née à Lausanne, qui met la musique
-        au service du lien social&nbsp;: soutien aux artistes, ateliers de
-        production, événements ouverts à toutes et tous.
-      </p>
-      <a class="link-arrow" href="./association.html">Découvrir l'association</a>
-    </section>
-
-    <section class="statement window reveal" aria-label="Ce que nous défendons">
+    <section class="statement window" aria-label="Ce que nous défendons">
       <div class="statement__inner">
         <p class="section-label">Ce que nous défendons</p>
         <p class="statement__text">
           Une économie à taille humaine, où la musique redevient
-          <em>un langage partagé</em>, un travail reconnu, un levier
-          d'émancipation.
+          un langage partagé, un travail reconnu, un levier
+          d’émancipation.
         </p>
       </div>
     </section>
 
-    <section class="home-agenda window reveal" aria-labelledby="home-agenda-title">
-      <p class="section-label"><span class="section-label__index" aria-hidden="true">02</span>Agenda</p>
+    <section class="home-agenda window" aria-labelledby="home-agenda-title">
+      <p class="section-label">Agenda</p>
       <div class="section-head">
         <h2 id="home-agenda-title" class="section-title">Prochainement</h2>
-        <a class="link-arrow" href="./agenda.html">Tout l'agenda</a>
+        <a class="link-arrow" href="./agenda.html">Tout l’agenda</a>
       </div>
       <div class="events-teaser" data-events-teaser>
         <p class="empty-note">Chargement des événements…</p>
       </div>
     </section>
 
-    <section class="home-support window reveal" aria-labelledby="home-support-title">
-      <p class="section-label"><span class="section-label__index" aria-hidden="true">03</span>Soutenir</p>
+    <section class="home-support window" aria-labelledby="home-support-title">
+      <p class="section-label">Soutenir</p>
       <h2 id="home-support-title" class="home-support__title">Soutenir 45 Syndicate</h2>
       <p class="home-support__text">
-        Un don, même modeste, fait vivre les projets de l'association.
-        Par virement, QR-facture ou Twint — en trente secondes.
+        Un don, même modeste, fait vivre les projets de l’association.
+        Par virement, QR-facture ou Twint, en trente secondes.
       </p>
-      <a class="btn btn--accent" href="./association.html#soutenir">Faire un don <span aria-hidden="true">→</span></a>
+      <a class="btn btn--accent" href="./association.html#soutenir">Faire un don</a>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="footer__radio" role="status">
+    <div class="footer__radio">
       <span class="footer__radio-dot" aria-hidden="true"></span>
-      Webradio 45 Syndicate — bientôt en ondes
+      Webradio 45 Syndicate&#8239;: bientôt en ondes
     </div>
     <div class="footer__main">
       <p class="footer__tagline">La musique<br />qui rassemble</p>
       <nav class="footer__block" aria-label="Navigation secondaire">
-        <p class="footer__block-title"><span class="footer__block-index" aria-hidden="true">45.01</span>Navigation</p>
+        <p class="footer__block-title">Navigation</p>
         <ul class="footer__list">
-          <li><a href="./association.html">L'association</a></li>
+          <li><a href="./association.html">L’association</a></li>
           <li><a href="./shop.html">Boutique</a></li>
           <li><a href="./agenda.html">Agenda</a></li>
           <li><a href="./association.html#soutenir">Faire un don</a></li>
         </ul>
       </nav>
       <div class="footer__block">
-        <p class="footer__block-title"><span class="footer__block-index" aria-hidden="true">45.02</span>Contact</p>
+        <p class="footer__block-title">Contact</p>
         <ul class="footer__list">
           <li><a href="mailto:hello@45syndicate.ch">hello@45syndicate.ch</a></li>
           <li>Lausanne, Suisse</li>
@@ -172,7 +176,7 @@
       </div>
     </div>
     <div class="footer__legal">
-      <p>© 2026 Association 45 Syndicate — Lausanne</p>
+      <p>© 2026 Association 45 Syndicate, Lausanne</p>
       <p>Association à but non lucratif</p>
     </div>
     <p class="footer__brandmark" aria-hidden="true"><span>45</span> SYNDICATE</p>

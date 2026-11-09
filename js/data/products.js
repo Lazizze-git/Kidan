@@ -5,9 +5,9 @@ export const PRODUCTS = [
   {
     id: "vinyle-01",
     artist: "Artiste à définir",
-    title: "Titre de l'album",
+    title: "Titre de l’album",
     description:
-      "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
+      "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
     price: 30,
     labelInitial: "A",
     available: true,
@@ -15,9 +15,9 @@ export const PRODUCTS = [
   {
     id: "vinyle-02",
     artist: "Artiste à définir",
-    title: "Titre de l'album",
+    title: "Titre de l’album",
     description:
-      "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
+      "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
     price: 28,
     labelInitial: "B",
     available: true,
@@ -25,9 +25,9 @@ export const PRODUCTS = [
   {
     id: "vinyle-03",
     artist: "Artiste à définir",
-    title: "Titre de l'album",
+    title: "Titre de l’album",
     description:
-      "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
+      "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
     price: 32,
     labelInitial: "C",
     available: true,
@@ -35,9 +35,9 @@ export const PRODUCTS = [
   {
     id: "vinyle-04",
     artist: "Artiste à définir",
-    title: "Titre de l'album",
+    title: "Titre de l’album",
     description:
-      "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
+      "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
     price: 25,
     labelInitial: "D",
     available: true,
@@ -45,9 +45,9 @@ export const PRODUCTS = [
   {
     id: "vinyle-05",
     artist: "Artiste à définir",
-    title: "Titre de l'album",
+    title: "Titre de l’album",
     description:
-      "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
+      "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
     price: 35,
     labelInitial: "E",
     available: true,
@@ -55,9 +55,9 @@ export const PRODUCTS = [
   {
     id: "vinyle-06",
     artist: "Artiste à définir",
-    title: "Titre de l'album",
+    title: "Titre de l’album",
     description:
-      "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
+      "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
     price: 30,
     labelInitial: "F",
     available: false,

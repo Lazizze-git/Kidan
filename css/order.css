@@ -1,0 +1,191 @@
+/* Barre panier, commande et confirmation. */
+
+/* Barre panier fixe ------------------------------------------- */
+.cart-bar {
+  position: fixed;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translateX(-50%);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  width: min(92%, 34rem);
+  padding: 0.85rem 0.85rem 0.85rem 1.35rem;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  box-shadow: 0 4px 10px rgba(20, 20, 15, 0.2),
+    0 18px 40px rgba(20, 20, 15, 0.35);
+  animation: cart-bar-rise 250ms var(--ease-out);
+}
+
+@keyframes cart-bar-rise {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 1.25rem);
+  }
+}
+
+/* L'attribut hidden doit gagner sur display: flex */
+.cart-bar[hidden] {
+  display: none;
+}
+
+.cart-bar__summary {
+  flex-grow: 1;
+  font-size: var(--fs-meta);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.cart-bar .btn {
+  padding: 0.6rem 1.15rem;
+  font-size: var(--fs-meta);
+  white-space: nowrap;
+  background: var(--color-paper);
+  border-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cart-bar .btn:hover {
+    background: var(--c-mellow);
+    border-color: var(--c-mellow);
+    color: var(--c-cherry);
+  }
+}
+
+/* La barre est posée sur le bas de l'écran : le pied de page garde
+   de la marge pour ne pas passer dessous */
+body:has(.cart-bar:not([hidden])) .site-footer {
+  padding-bottom: 5.5rem;
+}
+
+/* Une fenêtre ouverte fige la page derrière elle */
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+/* Commande : pop-up qui monte quand on clique "Passer commande" */
+.order-dialog {
+  --tilt: 0.7deg;
+
+  width: min(92vw, 34rem);
+  max-height: 88svh;
+  margin: auto;
+  padding: 0;
+  border: none;
+  overflow-y: auto;
+}
+
+.order-dialog::backdrop {
+  background: rgba(20, 20, 15, 0.6);
+}
+
+.order-dialog__body {
+  padding: clamp(1.25rem, 3.5vw, 1.85rem);
+}
+
+/* La pop-up monte en apparaissant */
+.order-dialog[open],
+.product-dialog[open] {
+  animation: dialog-rise 300ms var(--ease-settle);
+}
+
+@keyframes dialog-rise {
+  from {
+    opacity: 0;
+    transform: translateY(2rem) rotate(var(--tilt, 0deg)) scale(0.98);
+  }
+}
+
+.order__lines {
+  margin: 1.75rem 0 1rem;
+  border-top: 1px solid var(--color-line);
+}
+
+.order-line {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.order-line__name {
+  flex-grow: 1;
+  font-size: var(--fs-meta);
+  font-weight: 700;
+}
+
+.order-line__qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.order-line__qty button {
+  width: var(--target-min);
+  height: var(--target-min);
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: border-color var(--transition),
+    background-color var(--transition), color var(--transition);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .order-line__qty button:hover {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+}
+
+.order-line__price {
+  font-weight: 700;
+  min-width: 5.5rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.order__total {
+  text-align: right;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Confirmation -------------------------------------------------- */
+.order-confirm {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: var(--color-paper);
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.order-confirm__title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.order-confirm .donate__details dt {
+  opacity: 1;
+  color: var(--color-gray);
+}
+
+.order-confirm .donate__note {
+  opacity: 1;
+  color: var(--color-gray);
+}

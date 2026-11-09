@@ -9,10 +9,25 @@ function updateCartBadges() {
   });
 }
 
+const DESKTOP_QUERY = "(min-width: 900px)";
+
+// Pendant que le menu plein écran est ouvert, le reste de la page n'est
+// ni atteignable au clavier ni lu par les lecteurs d'écran.
+function setBackgroundInert(inert) {
+  document.querySelectorAll("main, .site-footer").forEach((node) => {
+    node.toggleAttribute("inert", inert);
+  });
+}
+
 function setMenuState(toggle, menu, open) {
   menu.classList.toggle("is-open", open);
   toggle.setAttribute("aria-expanded", String(open));
+  const label = toggle.querySelector(".nav__toggle-label");
+  if (label) {
+    label.textContent = open ? "Fermer" : "Menu";
+  }
   document.body.classList.toggle("nav-open", open);
+  setBackgroundInert(open);
 }
 
 function initMenu(toggle, menu) {
@@ -31,6 +46,13 @@ function initMenu(toggle, menu) {
     if (event.key === "Escape" && menu.classList.contains("is-open")) {
       setMenuState(toggle, menu, false);
       toggle.focus();
+    }
+  });
+
+  // Passage en grand écran avec le menu ouvert : on referme proprement
+  window.matchMedia(DESKTOP_QUERY).addEventListener("change", (event) => {
+    if (event.matches && menu.classList.contains("is-open")) {
+      setMenuState(toggle, menu, false);
     }
   });
 }

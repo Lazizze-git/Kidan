@@ -1,0 +1,89 @@
+/* La pochette de vinyle, dessinée en CSS : placeholder en attendant les vraies photos. */
+
+/* Pochette de vinyle, en pur CSS ------------------------------ */
+.vinyl {
+  position: relative;
+  aspect-ratio: 1;
+  margin-bottom: clamp(0.9rem, 2.2vw, 1.25rem);
+  background: linear-gradient(150deg, #f2f0e8 0%, #dedbd0 62%, #d3d0c4 100%);
+  box-shadow: inset 0 0 0 1px rgba(20, 20, 15, 0.14),
+    inset 0 -14px 22px rgba(20, 20, 15, 0.07),
+    0 2px 6px rgba(20, 20, 15, 0.14);
+  overflow: hidden;
+}
+
+/* L'ouverture de la pochette, en haut : un liseré plus sombre */
+.vinyl::after {
+  content: "";
+  position: absolute;
+  top: 5%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(20, 20, 15, 0.13);
+}
+
+/* Le disque : sillons fins et un reflet balayé */
+.vinyl__disc {
+  position: absolute;
+  inset: 9%;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+      circle at center,
+      var(--disc-black) 0,
+      var(--disc-black) 2px,
+      var(--disc-groove) 2px,
+      var(--disc-groove) 4px
+    ),
+    var(--disc-black);
+  box-shadow: 0 2px 8px rgba(20, 20, 15, 0.3);
+}
+
+.vinyl__disc::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 210deg,
+    rgba(255, 255, 255, 0) 0deg,
+    rgba(255, 255, 255, 0.16) 34deg,
+    rgba(255, 255, 255, 0) 78deg,
+    rgba(255, 255, 255, 0) 190deg,
+    rgba(255, 255, 255, 0.1) 216deg,
+    rgba(255, 255, 255, 0) 250deg
+  );
+}
+
+/* L'étiquette centrale : la lettre du pressage, cerclée comme
+   sur un vrai 45 tours */
+.vinyl__label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: 34%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--disc-color, var(--c-flossy));
+  color: var(--c-cherry);
+  box-shadow: 0 0 0 1px rgba(20, 20, 15, 0.3),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.18);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.1rem, 3.4vw, 1.7rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Le disque tourne quand on survole la carte : seul le reflet balaye
+   les sillons, l'étiquette reste lisible */
+@media (hover: hover) and (pointer: fine) {
+  .product-card:hover .vinyl__disc::after {
+    animation: disc-spin 6s linear infinite;
+  }
+}

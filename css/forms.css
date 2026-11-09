@@ -1,5 +1,6 @@
 /* Formulaire de commande : un formulaire administratif propre —
-   étiquettes en petites capitales, champs à filet, erreurs explicites */
+   libellés toujours visibles, champs à filet, erreur écrite sous le
+   champ concerné et rappelée en tête de formulaire. */
 .order-form__intro {
   max-width: 52ch;
   color: var(--color-gray);
@@ -19,39 +20,46 @@
 }
 
 .field label {
-  font-size: var(--fs-micro);
+  font-size: var(--fs-meta);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--color-gray);
+  color: var(--color-ink);
 }
 
 .field input,
 .field textarea {
-  padding: 0.8rem 0.9rem;
-  font-size: var(--fs-meta);
-  background: #fff;
-  border: 1px solid var(--color-line);
+  min-height: var(--target-min);
+  padding: 0.7rem 0.9rem;
+  /* 16 px : en dessous, iOS zoome la page au toucher du champ */
+  font-size: var(--fs-body);
+  color: var(--c-cherry);
+  background: var(--color-field);
+  border: 1px solid var(--color-ink);
   border-radius: 0;
-  transition: border-color var(--transition), box-shadow var(--transition);
+  transition: box-shadow var(--transition);
 }
 
 .field input::placeholder,
 .field textarea::placeholder {
-  color: #9a9a92;
+  color: var(--color-placeholder);
 }
 
-.field input:focus,
-.field textarea:focus {
-  outline: none;
-  border-color: var(--color-ink);
-  box-shadow: inset 0 -2px 0 var(--color-ink);
+.field input:focus-visible,
+.field textarea:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 2px;
+  box-shadow: none;
 }
 
-.field input.is-invalid,
-.field textarea.is-invalid {
-  border-color: var(--color-accent);
-  box-shadow: inset 0 -2px 0 var(--color-accent);
+.field input[aria-invalid="true"],
+.field textarea[aria-invalid="true"] {
+  border-color: var(--color-error);
+  box-shadow: inset 0 -3px 0 var(--color-error);
+}
+
+.field__error {
+  font-size: var(--fs-meta);
+  font-weight: 700;
+  color: var(--color-error);
 }
 
 .field textarea {
@@ -62,16 +70,15 @@
 .order-form__error {
   margin-top: 1.25rem;
   padding: 0.75rem 0.9rem;
-  font-size: var(--fs-micro);
+  font-size: var(--fs-meta);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #fff;
-  background: var(--color-accent);
+  color: var(--color-paper);
+  background: var(--color-error);
 }
 
 .order-form__submit {
   margin-top: 1.75rem;
+  width: 100%;
 }
 
 @media (min-width: 640px) {
@@ -82,4 +89,13 @@
   .field--full {
     grid-column: 1 / -1;
   }
+
+  .order-form__submit {
+    width: auto;
+  }
+}
+
+.field__optional {
+  font-weight: 400;
+  color: var(--color-gray);
 }

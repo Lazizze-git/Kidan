@@ -7,10 +7,10 @@ export function initAgenda() {
   if (!container) {
     return;
   }
-  const cards = getUpcomingEvents().map(createEventCard);
+  const cards = getUpcomingEvents().map((event) => createEventCard(event, { detailed: true }));
   renderInto(
     container,
     cards,
-    "Aucun événement programmé pour le moment — revenez bientôt !"
+    "Aucun événement programmé pour le moment. Revenez bientôt, ou écrivez-nous pour proposer une date."
   );
 }

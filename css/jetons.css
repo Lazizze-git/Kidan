@@ -1,0 +1,101 @@
+/* JETONS — toutes les valeurs de base du site (palette, rôles, échelle,
+   espacements, mouvement). Les thèmes de papier sont dans papers.css. */
+:root {
+  /* Palette de référence — douze couleurs de sérigraphie.
+     Les composants ne les posent jamais au hasard : elles servent aux
+     thèmes de papier (css/papers.css) et aux rôles ci-dessous. Un
+     composant lit un rôle (--color-ink, --color-accent…), pas une teinte. */
+  --c-green: #116b09; /* Green House   */
+  --c-flossy: #ff7fab; /* Flossy        */
+  --c-hotpink: #ff4283; /* Hot Pink      */
+  --c-deepred: #c60707; /* Deep Red      */
+  --c-berry: #1f6bed; /* Kind Berry    */
+  --c-mellow: #f4ff1e; /* Mellow        */
+  --c-magenta: #ff1ec7; /* Magenta       */
+  --c-mutedblue: #518dff; /* Muted Blue    */
+  --c-cherry: #6e1221; /* Velvet Cherry */
+  --c-taffy: #e76290; /* Taffy         */
+  --c-vinyl: #0759a2; /* Blue Vinyl    */
+  --c-riviera: #5196e8; /* Riviera       */
+
+  /* Rôles par défaut : encre bordeaux sur papier blanc.
+     Plus de noir pur nulle part — l'encre la plus sombre du site
+     est le Velvet Cherry. */
+  --color-ink: var(--c-cherry);
+  --color-paper: #f7f6f1;
+  --color-accent: var(--c-deepred);
+  --color-accent-bright: var(--c-hotpink);
+  --disc-color: var(--c-flossy);
+
+  /* Le mur de grillage : un gris chaud, qui tient avec le bordeaux */
+  --color-bg: #9c968d;
+  --color-bg-deep: #857f76;
+
+  /* Bordeaux poussé au noir : la base sur laquelle la page se pose */
+  --color-ink-deep: #4b0c16;
+
+  /* Texte secondaire et filets : de l'encre diluée dans le papier,
+     comme une couche d'impression plus légère. Le taux s'adapte
+     par thème (--ink-soft / --ink-line) pour rester lisible aussi
+     bien sur papier clair que sur fond saturé. */
+  --ink-soft: 78%;
+  --ink-line: 24%;
+
+  --font-mono: "Space Mono", "Courier New", monospace;
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+
+  /* Échelle typographique ------------------------------------- */
+  --fs-display: clamp(2.6rem, 7vw, 5.25rem);
+  --fs-h1: clamp(2.1rem, 5.4vw, 4rem);
+  --fs-h2: clamp(1.65rem, 3.4vw, 2.6rem);
+  --fs-h3: clamp(1.15rem, 2.1vw, 1.45rem);
+  --fs-lead: clamp(1rem, 1.4vw, 1.15rem);
+  --fs-body: 1rem;
+  --fs-meta: 0.875rem;
+  --fs-micro: 0.75rem;
+
+  --space-section: clamp(3.5rem, 7vw, 5.75rem);
+  --space-gutter: clamp(1.25rem, 4vw, 3rem);
+  --max-width: 72rem;
+
+  /* Affiches : angles nets, papier mat, ombre en couches ------ */
+  --radius-card: 0;
+  --border-frame: 2px solid var(--color-ink);
+  --frame-inline: clamp(1.4rem, 3vw, 2rem);
+  --frame-width: min(calc(100% - 2 * var(--frame-inline)), var(--max-width));
+
+  /* Ombre d'affiche : un contact serré + une diffusion large.
+     C'est ce qui fait décoller le papier du grillage. */
+  --shadow-poster: 0 1px 1px rgba(20, 20, 15, 0.1),
+    0 3px 5px rgba(20, 20, 15, 0.1), 0 10px 18px rgba(20, 20, 15, 0.14),
+    0 26px 44px rgba(20, 20, 15, 0.16);
+  --shadow-chip: 0 1px 1px rgba(20, 20, 15, 0.12),
+    0 4px 10px rgba(20, 20, 15, 0.18);
+
+  /* Grain de papier : une trame de bruit posée en multiply sur
+     chaque affiche, pour qu'elle ne soit pas un aplat numérique */
+  --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)' opacity='0.16'/%3E%3C/svg%3E");
+
+  /* Mouvement : une seule courbe de décélération, des durées courtes.
+     Rien ne dépasse 300 ms ; sous prefers-reduced-motion tout est coupé
+     (voir reset.css). */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-settle: cubic-bezier(0.23, 1, 0.32, 1);
+  --transition: 160ms var(--ease-out);
+  --transition-slow: 250ms var(--ease-out);
+
+  /* Disques vinyle et platine : noirs chauds et sillons */
+  --disc-black: #17170f;
+  --disc-groove: #232319;
+  --deck-black: #191917;
+  --deck-groove: #26261f;
+  --deck-groove-light: #2a2a25;
+
+  /* Rôles utilitaires : plus aucune couleur en dur dans les composants */
+  --color-on-accent: #fff;
+  --color-field: #fff;
+  --color-placeholder: #6b6a63;
+  --color-error: var(--c-deepred);
+  --tracking-label: 0.06em;
+  --target-min: 2.75rem;
+}

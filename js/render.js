@@ -1,4 +1,9 @@
 // Petites briques de rendu partagées entre les pages
+import { el } from "./dom.js";
+import { createEventExtras } from "./event-extras.js";
+
+export { el };
+
 const priceFormatter = new Intl.NumberFormat("fr-CH", {
   style: "currency",
   currency: "CHF",
@@ -6,17 +11,6 @@ const priceFormatter = new Intl.NumberFormat("fr-CH", {
 
 export function formatPrice(value) {
   return priceFormatter.format(value);
-}
-
-export function el(tag, className, text) {
-  const node = document.createElement(tag);
-  if (className) {
-    node.className = className;
-  }
-  if (text !== undefined) {
-    node.textContent = text;
-  }
-  return node;
 }
 
 function eventDateParts(isoDate) {
@@ -32,15 +26,17 @@ function eventDateParts(isoDate) {
   return { day, month, full };
 }
 
-export function createEventCard(event) {
-  const card = el("article", "event-card reveal");
+export function createEventCard(event, options = {}) {
+  const card = el("article", "event-card");
   const { day, month, full } = eventDateParts(event.date);
 
-  const dateBlock = el("div", "event-card__date");
-  const dayNode = el("span", "event-card__day", day);
-  const monthNode = el("span", "event-card__month", month);
-  dateBlock.append(dayNode, monthNode);
+  const dateBlock = el("time", "event-card__date");
+  dateBlock.dateTime = event.date;
   dateBlock.setAttribute("aria-label", full);
+  dateBlock.append(
+    el("span", "event-card__day", day),
+    el("span", "event-card__month", month)
+  );
 
   const body = el("div", "event-card__body");
   body.append(el("h3", "event-card__title", event.title));
@@ -52,6 +48,9 @@ export function createEventCard(event) {
     el("span", "", event.price)
   );
   body.append(meta, el("p", "event-card__desc", event.description));
+  if (options.detailed) {
+    body.append(...createEventExtras(event));
+  }
 
   card.append(dateBlock, body, el("span", "event-card__tag", event.tag));
   return card;
@@ -64,8 +63,21 @@ export function createVinylVisual(labelInitial) {
   return vinyl;
 }
 
+const ADDED_FEEDBACK_MS = 1500;
+
+// Le bouton dit « Ajouté » un instant : le panier a bien reçu le vinyle
+function confirmAdded(button, title) {
+  const idleLabel = `Ajouter ${title} au panier`;
+  button.textContent = "Ajouté";
+  button.setAttribute("aria-label", `${title} ajouté au panier`);
+  window.setTimeout(() => {
+    button.textContent = "Ajouter";
+    button.setAttribute("aria-label", idleLabel);
+  }, ADDED_FEEDBACK_MS);
+}
+
 export function createProductCard(product, onAdd, index, onOpen) {
-  const card = el("article", "product-card window reveal");
+  const card = el("article", "product-card window");
   const refCode = `Ref 45S-${String(index + 1).padStart(2, "0")}`;
 
   const footer = el("div", "product-card__footer");
@@ -76,7 +88,11 @@ export function createProductCard(product, onAdd, index, onOpen) {
   } else {
     const button = el("button", "btn btn--primary product-card__add", "Ajouter");
     button.type = "button";
-    button.addEventListener("click", () => onAdd(product));
+    button.setAttribute("aria-label", `Ajouter ${product.title} au panier`);
+    button.addEventListener("click", () => {
+      onAdd(product);
+      confirmAdded(button, product.title);
+    });
     footer.append(button);
   }
 

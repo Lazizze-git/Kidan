@@ -1,0 +1,178 @@
+/* Dons : affiche-titre, moyens de paiement, copie de l'IBAN. */
+
+/* Dons : petite affiche-titre rose, puis un moyen de paiement
+   par affiche blanche ---------------------------------------- */
+.donate {
+  --poster-w: min(34rem, calc(100% - 2 * var(--frame-inline)));
+  --tilt: -1.2deg;
+
+  margin-top: calc(var(--space-section) * 0.6);
+  margin-left: max(var(--frame-inline), 10%);
+  margin-right: auto;
+  padding: clamp(1.25rem, 3.5vw, 1.75rem);
+}
+
+.donate .section-label {
+  justify-content: center;
+}
+
+.donate__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 0.94;
+  text-align: center;
+}
+
+.donate__lead {
+  max-width: 38ch;
+  margin: 1.1rem auto 0;
+  text-align: center;
+  color: var(--color-gray);
+}
+
+/* Les deux moyens de paiement : petites affiches blanches en quinconce */
+.donate__grid {
+  display: grid;
+  gap: clamp(1.25rem, 2.5vw, 1.75rem);
+  width: min(42rem, var(--frame-width));
+  margin: 1.5rem auto 0;
+  align-items: start;
+}
+
+.donate__grid .donate__block {
+  width: auto;
+  margin: 0;
+  padding: 1.4rem 1.25rem;
+}
+
+.donate__grid .donate__block:nth-child(1) {
+  --tilt: 1deg;
+}
+
+.donate__grid .donate__block:nth-child(2) {
+  --tilt: -1.3deg;
+}
+
+@media (min-width: 720px) {
+  .donate__grid .donate__block:nth-child(2) {
+    margin-top: 1.75rem;
+  }
+}
+
+/* Mobile : affiches de paiement compactes, décalées en alternance */
+@media (max-width: 719px) {
+  .donate__grid .donate__block {
+    padding: 1.2rem 1rem;
+  }
+
+  .donate__grid .donate__block:nth-child(odd) {
+    margin-right: 2rem;
+  }
+
+  .donate__grid .donate__block:nth-child(even) {
+    margin-left: 2rem;
+  }
+}
+
+.donate__block-title {
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-line);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  color: var(--color-accent);
+}
+
+.donate__details {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.donate__details dt {
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  color: var(--color-gray);
+  margin-top: 0.9rem;
+}
+
+.donate__details dd {
+  font-size: var(--fs-meta);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.donate__qr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(8rem, 100%);
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  aspect-ratio: 1;
+  border: 2px dashed var(--color-line);
+  border-radius: var(--radius-card);
+  text-align: center;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  line-height: 1.6;
+  color: var(--color-gray);
+}
+
+.donate__note {
+  margin-top: 0.9rem;
+  font-size: var(--fs-micro);
+  line-height: 1.6;
+  color: var(--color-gray);
+}
+
+@media (min-width: 720px) {
+  .donate__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile : affiche don compacte */
+@media (max-width: 899px) {
+  .donate {
+    padding: 1.5rem 1.35rem;
+  }
+}
+
+/* Bouton « Copier l'IBAN » : l'action utile du bloc de paiement */
+.copy-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-min);
+  margin-top: 1rem;
+  padding: 0 1rem;
+  font-size: var(--fs-meta);
+  font-weight: 700;
+  color: var(--color-ink);
+  border: 2px solid var(--color-ink);
+  transition: background-color var(--transition), color var(--transition),
+    scale 100ms var(--ease-out);
+}
+
+.copy-button:active {
+  scale: 0.97;
+}
+
+.copy-button.is-copied {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .copy-button:hover {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+}

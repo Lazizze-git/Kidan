@@ -1,0 +1,102 @@
+/* Boutons : un aplat d'encre, des angles nets. Au survol la couleur
+   s'inverse ; à la pression le bouton s'enfonce de 3 %. ------------ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: var(--target-min);
+  white-space: nowrap;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: var(--fs-meta);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  text-decoration: none;
+  border-radius: 0;
+  border: 2px solid var(--color-ink);
+  transition: background-color var(--transition), color var(--transition),
+    border-color var(--transition), scale 100ms var(--ease-out);
+}
+
+.btn:active {
+  scale: 0.97;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.btn--primary {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.btn--accent {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-paper);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  /* Le bouton plein s'évide : l'encre repasse en texte sur le papier,
+     la paire reste lisible sur tous les fonds */
+  .btn--primary:hover {
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  .btn--accent:hover {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+}
+
+/* Liens fléchés : la flèche avance, le filet se déroule ------- */
+.link-arrow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: var(--target-min);
+  font-weight: 700;
+  font-size: var(--fs-meta);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  text-decoration: none;
+}
+
+.link-arrow::before {
+  content: "→";
+  transition: transform var(--transition);
+}
+
+.link-arrow::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.5rem;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-slow);
+}
+
+.link-arrow:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link-arrow:hover::before {
+    transform: translateX(4px);
+  }
+
+  .link-arrow:hover::after {
+    transform: scaleX(1);
+  }
+}

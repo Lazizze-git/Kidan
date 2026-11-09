@@ -1,8 +1,7 @@
 // Validation et envoi du formulaire de commande
 import { CONFIG } from "./config.js";
 import { formatPrice } from "./render.js";
-
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+import { validateForm, watchFields } from "./form-validation.js";
 
 function readFields(form) {
   const data = new FormData(form);
@@ -17,28 +16,6 @@ function readFields(form) {
     phone: value("phone"),
     notes: value("notes"),
   };
-}
-
-function validate(form, fields) {
-  const required = ["firstname", "lastname", "street", "zip", "city", "email", "phone"];
-  let firstInvalid = null;
-
-  required.forEach((name) => {
-    const input = form.elements.namedItem(name);
-    const isEmpty = fields[name] === "";
-    const isBadEmail = name === "email" && !isEmpty && !EMAIL_PATTERN.test(fields.email);
-    const invalid = isEmpty || isBadEmail;
-    input.classList.toggle("is-invalid", invalid);
-    if (invalid && firstInvalid === null) {
-      firstInvalid = input;
-    }
-  });
-
-  if (firstInvalid !== null) {
-    firstInvalid.focus();
-    return "Merci de remplir tous les champs obligatoires (email valide inclus).";
-  }
-  return null;
 }
 
 function buildOrderText(items, total, fields) {
@@ -86,38 +63,55 @@ async function sendOrder(orderText, fields) {
   window.location.href = `mailto:${CONFIG.contactEmail}?subject=${subject}&body=${body}`;
 }
 
+function setError(errorNode, message) {
+  errorNode.textContent = message;
+  errorNode.hidden = message === "";
+}
+
 export function initOrderForm({ form, errorNode, getItems, getTotal, onSuccess }) {
+  watchFields(form);
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    errorNode.hidden = true;
+    setError(errorNode, "");
 
-    const fields = readFields(form);
-    const validationError = validate(form, fields);
-    if (validationError !== null) {
-      errorNode.textContent = validationError;
-      errorNode.hidden = false;
+    const { firstInvalid, invalidCount } = validateForm(form);
+    if (firstInvalid !== null) {
+      setError(
+        errorNode,
+        invalidCount === 1
+          ? "Un champ est à corriger avant d’envoyer la commande."
+          : `${invalidCount} champs sont à corriger avant d’envoyer la commande.`
+      );
+      firstInvalid.focus();
       return;
     }
 
     const items = getItems();
-    const total = getTotal();
     if (items.length === 0) {
-      errorNode.textContent = "Votre panier est vide.";
-      errorNode.hidden = false;
+      setError(errorNode, "Votre panier est vide.");
       return;
     }
 
     const submitButton = form.querySelector("button[type='submit']");
+    const idleLabel = submitButton.textContent;
     submitButton.disabled = true;
+    submitButton.textContent = "Envoi en cours…";
+
+    const fields = readFields(form);
+    const total = getTotal();
 
     try {
       await sendOrder(buildOrderText(items, total, fields), fields);
       onSuccess(total);
     } catch {
-      errorNode.textContent = `L'envoi a échoué. Réessayez, ou écrivez-nous directement à ${CONFIG.contactEmail}.`;
-      errorNode.hidden = false;
+      setError(
+        errorNode,
+        `L’envoi a échoué. Réessayez, ou écrivez-nous directement à ${CONFIG.contactEmail}.`
+      );
     } finally {
       submitButton.disabled = false;
+      submitButton.textContent = idleLabel;
     }
   });
 }

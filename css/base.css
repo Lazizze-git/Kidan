@@ -2,90 +2,6 @@
    Deux voix typographiques : Archivo (grasse, serrée) pour les titres
    qui doivent crier, Space Mono pour tout ce qui est technique —
    étiquettes, chiffres, texte courant. */
-:root {
-  /* Palette de référence — douze couleurs de sérigraphie.
-     Elles ne sont jamais utilisées directement : elles alimentent
-     les thèmes de papier (css/papers.css), qui les assemblent en
-     paires fond + encre vérifiées en contraste. */
-  --c-green: #116b09; /* Green House   */
-  --c-flossy: #ff7fab; /* Flossy        */
-  --c-hotpink: #ff4283; /* Hot Pink      */
-  --c-deepred: #c60707; /* Deep Red      */
-  --c-berry: #1f6bed; /* Kind Berry    */
-  --c-mellow: #f4ff1e; /* Mellow        */
-  --c-magenta: #ff1ec7; /* Hot Pink      */
-  --c-mutedblue: #518dff; /* Muted Blue    */
-  --c-cherry: #6e1221; /* Velvet Cherry */
-  --c-taffy: #e76290; /* Taffy         */
-  --c-vinyl: #0759a2; /* Blue Vinyl    */
-  --c-riviera: #5196e8; /* Riviera       */
-
-  /* Rôles par défaut : encre bordeaux sur papier blanc.
-     Plus de noir pur nulle part — l'encre la plus sombre du site
-     est le Velvet Cherry. */
-  --color-ink: var(--c-cherry);
-  --color-paper: #f7f6f1;
-  --color-accent: var(--c-deepred);
-  --color-accent-bright: var(--c-hotpink);
-  --disc-color: var(--c-flossy);
-
-  /* Le mur de grillage : un gris chaud, qui tient avec le bordeaux */
-  --color-bg: #9c968d;
-  --color-bg-deep: #857f76;
-
-  /* Bordeaux poussé au noir : la base sur laquelle la page se pose */
-  --color-ink-deep: #4b0c16;
-
-  /* Texte secondaire et filets : de l'encre diluée dans le papier,
-     comme une couche d'impression plus légère. Le taux s'adapte
-     par thème (--ink-soft / --ink-line) pour rester lisible aussi
-     bien sur papier clair que sur fond saturé. */
-  --ink-soft: 78%;
-  --ink-line: 24%;
-
-  --font-mono: "Space Mono", "Courier New", monospace;
-  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
-
-  /* Échelle typographique ------------------------------------- */
-  --fs-display: clamp(2.6rem, 7vw, 5.25rem);
-  --fs-h1: clamp(2.1rem, 5.4vw, 4rem);
-  --fs-h2: clamp(1.65rem, 3.4vw, 2.6rem);
-  --fs-h3: clamp(1.15rem, 2.1vw, 1.45rem);
-  --fs-lead: clamp(1rem, 1.4vw, 1.15rem);
-  --fs-body: 1rem;
-  --fs-meta: 0.78rem;
-  --fs-micro: 0.68rem;
-
-  --space-section: clamp(3.5rem, 7vw, 5.75rem);
-  --space-gutter: clamp(1.25rem, 4vw, 3rem);
-  --max-width: 72rem;
-
-  /* Affiches : angles nets, papier mat, ombre en couches ------ */
-  --radius-card: 0;
-  --border-frame: 2px solid var(--color-ink);
-  --frame-inline: clamp(1.4rem, 3vw, 2rem);
-  --frame-width: min(calc(100% - 2 * var(--frame-inline)), var(--max-width));
-
-  /* Ombre d'affiche : un contact serré + une diffusion large.
-     C'est ce qui fait décoller le papier du grillage. */
-  --shadow-poster: 0 1px 1px rgba(20, 20, 15, 0.1),
-    0 3px 5px rgba(20, 20, 15, 0.1), 0 10px 18px rgba(20, 20, 15, 0.14),
-    0 26px 44px rgba(20, 20, 15, 0.16);
-  --shadow-poster-lift: 0 2px 2px rgba(20, 20, 15, 0.1),
-    0 6px 10px rgba(20, 20, 15, 0.12), 0 18px 30px rgba(20, 20, 15, 0.16),
-    0 40px 64px rgba(20, 20, 15, 0.2);
-  --shadow-chip: 0 1px 1px rgba(20, 20, 15, 0.12),
-    0 4px 10px rgba(20, 20, 15, 0.18);
-
-  /* Grain de papier : une trame de bruit posée en multiply sur
-     chaque affiche, pour qu'elle ne soit pas un aplat numérique */
-  --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)' opacity='0.16'/%3E%3C/svg%3E");
-
-  --ease-out: cubic-bezier(0.22, 0.75, 0.24, 1);
-  --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
-  --transition: 220ms var(--ease-out);
-  --transition-slow: 380ms var(--ease-out);
-}
 
 html {
   scroll-behavior: smooth;
@@ -147,8 +63,7 @@ main {
    reste — c'est le contraste entre les deux qui fait la hiérarchie. */
 h1,
 h2,
-h3,
-.type-display {
+h3 {
   font-family: var(--font-display);
   font-weight: 800;
   letter-spacing: -0.025em;
@@ -178,182 +93,12 @@ body,
   );
 }
 
-/* Affiches collées sur le grillage : papier sans cadre, ombre portée,
-   inclinaison propre à chaque affiche (--tilt), largeur propre
-   (--poster-w) et scotch sur les coins ---------------------------- */
-.window {
-  --tilt: -0.8deg;
-  --lift: 0px;
-  --reveal-rot: 1.4deg;
-  --poster-w: var(--frame-width);
-
-  position: relative;
-  width: var(--poster-w);
-  margin: var(--space-section) auto 0;
-  /* Tout est ré-évalué ici : chaque affiche porte sa propre encre,
-     et son texte secondaire est cette encre diluée dans SON papier */
-  color: var(--color-ink);
-  background-color: var(--poster-bg, var(--color-paper));
-  background-image: var(--paper-grain);
-  background-blend-mode: var(--paper-grain-blend, multiply);
-  box-shadow: var(--shadow-poster);
-  transform: translateY(var(--lift)) rotate(var(--tilt));
-  transition: transform var(--transition), box-shadow var(--transition);
-}
-
-/* L'affiche se redresse et se soulève quand on la "tient" */
-.window:hover {
-  --tilt: 0deg;
-  --lift: -5px;
-
-  box-shadow: var(--shadow-poster-lift);
-}
-
-/* Morceaux de scotch : bords déchirés à la main, translucides, avec
-   un reflet mat. Six poses différentes qui se répètent, pour que
-   chaque affiche paraisse collée séparément --------------------- */
-.window::before,
-.window::after {
-  content: "";
-  position: absolute;
-  top: -0.85rem;
-  width: clamp(3rem, 7vw, 4.8rem);
-  height: clamp(1.15rem, 2.6vw, 1.5rem);
-  background: linear-gradient(
-    104deg,
-    rgba(248, 246, 238, 0.34) 0%,
-    rgba(248, 246, 238, 0.5) 26%,
-    rgba(228, 226, 216, 0.42) 55%,
-    rgba(248, 246, 238, 0.5) 82%,
-    rgba(228, 226, 216, 0.36) 100%
-  );
-  box-shadow: 0 1px 2px rgba(20, 20, 15, 0.16),
-    0 4px 8px rgba(20, 20, 15, 0.12);
-  /* Bords déchirés : les extrémités ne sont jamais droites */
-  clip-path: polygon(
-    4% 3%,
-    38% 0%,
-    71% 4%,
-    100% 1%,
-    96% 48%,
-    100% 99%,
-    64% 96%,
-    30% 100%,
-    0% 97%,
-    3% 51%
-  );
-  backdrop-filter: saturate(0.78) brightness(1.05);
-  pointer-events: none;
-}
-
-/* Pose 1 (par défaut) : deux scotchs en haut, classiques */
-.window::before {
-  left: 6%;
-  transform: rotate(-4deg);
-}
-
-.window::after {
-  right: 14%;
-  transform: rotate(3deg);
-}
-
-/* Pose 2 : décalés vers le centre, penchés à l'inverse */
-.window:nth-child(6n + 2)::before {
-  left: 18%;
-  width: clamp(2.6rem, 6.5vw, 4.2rem);
-  transform: rotate(5deg);
-}
-
-.window:nth-child(6n + 2)::after {
-  right: 4%;
-  transform: rotate(-3.5deg);
-}
-
-/* Pose 3 : un scotch presque au centre, l'autre en bas à droite */
-.window:nth-child(6n + 3)::before {
-  left: 38%;
-  transform: rotate(2deg);
-}
-
-.window:nth-child(6n + 3)::after {
-  top: auto;
-  bottom: -0.75rem;
-  right: 8%;
-  transform: rotate(-5deg);
-}
-
-/* Pose 4 : petit scotch au ras du coin, grand scotch décalé */
-.window:nth-child(6n + 4)::before {
-  left: 3%;
-  width: clamp(2.4rem, 6vw, 3.4rem);
-  transform: rotate(6deg);
-}
-
-.window:nth-child(6n + 4)::after {
-  right: 24%;
-  width: clamp(3.2rem, 8vw, 4.8rem);
-  transform: rotate(-2deg);
-}
-
-/* Pose 5 : un scotch en bas à gauche, l'autre en haut à droite */
-.window:nth-child(6n + 5)::before {
-  top: auto;
-  bottom: -0.75rem;
-  left: 10%;
-  transform: rotate(4deg);
-}
-
-.window:nth-child(6n + 5)::after {
-  right: 12%;
-  transform: rotate(-4deg);
-}
-
-/* Pose 6 : les deux vers l'intérieur, angles marqués */
-.window:nth-child(6n + 6)::before {
-  left: 26%;
-  transform: rotate(-6deg);
-}
-
-.window:nth-child(6n + 6)::after {
-  right: 30%;
-  width: clamp(2.5rem, 6.5vw, 3.6rem);
-  transform: rotate(5deg);
-}
-
-/* Mobile : affiches plus petites — plus étroites, scotchs réduits,
-   pour laisser respirer le grillage autour */
-@media (max-width: 899px) {
-  .window {
-    width: min(var(--poster-w), calc(100% - 3rem));
-  }
-}
-
-/* En-tête de la fiche produit (seul usage restant) */
-.window-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.6rem 1.25rem;
-  border-bottom: 1px solid var(--color-line);
-  font-size: var(--fs-micro);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-gray);
-}
-
-::selection {
-  background: var(--color-accent);
-  color: #fff;
-}
-
 /* Anneau de focus à deux couches : reste visible sur le papier clair
    comme sur les affiches noire et rouge */
 :focus-visible {
-  outline: 2px solid var(--color-ink);
+  outline: 3px solid var(--color-ink);
   outline-offset: 3px;
-  box-shadow: 0 0 0 5px rgba(247, 246, 241, 0.9);
+  box-shadow: 0 0 0 6px var(--color-paper);
 }
 
 /* Helpers ------------------------------------------------ */
@@ -379,7 +124,7 @@ body,
   font-size: var(--fs-meta);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: var(--tracking-label);
   text-decoration: none;
   color: var(--color-paper);
   background: var(--color-ink);
@@ -391,32 +136,22 @@ body,
   transform: translateY(0);
 }
 
-/* Étiquette de section : 01 / QUI SOMMES-NOUS */
+/* Étiquette de section : le nom de la rubrique, en mono gras, suivi
+   d'un filet — la légende d'une planche, pas un sur-titre. */
 .section-label {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  font-size: var(--fs-micro);
+  gap: 0.8rem;
+  font-size: var(--fs-meta);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--color-gray);
-  margin-bottom: 1.5rem;
-  font-variant-numeric: tabular-nums;
-}
-
-/* Index technique des sections : 01, 02, 03… suivi d'un filet */
-.section-label__index {
   color: var(--color-ink);
+  margin-bottom: 1.5rem;
 }
 
-.section-label__index::after {
+.section-label::after {
   content: "";
-  display: inline-block;
   width: clamp(1.25rem, 3vw, 2.25rem);
-  margin-left: 0.7rem;
   border-top: 1px solid currentColor;
-  vertical-align: 0.25em;
   opacity: 0.45;
 }
 
@@ -429,13 +164,6 @@ body,
   line-height: 1.02;
 }
 
-/* Filet en tête de section (sections posées sur le bureau) */
-section.section--ruled {
-  border-top: var(--border-frame);
-  margin-top: calc(var(--space-section) / 2);
-  padding-top: calc(var(--space-section) / 2);
-}
-
 .section-head {
   display: flex;
   flex-wrap: wrap;
@@ -445,153 +173,6 @@ section.section--ruled {
   margin-bottom: 2rem;
 }
 
-.section-intro {
-  max-width: 42ch;
-  color: var(--color-gray);
-  margin-bottom: 2.5rem;
-}
-
 .empty-note {
   color: var(--color-gray);
-}
-
-/* Boutons ------------------------------------------------ */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  white-space: nowrap;
-  padding: 0.85rem 1.5rem;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: var(--fs-meta);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-  border-radius: 0;
-  border: 2px solid var(--color-ink);
-  box-shadow: 0 0 0 var(--color-ink);
-  transition: transform var(--transition), background-color var(--transition),
-    color var(--transition), box-shadow var(--transition);
-}
-
-.btn:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 5px 5px 0 var(--color-ink);
-}
-
-/* Le bouton s'enfonce quand on appuie */
-.btn:active {
-  transform: translate(0, 0);
-  box-shadow: 0 0 0 var(--color-ink);
-  transition-duration: 60ms;
-}
-
-.btn--primary {
-  background: var(--color-ink);
-  color: var(--color-paper);
-}
-
-.btn--primary:hover {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-}
-
-.btn--accent {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-paper);
-}
-
-.btn--accent:hover {
-  background: var(--color-ink);
-  border-color: var(--color-ink);
-  color: var(--color-paper);
-}
-
-/* Liens fléchés : la flèche avance, le filet se déroule ------- */
-.link-arrow {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-  font-size: var(--fs-meta);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  text-decoration: none;
-  padding-bottom: 0.35rem;
-}
-
-.link-arrow::before {
-  content: "→";
-  transition: transform var(--transition);
-}
-
-.link-arrow:hover::before {
-  transform: translateX(4px);
-}
-
-.link-arrow::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0;
-  height: 2px;
-  background: currentColor;
-  transition: width var(--transition-slow);
-}
-
-.link-arrow:hover::after {
-  width: 100%;
-}
-
-/* Apparition au défilement : l'affiche se pose sur le mur.
-   Ne masque le contenu que si le JS est chargé, pour que la page
-   reste lisible même sans JavaScript. Le décalage (--reveal-delay)
-   est posé par js/scroll-reveal.js pour un effet en cascade. */
-html.js .reveal {
-  opacity: 0;
-  transform: translateY(18px)
-    rotate(calc(var(--tilt, 0deg) + var(--reveal-rot, 0deg))) scale(0.985);
-  transition: opacity 620ms var(--ease-settle),
-    transform 720ms var(--ease-settle);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-html.js .reveal.is-visible {
-  opacity: 1;
-  transform: translateY(var(--lift, 0px)) rotate(var(--tilt, 0deg));
-}
-
-/* Fermeture / réapparition des fenêtres (après .reveal pour primer) */
-.window.is-closing {
-  opacity: 0;
-  transform: scale(0.985);
-  transition: opacity 180ms ease-out, transform 180ms ease-out;
-}
-
-.window.is-closed {
-  display: none;
-}
-
-/* Accessibilité : couper les animations si l'utilisateur le demande */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-
-  html.js .reveal {
-    opacity: 1;
-    transform: rotate(var(--tilt, 0deg));
-  }
 }

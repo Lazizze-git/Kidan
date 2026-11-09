@@ -10,7 +10,9 @@ import {
   onCartChange,
   setCartQty,
 } from "../cart.js";
+import { resetCopyButtons } from "../copy.js";
 import { initOrderForm } from "../order-form.js";
+import { initProductDialog } from "./product-dialog.js";
 import { createProductCard, el, formatPrice, renderInto } from "../render.js";
 
 function createOrderLine(item) {
@@ -20,7 +22,7 @@ function createOrderLine(item) {
   const name = el(
     "span",
     "order-line__name",
-    `${product.artist} — ${product.title}`
+    `${product.artist}, ${product.title}`
   );
 
   const qtyBlock = el("span", "order-line__qty");
@@ -54,12 +56,20 @@ function refreshOrderUI(nodes) {
   if (!hasItems && nodes.orderSection.open) {
     nodes.orderSection.close();
   }
-  nodes.cartSummary.textContent = `${count} article${count > 1 ? "s" : ""} — ${formatPrice(total)}`;
+  nodes.cartSummary.textContent = `${count} article${count > 1 ? "s" : ""} · ${formatPrice(total)}`;
   nodes.cartTotal.textContent = formatPrice(total);
   nodes.cartLines.replaceChildren(...getCartItems().map(createOrderLine));
 }
 
+// Nouvelle commande après une confirmation : on rouvre le formulaire
+function showOrderForm(nodes) {
+  nodes.confirm.hidden = true;
+  nodes.form.hidden = false;
+  resetCopyButtons(nodes.confirm);
+}
+
 function showConfirmation(nodes, total) {
+  resetCopyButtons(nodes.confirm);
   nodes.form.hidden = true;
   nodes.confirm.hidden = false;
   nodes.confirmBeneficiary.textContent = CONFIG.beneficiary;
@@ -67,65 +77,20 @@ function showConfirmation(nodes, total) {
   nodes.confirmTotal.textContent = formatPrice(total);
   nodes.confirmEmail.textContent = CONFIG.contactEmail;
   nodes.confirmEmail.href = `mailto:${CONFIG.contactEmail}`;
+  // Sans service de formulaire, la commande part par le logiciel d'email du
+  // visiteur : on ne peut pas savoir s'il a envoyé le message, donc on le lui dit.
+  if (CONFIG.orderEndpoint === "") {
+    nodes.confirmTitle.textContent = "Dernière étape : envoyer l’email";
+    nodes.confirmText.textContent =
+      "Votre logiciel d’email s’est ouvert avec la commande. Envoyez le message, puis réglez le montant total par virement ou Twint. Vos vinyles partiront dès réception du paiement.";
+  }
   clearCart();
   nodes.cartBar.hidden = true;
   // La pop-up reste ouverte sur la confirmation
   if (!nodes.orderSection.open) {
     nodes.orderSection.showModal();
   }
-  nodes.confirm.scrollIntoView({ behavior: "smooth", block: "nearest" });
-}
-
-// Fiche produit : ouvre le détail d'un vinyle dans une fenêtre modale
-function initProductDialog() {
-  const dialog = document.querySelector("[data-product-dialog]");
-  if (!dialog) {
-    return () => {};
-  }
-
-  const nodes = {
-    ref: dialog.querySelector("[data-dialog-ref]"),
-    initial: dialog.querySelector("[data-dialog-initial]"),
-    artist: dialog.querySelector("[data-dialog-artist]"),
-    title: dialog.querySelector("[data-dialog-title]"),
-    desc: dialog.querySelector("[data-dialog-desc]"),
-    price: dialog.querySelector("[data-dialog-price]"),
-    add: dialog.querySelector("[data-dialog-add]"),
-    soldout: dialog.querySelector("[data-dialog-soldout]"),
-  };
-
-  let currentProduct = null;
-
-  nodes.add.addEventListener("click", () => {
-    if (currentProduct) {
-      addToCart(currentProduct.id);
-      dialog.close();
-    }
-  });
-
-  dialog.querySelector("[data-dialog-close]").addEventListener("click", () => {
-    dialog.close();
-  });
-
-  // Clic sur le fond assombri : ferme la fiche
-  dialog.addEventListener("click", (event) => {
-    if (event.target === dialog) {
-      dialog.close();
-    }
-  });
-
-  return (product, refCode) => {
-    currentProduct = product;
-    nodes.ref.textContent = `${refCode.replace(" ", "_").toUpperCase()}.TXT`;
-    nodes.initial.textContent = product.labelInitial;
-    nodes.artist.textContent = product.artist;
-    nodes.title.textContent = product.title;
-    nodes.desc.textContent = product.description;
-    nodes.price.textContent = formatPrice(product.price);
-    nodes.add.hidden = !product.available;
-    nodes.soldout.hidden = product.available;
-    dialog.showModal();
-  };
+  nodes.confirmTitle.focus();
 }
 
 export function initShop() {
@@ -149,6 +114,8 @@ export function initShop() {
     confirmIban: document.querySelector("[data-confirm-iban]"),
     confirmTotal: document.querySelector("[data-confirm-total]"),
     confirmEmail: document.querySelector("[data-confirm-email]"),
+    confirmTitle: document.querySelector("[data-confirm-title]"),
+    confirmText: document.querySelector("[data-confirm-text]"),
   };
 
   // La commande s'ouvre en pop-up et on reste dessus
@@ -180,13 +147,19 @@ export function initShop() {
       openProductDialog
     )
   );
-  renderInto(grid, cards, "La boutique arrive bientôt !");
+  renderInto(grid, cards, "La boutique arrive bientôt !");
 
   let orderDone = false;
   const refresh = () => {
-    if (!orderDone) {
-      refreshOrderUI(nodes);
+    if (orderDone) {
+      // Le panier se vide à la commande : on attend un nouvel ajout
+      if (getCartCount() === 0) {
+        return;
+      }
+      orderDone = false;
+      showOrderForm(nodes);
     }
+    refreshOrderUI(nodes);
   };
   refresh();
   onCartChange(refresh);

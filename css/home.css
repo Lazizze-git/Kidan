@@ -41,11 +41,6 @@
   max-width: 15ch;
 }
 
-.screen__title em {
-  font-style: normal;
-  color: var(--color-accent);
-}
-
 .screen__lead {
   max-width: 44ch;
   font-size: var(--fs-lead);
@@ -88,7 +83,6 @@
     max-width: 12ch;
   }
 
-  .home-mission,
   .home-agenda {
     padding: 1.5rem 1.35rem;
   }
@@ -96,24 +90,6 @@
   .home-support {
     padding: 1.75rem 1.35rem;
   }
-}
-
-/* Affiche mission : papier jaune fluo, étroite, collée à gauche */
-.home-mission {
-  --poster-w: min(40rem, calc(100% - 2 * var(--frame-inline)));
-  --tilt: 1.1deg;
-
-  margin-top: calc(var(--space-section) * 0.6);
-  margin-left: max(var(--frame-inline), 6%);
-  margin-right: auto;
-  padding: clamp(1.75rem, 4vw, 2.5rem);
-}
-
-.home-mission__text {
-  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
-  line-height: 1.55;
-  max-width: 34ch;
-  margin-bottom: 1.75rem;
 }
 
 /* Affiche AGENDA : papier bleu, large, décalée à gauche ------ */

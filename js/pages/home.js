@@ -14,6 +14,6 @@ export function initHome() {
   renderInto(
     eventsContainer,
     cards,
-    "Aucun événement programmé pour le moment — revenez bientôt !"
+    "Aucun événement programmé pour le moment. Revenez bientôt, ou écrivez-nous pour proposer une date."
   );
 }

@@ -14,21 +14,15 @@
 .events-list {
   display: grid;
   gap: 0;
-  border-top: 1px solid var(--color-ink);
+  border-top: 2px solid var(--color-ink);
 }
 
 /* Une date ---------------------------------------------------- */
 .event-card {
   display: grid;
   gap: 0.35rem 1.5rem;
-  border-bottom: 1px solid rgba(20, 20, 15, 0.22);
-  border-radius: var(--radius-card);
+  border-bottom: 1px solid var(--color-line);
   padding: clamp(1.1rem, 2.5vw, 1.5rem) 0.35rem;
-  transition: background-color var(--transition);
-}
-
-.event-card:hover {
-  background: rgba(20, 20, 15, 0.06);
 }
 
 /* Bloc date : le jour en très gros, le mois en petites capitales */
@@ -51,8 +45,7 @@
 .event-card__month {
   font-size: var(--fs-micro);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: var(--tracking-label);
   color: var(--color-gray);
 }
 
@@ -71,22 +64,29 @@
 
 /* Informations pratiques : une seule ligne, séparateurs discrets */
 .event-card__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.2rem 0.7rem;
+  display: grid;
+  gap: 0.15rem;
   margin: 0.55rem 0 0.7rem;
-  font-size: var(--fs-micro);
+  font-size: var(--fs-meta);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
   color: var(--color-gray);
   font-variant-numeric: tabular-nums;
 }
 
-.event-card__meta span:not(:last-child)::after {
-  content: "·";
-  margin-left: 0.7rem;
-  opacity: 0.5;
+/* Dès que la ligne est large, les infos pratiques s'alignent sur une
+   ligne, séparées par un point médian */
+@media (min-width: 720px) {
+  .event-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem 0.7rem;
+  }
+
+  .event-card__meta span:not(:last-child)::after {
+    content: "·";
+    margin-left: 0.7rem;
+    opacity: 0.5;
+  }
 }
 
 .event-card__desc {
@@ -101,10 +101,10 @@
   justify-self: start;
   align-self: start;
   padding: 0.3rem 0.7rem;
-  font-size: 0.62rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: var(--tracking-label);
   color: var(--color-paper);
   background: var(--color-ink);
   border-radius: 0;
@@ -144,7 +144,6 @@
 
 .events-teaser .event-card__meta {
   display: grid;
-  gap: 0.3rem;
 }
 
 .events-teaser .event-card__meta span:not(:last-child)::after {

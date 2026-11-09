@@ -1,0 +1,15 @@
+#6e1221 | #f7f6f1 | courant
+#c60707 | #f7f6f1 | courant
+#0759a2 | #f4ff1e | courant
+#f4ff1e | #0759a2 | courant
+#f4ff1e | #116b09 | courant
+#f4ff1e | #6e1221 | courant
+#ff7fab | #6e1221 | courant
+#f4ff1e | #c60707 | courant
+#6e1221 | #d8d2ca | courant
+#f4ff1e | #4b0c16 | courant
+#f7f6f1 | #4b0c16 | courant
+#6b6a63 | #ffffff | placeholder
+#6e1221 | #ffffff | courant
+#c60707 | #ffffff | courant
+#f7f6f1 | #c60707 | ui

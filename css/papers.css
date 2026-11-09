@@ -41,7 +41,6 @@
 }
 
 /* --- Jaune : encre bleu vinyle ------------------------------ */
-.home-mission,
 .about-mission,
 .founders__grid .founder-card:nth-child(2),
 .shop-grid .product-card:nth-child(6n + 2) {
@@ -158,18 +157,6 @@
   --ink-soft: 100%;
 }
 
-/* Sur fond sombre, un mot mis en avant ne change pas de couleur
-   (le contraste ne le permettrait pas) : il se souligne. */
-.statement .statement__text em,
-.page-cta .page-cta__title em,
-.home-support .home-support__title em {
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-color: var(--color-accent);
-  text-underline-offset: 0.14em;
-  text-decoration-thickness: 4px;
-}
-
 /* Le disque des flyers : sillons sombres même sur fond sombre,
    pour qu'il reste lisible comme un objet posé sur l'affiche */
 .index-row--accent .index-row__disc,
@@ -177,47 +164,4 @@
 .flyers > .index-row:nth-child(2) .index-row__disc,
 .flyers > .index-row:nth-child(3) .index-row__disc {
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-ink) 30%, transparent);
-}
-
-/* --- Le panneau de menu mobile ------------------------------
-   Là, chaque rubrique est un flyer de sa couleur. Sur grand écran
-   les étiquettes restent en papier blanc (voir nav.css) : une
-   barre de navigation ne doit pas rivaliser avec le mur. */
-@media (max-width: 899px) {
-  .nav__menu li:nth-child(2) a {
-    --poster-bg: var(--c-green);
-    --color-paper: var(--c-green);
-    --color-ink: var(--c-mellow);
-    --color-accent: var(--c-flossy);
-  }
-
-  .nav__menu li:nth-child(3) a {
-    --poster-bg: var(--c-cherry);
-    --color-paper: var(--c-cherry);
-    --color-ink: var(--c-mellow);
-    --color-accent: var(--c-flossy);
-  }
-
-  .nav__menu li:nth-child(4) a {
-    --poster-bg: var(--c-vinyl);
-    --color-paper: var(--c-vinyl);
-    --color-ink: var(--c-mellow);
-    --color-accent: var(--c-flossy);
-  }
-
-  .nav__menu .nav__cta {
-    --poster-bg: var(--c-deepred);
-    --color-paper: var(--c-deepred);
-    --color-ink: var(--c-mellow);
-    --color-accent: var(--c-flossy);
-  }
-
-  .nav__menu li:nth-child(2) a,
-  .nav__menu li:nth-child(3) a,
-  .nav__menu li:nth-child(4) a,
-  .nav__menu .nav__cta {
-    --paper-grain-blend: screen;
-    --ink-soft: 88%;
-    --ink-line: 34%;
-  }
 }

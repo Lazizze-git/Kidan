@@ -49,370 +49,71 @@ body.nav-open {
   text-decoration: none;
   background: var(--color-paper);
   box-shadow: var(--shadow-chip);
+  min-height: var(--target-min);
   transform: rotate(-1.2deg);
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.nav__logo:hover {
-  transform: rotate(0deg) translateY(-2px);
-}
-
-/* Le disque 45 tours tourne au survol */
+/* Le disque 45 tours fait un demi-tour au survol */
 .nav__logo-mark {
   width: 24px;
   height: 24px;
-  transition: transform 700ms var(--ease-settle);
+  transition: transform var(--transition-slow);
 }
 
-.nav__logo:hover .nav__logo-mark {
-  transform: rotate(180deg);
+@media (hover: hover) and (pointer: fine) {
+  .nav__logo:hover {
+    transform: rotate(0deg);
+  }
+
+  .nav__logo:hover .nav__logo-mark {
+    transform: rotate(180deg);
+  }
 }
 
-/* Étiquette du bouton menu (mobile) — la croix reste au-dessus
-   du panneau ouvert */
+/* Étiquette du bouton menu (mobile) : le mot « Menu » est écrit,
+   la croix reste au-dessus du panneau ouvert */
 .nav__toggle {
   pointer-events: auto;
   position: relative;
   z-index: 46;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 6px;
-  width: 2.9rem;
-  height: 2.9rem;
+  display: inline-flex;
   align-items: center;
+  gap: 0.7rem;
+  min-height: var(--target-min);
+  padding: 0 0.9rem;
+  font-size: var(--fs-meta);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
   background: var(--color-paper);
   box-shadow: var(--shadow-chip);
   transform: rotate(1.4deg);
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.nav__toggle:hover {
-  transform: rotate(0deg);
+.nav__toggle-lines {
+  display: grid;
+  gap: 5px;
 }
 
 .nav__toggle-line {
-  width: 20px;
+  width: 18px;
   height: 2px;
   background: var(--color-ink);
   transition: transform var(--transition);
 }
 
 .nav__toggle[aria-expanded="true"] .nav__toggle-line:first-child {
-  transform: translateY(4px) rotate(45deg);
+  transform: translateY(3.5px) rotate(45deg);
 }
 
 .nav__toggle[aria-expanded="true"] .nav__toggle-line:last-child {
-  transform: translateY(-4px) rotate(-45deg);
+  transform: translateY(-3.5px) rotate(-45deg);
 }
 
-/* Menu mobile : le mur se vide, il ne reste que les flyers
-   des rubriques, aux couleurs du site ------------------------ */
-.nav__menu {
-  pointer-events: auto;
-  position: fixed;
-  inset: 0;
-  z-index: 45;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.85rem;
-  padding: 6rem clamp(1.5rem, 6vw, 3rem) 2rem;
-  /* Le même mur de grillage, assombri pour que les flyers ressortent */
-  background-color: var(--color-bg-deep);
-  background-image: linear-gradient(
-      180deg,
-      rgba(20, 20, 15, 0.3),
-      rgba(20, 20, 15, 0.14)
-    ),
-    var(--fence-tile, none);
-  background-size: auto, var(--fence-size, auto);
-  background-repeat: no-repeat, repeat;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity var(--transition), visibility var(--transition);
-}
-
-.nav__menu.is-open {
-  visibility: visible;
-  opacity: 1;
-}
-
-.nav__menu li {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 380ms var(--ease-settle),
-    transform 460ms var(--ease-settle);
-}
-
-.nav__menu.is-open li {
-  opacity: 1;
-  transform: none;
-}
-
-.nav__menu.is-open li:nth-child(2) {
-  transition-delay: 45ms;
-}
-
-.nav__menu.is-open li:nth-child(3) {
-  transition-delay: 90ms;
-}
-
-.nav__menu.is-open li:nth-child(4) {
-  transition-delay: 135ms;
-}
-
-.nav__menu.is-open li:nth-child(5) {
-  transition-delay: 180ms;
-}
-
-.nav__menu.is-open li:nth-child(6) {
-  transition-delay: 225ms;
-}
-
-/* Chaque lien est un flyer collé de travers */
-.nav__menu a {
-  display: flex;
-  align-items: baseline;
-  gap: 0.85rem;
-  padding: 0.95rem 1.15rem;
-  font-family: var(--font-display);
-  font-size: clamp(1.35rem, 6vw, 1.7rem);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: -0.025em;
-  line-height: 1;
-  text-decoration: none;
-  color: var(--color-ink);
-  background-color: var(--color-paper);
-  background-image: var(--paper-grain);
-  background-blend-mode: multiply;
-  box-shadow: var(--shadow-poster);
-}
-
-/* Les couleurs des rubriques, comme les flyers de l'accueil */
-.nav__menu li:nth-child(1) a {
-  transform: rotate(-1.2deg);
-  margin-right: 2rem;
-}
-
-.nav__menu li:nth-child(2) a {
-  transform: rotate(1deg);
-  margin-left: 2rem;
-}
-
-.nav__menu li:nth-child(3) a {
-  transform: rotate(-0.9deg);
-  margin-right: 1.25rem;
-}
-
-.nav__menu li:nth-child(4) a {
-  transform: rotate(1.3deg);
-  margin-left: 1.25rem;
-}
-
-.nav__menu a[aria-current="page"] {
-  text-decoration: underline;
-  text-decoration-color: var(--color-accent);
-  text-underline-offset: 6px;
-  text-decoration-thickness: 3px;
-}
-
-/* Numéro de piste sur chaque flyer */
-.nav__num {
-  font-family: var(--font-mono);
-  font-size: var(--fs-micro);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  /* De l'encre diluée : reste visible aussi bien sur le papier
-     blanc que sur les flyers de couleur */
-  color: color-mix(in srgb, var(--color-ink) 62%, var(--color-paper));
-  font-variant-numeric: tabular-nums;
-}
-
-/* CTA Soutenir : flyer rouge, texte blanc */
-.nav__item-cta {
-  margin-top: 0.4rem;
-}
-
-.nav__menu .nav__cta {
-  justify-content: center;
-  font-size: 1.2rem;
-  letter-spacing: 0.02em;
-  transform: rotate(-1deg);
-  margin-right: 1.5rem;
-}
-
-.nav__menu .nav__cta:hover {
-  background-color: var(--color-ink);
-  color: var(--color-paper);
-}
-
-/* Pied de panneau : petite étiquette contact */
-.nav__menu-meta {
-  display: grid;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
-  padding: 0.95rem 1.1rem;
-  background-color: var(--color-paper);
-  background-image: var(--paper-grain);
-  background-blend-mode: multiply;
-  box-shadow: var(--shadow-chip);
-  transform: rotate(0.8deg);
-  font-size: var(--fs-micro);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--color-gray);
-}
-
-.nav__menu-meta a {
-  display: inline;
-  padding: 0;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: 700;
-  letter-spacing: inherit;
-  color: var(--color-ink);
-  background: none;
-  box-shadow: none;
-  transform: none;
-  margin: 0;
-}
-
-.nav__menu-radio {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.nav__menu-radio-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--color-accent-bright);
-  animation: radio-pulse 2.4s var(--ease-out) infinite;
-}
-
-/* Compteur panier */
-.nav__cart-count {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 1.25rem;
-  height: 1.25rem;
-  padding: 0 0.3rem;
-  margin-left: 0.35rem;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: var(--color-paper);
-  background: var(--color-accent);
-  border-radius: 999px;
-  font-variant-numeric: tabular-nums;
-}
-
-/* Panier vide : l'attribut hidden doit primer sur display: inline-flex */
-.nav__cart-count[hidden] {
-  display: none;
-}
-
-/* Desktop : une rangée d'étiquettes ---------------------------- */
-@media (min-width: 900px) {
-  .nav__toggle {
-    display: none;
-  }
-
-  .nav__menu {
-    position: static;
-    inset: auto;
-    z-index: auto;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 0.45rem;
-    padding: 0;
-    background: none;
-    overflow: visible;
-    visibility: visible;
-    opacity: 1;
-  }
-
-  .nav__menu li {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  .nav__num {
-    display: none;
-  }
-
-  .nav__item-cta {
-    margin-top: 0;
-    margin-left: 0.35rem;
-  }
-
-  .nav__menu-meta {
-    display: none;
-  }
-
-  /* Petites étiquettes de papier, chacune posée de travers */
-  .nav__menu a,
-  .nav__menu li:nth-child(1) a,
-  .nav__menu li:nth-child(2) a,
-  .nav__menu li:nth-child(3) a,
-  .nav__menu li:nth-child(4) a {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.5rem 0.8rem;
-    margin: 0;
-    font-family: var(--font-mono);
-    font-size: 0.74rem;
-    font-weight: 700;
-    letter-spacing: 0.09em;
-    color: var(--color-ink);
-    background-color: var(--color-paper);
-    box-shadow: var(--shadow-chip);
-    transform: rotate(var(--chip-tilt, -1.1deg));
-    transition: transform var(--transition), box-shadow var(--transition),
-      background-color var(--transition), color var(--transition);
-  }
-
-  .nav__menu li:nth-child(even) a {
-    --chip-tilt: 1.1deg;
-  }
-
-  .nav__menu a:hover {
-    transform: rotate(0deg) translateY(-3px);
-    box-shadow: 0 3px 4px rgba(20, 20, 15, 0.16),
-      0 12px 24px rgba(20, 20, 15, 0.24);
-  }
-
-  /* Page courante : étiquette noire */
-  .nav__menu a[aria-current="page"] {
-    background-color: var(--color-ink);
-    color: var(--color-paper);
-    text-decoration: none;
-  }
-
-  /* Le CTA Soutenir reste l'étiquette rouge */
-  .nav__menu .nav__cta,
-  .nav__menu li:nth-child(5) a {
-    background-color: var(--color-accent);
-    color: var(--color-paper);
-    justify-content: center;
-  }
-
-  .nav__menu .nav__cta:hover {
-    background-color: var(--color-ink);
-    color: var(--color-paper);
-  }
-
-  .nav__menu a[aria-current="page"] .nav__cart-count {
-    color: var(--color-ink);
-    background: var(--color-paper);
+@media (hover: hover) and (pointer: fine) {
+  .nav__toggle:hover {
+    transform: rotate(0deg);
   }
 }

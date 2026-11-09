@@ -2,11 +2,10 @@
    Elle doit dominer largement tout ce qui la suit. */
 
 .hero__kicker {
-  font-size: var(--fs-micro);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: var(--tracking-label);
   color: var(--color-gray);
+  font-size: var(--fs-meta);
   margin-bottom: 1.5rem;
 }
 
@@ -40,8 +39,7 @@
 .page-hero__meta {
   font-size: var(--fs-micro);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: var(--tracking-label);
   color: var(--color-gray);
   font-variant-numeric: tabular-nums;
 }
@@ -55,12 +53,6 @@
   line-height: 0.94;
   max-width: 16ch;
   text-wrap: balance;
-}
-
-/* Le mot souligné : c'est là que le rouge de l'association intervient */
-.page-hero__title em {
-  font-style: normal;
-  color: var(--color-accent);
 }
 
 .page-hero__lead {

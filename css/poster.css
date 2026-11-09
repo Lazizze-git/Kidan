@@ -1,0 +1,158 @@
+/* Affiches : le papier collé sur le mur — ombre, inclinaison, scotch. */
+
+/* Affiches collées sur le grillage : papier sans cadre, ombre portée,
+   inclinaison propre à chaque affiche (--tilt), largeur propre
+   (--poster-w) et scotch sur les coins ---------------------------- */
+.window {
+  --tilt: -0.8deg;
+  --poster-w: var(--frame-width);
+
+  position: relative;
+  width: var(--poster-w);
+  margin: var(--space-section) auto 0;
+  /* Tout est ré-évalué ici : chaque affiche porte sa propre encre,
+     et son texte secondaire est cette encre diluée dans SON papier */
+  color: var(--color-ink);
+  background-color: var(--poster-bg, var(--color-paper));
+  background-image: var(--paper-grain);
+  background-blend-mode: var(--paper-grain-blend, multiply);
+  box-shadow: var(--shadow-poster);
+  transform: rotate(var(--tilt));
+}
+
+/* Morceaux de scotch : bords déchirés à la main, translucides, avec
+   un reflet mat. Six poses différentes qui se répètent, pour que
+   chaque affiche paraisse collée séparément --------------------- */
+.window::before,
+.window::after {
+  content: "";
+  position: absolute;
+  top: -0.85rem;
+  width: clamp(3rem, 7vw, 4.8rem);
+  height: clamp(1.15rem, 2.6vw, 1.5rem);
+  background: linear-gradient(
+    104deg,
+    rgba(248, 246, 238, 0.34) 0%,
+    rgba(248, 246, 238, 0.5) 26%,
+    rgba(228, 226, 216, 0.42) 55%,
+    rgba(248, 246, 238, 0.5) 82%,
+    rgba(228, 226, 216, 0.36) 100%
+  );
+  box-shadow: 0 1px 2px rgba(20, 20, 15, 0.16),
+    0 4px 8px rgba(20, 20, 15, 0.12);
+  /* Bords déchirés : les extrémités ne sont jamais droites */
+  clip-path: polygon(
+    4% 3%,
+    38% 0%,
+    71% 4%,
+    100% 1%,
+    96% 48%,
+    100% 99%,
+    64% 96%,
+    30% 100%,
+    0% 97%,
+    3% 51%
+  );
+  pointer-events: none;
+}
+
+/* Pose 1 (par défaut) : deux scotchs en haut, classiques */
+.window::before {
+  left: 6%;
+  transform: rotate(-4deg);
+}
+
+.window::after {
+  right: 14%;
+  transform: rotate(3deg);
+}
+
+/* Pose 2 : décalés vers le centre, penchés à l'inverse */
+.window:nth-child(6n + 2)::before {
+  left: 18%;
+  width: clamp(2.6rem, 6.5vw, 4.2rem);
+  transform: rotate(5deg);
+}
+
+.window:nth-child(6n + 2)::after {
+  right: 4%;
+  transform: rotate(-3.5deg);
+}
+
+/* Pose 3 : un scotch presque au centre, l'autre en bas à droite */
+.window:nth-child(6n + 3)::before {
+  left: 38%;
+  transform: rotate(2deg);
+}
+
+.window:nth-child(6n + 3)::after {
+  top: auto;
+  bottom: -0.75rem;
+  right: 8%;
+  transform: rotate(-5deg);
+}
+
+/* Pose 4 : petit scotch au ras du coin, grand scotch décalé */
+.window:nth-child(6n + 4)::before {
+  left: 3%;
+  width: clamp(2.4rem, 6vw, 3.4rem);
+  transform: rotate(6deg);
+}
+
+.window:nth-child(6n + 4)::after {
+  right: 24%;
+  width: clamp(3.2rem, 8vw, 4.8rem);
+  transform: rotate(-2deg);
+}
+
+/* Pose 5 : un scotch en bas à gauche, l'autre en haut à droite */
+.window:nth-child(6n + 5)::before {
+  top: auto;
+  bottom: -0.75rem;
+  left: 10%;
+  transform: rotate(4deg);
+}
+
+.window:nth-child(6n + 5)::after {
+  right: 12%;
+  transform: rotate(-4deg);
+}
+
+/* Pose 6 : les deux vers l'intérieur, angles marqués */
+.window:nth-child(6n + 6)::before {
+  left: 26%;
+  transform: rotate(-6deg);
+}
+
+.window:nth-child(6n + 6)::after {
+  right: 30%;
+  width: clamp(2.5rem, 6.5vw, 3.6rem);
+  transform: rotate(5deg);
+}
+
+/* Mobile : affiches plus petites — plus étroites, scotchs réduits,
+   pour laisser respirer le grillage autour */
+@media (max-width: 899px) {
+  .window {
+    width: min(var(--poster-w), calc(100% - 3rem));
+  }
+}
+
+/* En-tête de la fiche produit (seul usage restant) */
+.window-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 1.25rem;
+  border-bottom: 1px solid var(--color-line);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  color: var(--color-gray);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}

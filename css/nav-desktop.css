@@ -1,0 +1,97 @@
+/* Navigation grand écran : une rangée d'étiquettes de papier. */
+
+/* Desktop : une rangée d'étiquettes ---------------------------- */
+@media (min-width: 900px) {
+  .nav__toggle {
+    display: none;
+  }
+
+  .nav__menu,
+  html.js .nav__menu {
+    position: static;
+    inset: auto;
+    z-index: auto;
+    flex-basis: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.45rem;
+    padding: 0;
+    background: none;
+    overflow: visible;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .nav__menu li,
+  html.js .nav__menu li {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .nav__item-cta {
+    margin-top: 0;
+    margin-left: 0.35rem;
+  }
+
+  .nav__menu-meta {
+    display: none;
+  }
+
+  /* Petites étiquettes de papier, chacune posée de travers */
+  .nav__menu a,
+  .nav__menu li:nth-child(1) a,
+  .nav__menu li:nth-child(2) a,
+  .nav__menu li:nth-child(3) a,
+  .nav__menu li:nth-child(4) a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0.8rem;
+    margin: 0;
+    font-family: var(--font-mono);
+    min-height: var(--target-min);
+    font-size: var(--fs-meta);
+    font-weight: 700;
+    letter-spacing: var(--tracking-label);
+    color: var(--color-ink);
+    background-color: var(--color-paper);
+    box-shadow: var(--shadow-chip);
+    transform: rotate(var(--chip-tilt, -1.1deg));
+    transition: transform var(--transition), box-shadow var(--transition),
+      background-color var(--transition), color var(--transition);
+  }
+
+  .nav__menu li:nth-child(even) a {
+    --chip-tilt: 1.1deg;
+  }
+
+  .nav__menu a:hover {
+    transform: rotate(0deg);
+  }
+
+  /* Page courante : étiquette noire */
+  .nav__menu a[aria-current="page"] {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+    text-decoration: none;
+  }
+
+  /* Le CTA Soutenir reste l'étiquette rouge */
+  .nav__menu .nav__cta,
+  .nav__menu li:nth-child(5) a {
+    background-color: var(--color-accent);
+    color: var(--color-paper);
+    justify-content: center;
+  }
+
+  .nav__menu .nav__cta:hover {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .nav__menu a[aria-current="page"] .nav__cart-count {
+    color: var(--color-ink);
+    background: var(--color-paper);
+  }
+}
