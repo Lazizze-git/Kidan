@@ -1,0 +1,132 @@
+/* CARTES : les textes rangés en fenêtres, sur le modèle de la fenêtre des
+   rubriques de l'accueil. Une bande de titre, un corps ; trois fonds selon
+   le rôle : papier (texte courant), lavis rose (citation), bordeaux plein
+   (l'essentiel). Les tailles varient avec l'importance du contenu. */
+.card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ink);
+  background-color: var(--paper-raised);
+  border: 1px solid var(--c-hinge-ring);
+  border-radius: var(--radius-window);
+}
+
+.card:not(:has(> .card__bar)) {
+  grid-template-rows: 1fr;
+}
+
+.card__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.375rem 0.75rem;
+  padding: 0.625rem 1rem;
+  border-bottom: 1px solid var(--line-quiet);
+}
+
+.card__title {
+  font-size: var(--fs-row);
+}
+
+.card__body {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 0.875rem;
+  padding: 1rem;
+}
+
+.card__body > p {
+  max-width: 36rem;
+}
+
+.card__quote {
+  font-size: var(--fs-h3);
+  font-weight: var(--weight-title);
+  line-height: var(--lh-quote);
+  text-wrap: balance;
+}
+
+/* Étiquette, flèche et lien vers la page qui en dit plus */
+.card__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  font-size: var(--fs-small);
+}
+
+.card__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-min);
+  color: var(--ink);
+  text-decoration-color: var(--line-quiet);
+}
+
+.card--wash {
+  color: var(--ink-on-wash);
+  background-color: var(--paper-wash);
+  border-color: var(--paper-wash);
+}
+
+.card--ink {
+  color: var(--on-ink);
+  background-color: var(--ink);
+  border-color: var(--ink);
+}
+
+.card--ink .card__bar {
+  border-bottom-color: color-mix(in oklab, var(--on-ink) 35%, var(--ink));
+}
+
+.card--ink strong,
+.card--ink a {
+  color: inherit;
+}
+
+.card--ink :focus-visible {
+  outline-color: var(--on-ink);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card__links a:hover {
+    text-decoration-color: var(--ink);
+  }
+}
+
+@media (min-width: 48rem) {
+  .card__bar {
+    padding-inline: 1.25rem;
+  }
+
+  .card__body {
+    padding: 1.25rem;
+  }
+}
+
+/* Liste « étiquette : valeur » (heure, lieu, accès, IBAN). Les libellés
+   s'alignent sur le plus long, ligne après ligne. */
+.meta-list {
+  display: grid;
+  grid-template-columns: minmax(4.5rem, max-content) 1fr;
+  column-gap: 0.75rem;
+  font-size: var(--fs-small);
+}
+
+.meta-list div {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--line-quiet);
+}
+
+.meta-list dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  line-height: 1.6;
+}

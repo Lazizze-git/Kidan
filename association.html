@@ -2,320 +2,298 @@
 <html lang="fr-CH">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>L’association | 45 Syndicate, Lausanne</title>
-  <meta name="description" content="Découvrez l’association 45 Syndicate : sa mission, ses membres fondateurs, ses statuts officiels et comment la soutenir par un don (QR-facture, Twint, virement)." />
-  <link rel="icon" type="image/png" href="./assets/favicon.png" />
+  <meta name="description" content="45 Syndicate, association lausannoise à but non lucratif : mission, fondateur·ice·s, lieux, statuts et dons." />
+  <meta property="og:title" content="L’association | 45 Syndicate, Lausanne" />
+  <meta property="og:description" content="Mission, équipe, statuts et dons de l’association 45 Syndicate." />
+  <meta property="og:locale" content="fr_CH" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#5a0416" />
+  <link rel="icon" type="image/png" href="./assets/favicon-bordeaux.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&amp;family=Space+Mono&amp;display=swap" />
   <link rel="stylesheet" href="./css/jetons.css" />
   <link rel="stylesheet" href="./css/reset.css" />
   <link rel="stylesheet" href="./css/base.css" />
-  <link rel="stylesheet" href="./css/poster.css" />
-  <link rel="stylesheet" href="./css/paper-texture.css" />
+  <link rel="stylesheet" href="./css/frame.css" />
+  <link rel="stylesheet" href="./css/lines.css" />
   <link rel="stylesheet" href="./css/buttons.css" />
-  <link rel="stylesheet" href="./css/papers.css" />
-  <link rel="stylesheet" href="./css/nav-papers.css" />
-  <link rel="stylesheet" href="./css/nav.css" />
-  <link rel="stylesheet" href="./css/nav-menu.css" />
-  <link rel="stylesheet" href="./css/nav-flyers.css" />
-  <link rel="stylesheet" href="./css/nav-desktop.css" />
-  <link rel="stylesheet" href="./css/hero.css" />
-  <link rel="stylesheet" href="./css/blocks.css" />
-  <link rel="stylesheet" href="./css/association.css" />
-  <link rel="stylesheet" href="./css/donate.css" />
+  <link rel="stylesheet" href="./css/plate.css" />
+  <link rel="stylesheet" href="./css/plate-menu.css" />
+  <link rel="stylesheet" href="./css/deck.css" />
+  <link rel="stylesheet" href="./css/opening.css" />
+  <link rel="stylesheet" href="./css/cards.css" />
   <link rel="stylesheet" href="./css/mission.css" />
+  <link rel="stylesheet" href="./css/manifesto.css" />
+  <link rel="stylesheet" href="./css/association.css" />
   <link rel="stylesheet" href="./css/footer.css" />
 </head>
 <body data-page="association">
   <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <canvas class="waveform" data-field aria-hidden="true"></canvas>
 
-  <header class="site-header">
-    <nav class="nav" aria-label="Navigation principale">
-      <a class="nav__logo" href="./index.html"><img class="nav__logo-mark" src="./assets/logo-mark.png" alt="" width="30" height="30" />45 SYNDICATE</a>
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
-        <span class="nav__toggle-lines" aria-hidden="true">
-          <span class="nav__toggle-line"></span>
-          <span class="nav__toggle-line"></span>
-        </span>
-        <span class="nav__toggle-label">Menu</span>
-      </button>
-      <ul id="nav-menu" class="nav__menu">
-        <li><a href="./index.html">Accueil</a></li>
-        <li><a href="./association.html" aria-current="page">L’association</a></li>
-        <li><a href="./shop.html">Boutique <span class="nav__cart-count" data-cart-count hidden>0</span></a></li>
-        <li><a href="./agenda.html">Agenda</a></li>
-        <li class="nav__item-cta"><a class="nav__cta" href="#soutenir">Soutenir</a></li>
-        <li class="nav__menu-meta">
-          <a href="mailto:hello@45syndicate.ch">hello@45syndicate.ch</a>
-          <span>Lausanne, Suisse</span>
-        </li>
-      </ul>
-    </nav>
-  </header>
-
-  <main id="contenu" tabindex="-1">
-    <section class="page-hero window">
-      <div class="page-hero__topline">
-        <p class="hero__kicker">L’association</p>
+  <div class="site">
+    <header class="plate hinged hinged--single">
+      <div class="plate__strip">
+        <a class="plate__brand" href="./index.html">45 Syndicate</a>
+        <img class="plate__mark" src="./assets/logo-mark-bordeaux.png" alt="" width="30" height="30" />
+        <div class="plate__end">
+          <nav aria-label="Navigation principale">
+            <button class="plate__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+            <ul id="nav-menu" class="plate__menu">
+              <li><a href="./association.html" aria-current="page">L’association</a></li>
+              <li><a href="./shop.html">Boutique<span class="plate__count" data-cart-count hidden>0</span></a></li>
+              <li><a href="./agenda.html">Agenda</a></li>
+              <li class="plate__menu-cta"><a class="btn btn--solid btn--small" href="#soutenir">Soutenir</a></li>
+            </ul>
+          </nav>
+          <button class="deck" type="button" data-field-toggle aria-pressed="false" hidden>
+            <span class="deck__icon" aria-hidden="true"></span>
+            <span class="visually-hidden" data-field-toggle-label>Mettre la piste du fond en pause</span>
+          </button>
+        </div>
       </div>
-      <h1 class="page-hero__title">Née à Lausanne, portée par la musique</h1>
-      <p class="page-hero__lead">
-        45 Syndicate est une association à but non lucratif qui ouvre des
-        chemins concrets aux artistes indépendants&nbsp;: vinyles solidaires,
-        ateliers, événements, et bientôt une radio.
-      </p>
-    </section>
+    </header>
 
-    <section class="specs window" aria-label="L’association en bref">
-      <dl class="specs__grid">
-        <div class="spec">
-          <dt>Statut</dt>
-          <dd>Association à but non lucratif</dd>
+    <main id="contenu" class="panel" tabindex="-1">
+      <section class="panel__section opening hinged" aria-labelledby="titre-page">
+        <div class="opening__title ruled ruled--top">
+          <h1 id="titre-page" class="title-1">Née à Lausanne, portée par la musique</h1>
+          <span class="arc arc--br" aria-hidden="true"></span>
         </div>
-        <div class="spec">
-          <dt>Fondation</dt>
-          <dd>Lausanne, 2026</dd>
+        <div class="opening__body ruled ruled--bottom">
+          <p class="lead">
+            45 Syndicate est une association à but non lucratif qui ouvre des
+            chemins concrets aux artistes indépendants&#8239;: vinyles solidaires,
+            ateliers, événements, et bientôt une radio.
+          </p>
+          <p class="actions">
+            <a class="btn btn--solid" href="#soutenir">Faire un don</a>
+            <a class="btn" href="./assets/documents/statuts-45-syndicate.pdf" download>Lire les statuts (PDF)</a>
+          </p>
+          <span class="arc arc--tr" aria-hidden="true"></span>
         </div>
-        <div class="spec">
-          <dt>Membres fondateurs</dt>
-          <dd>Trois personnes</dd>
-        </div>
-        <div class="spec">
-          <dt>Financement</dt>
-          <dd>Dons &amp; boutique solidaire</dd>
-        </div>
-      </dl>
-    </section>
+      </section>
 
-    <section class="about-mission window" aria-labelledby="mission-title">
-      <p class="section-label">Notre mission</p>
-      <h2 id="mission-title" class="visually-hidden">Notre mission</h2>
-      <p class="about-mission__lead">
-        La musique n’est pas un produit jetable&nbsp;: c’est un art qui
-        traverse le temps, façonne les identités et relie les êtres
-        humains et les cultures.
-      </p>
-      <p class="about-mission__intro">
-        L’Association est née de cette conviction simple et tenace. Elle
-        s’engage à soutenir et à faire grandir la scène musicale indépendante,
-        en Suisse comme au-delà de ses frontières, en ouvrant des chemins
-        concrets aux artistes émergents trop souvent laissés en marge des
-        circuits dominants.
-      </p>
+      <section class="panel__section facts" aria-label="L’association en bref">
+        <dl class="facts__grid">
+          <div class="facts__item"><dt>Statut</dt><dd>Association à but non lucratif</dd></div>
+          <div class="facts__item"><dt>Fondation</dt><dd>Lausanne, 2026</dd></div>
+          <div class="facts__item"><dt>Membres fondateurs</dt><dd>Trois personnes</dd></div>
+          <div class="facts__item"><dt>Financement</dt><dd>Dons et boutique solidaire</dd></div>
+        </dl>
+      </section>
 
-    </section>
-
-    <div class="mission-points">
-        <article class="mission-point window is-open" data-accordion-item>
-          <h3 class="mission-point__title">
-            <button class="mission-point__toggle" type="button" aria-expanded="true" aria-controls="mission-panel-1" data-accordion-toggle>
-              <span class="mission-point__label">Redonner la maîtrise aux artistes</span>
-              <span class="mission-point__icon" aria-hidden="true">+</span>
-            </button>
-          </h3>
-          <div class="mission-point__panel" id="mission-panel-1">
-            <div class="mission-point__panel-inner">
-              <p class="mission-point__text">
+      <section class="panel__section mission hinged" aria-labelledby="mission-title">
+        <div class="mission__intro ruled ruled--top">
+          <h2 id="mission-title" class="title-2">Notre mission</h2>
+          <p class="mission__lead">
+            La musique n’est pas un produit jetable&#8239;: c’est un art qui
+            traverse le temps, façonne les identités et relie les êtres humains
+            et les cultures.
+          </p>
+          <article class="card card--ink">
+            <div class="card__bar">
+              <h3 class="card__title">Notre raison d’être</h3>
+            </div>
+            <div class="card__body">
+              <p class="card__quote">
+                Redonner aux musiciennes et musiciens la maîtrise de leurs œuvres
+                et de leurs revenus.
+              </p>
+            </div>
+          </article>
+        </div>
+        <div class="mission__cards">
+          <article class="card is-wide">
+            <div class="card__bar">
+              <h3 class="card__title">Redonner la maîtrise aux artistes</h3>
+              <span class="tag">Pressage de vinyles</span>
+            </div>
+            <div class="card__body">
+              <p>
                 Le projet s’ancre dans une volonté forte de redonner aux
                 musiciennes et musiciens la maîtrise de leurs œuvres et de leurs
                 revenus. En développant une activité de pressage de vinyles,
                 l’Association souhaite offrir une alternative aux modèles imposés
                 par les labels majeurs et les plateformes de streaming, à travers
-                des <strong>contrats équitables, transparents et
-                respectueux</strong> de la création artistique.
+                des <strong>contrats équitables, transparents et respectueux</strong>
+                de la création artistique.
               </p>
             </div>
-          </div>
-        </article>
-        <article class="mission-point window" data-accordion-item>
-          <h3 class="mission-point__title">
-            <button class="mission-point__toggle" type="button" aria-expanded="false" aria-controls="mission-panel-2" data-accordion-toggle>
-              <span class="mission-point__label">Un atelier à vocation sociale</span>
-              <span class="mission-point__icon" aria-hidden="true">+</span>
-            </button>
-          </h3>
-          <div class="mission-point__panel" id="mission-panel-2">
-            <div class="mission-point__panel-inner">
-              <p class="mission-point__text">
-                Un lieu vivant où la musique se fabrique de bout en
-                bout&nbsp;: de l’idée à l’enregistrement, de la prise de son à la
-                presse du disque. Un espace d’apprentissage, de transmission et
-                de reconstruction, destiné notamment à des <strong>personnes en
+          </article>
+          <article class="card card--wash">
+            <div class="card__body">
+              <p>
+                L’Association est née de cette conviction simple et tenace. Elle
+                s’engage à soutenir et à faire grandir la scène musicale
+                indépendante, en Suisse comme au-delà de ses frontières, en ouvrant
+                des <strong>chemins concrets</strong> aux artistes émergents trop
+                souvent laissés en marge des circuits dominants.
+              </p>
+            </div>
+          </article>
+          <article class="card is-wide">
+            <div class="card__bar">
+              <h3 class="card__title">Un atelier à vocation sociale</h3>
+              <span class="tag">Réinsertion</span>
+            </div>
+            <div class="card__body">
+              <p>
+                Un lieu vivant où la musique se fabrique de bout en bout&#8239;: de
+                l’idée à l’enregistrement, de la prise de son à la presse du
+                disque. Un espace d’apprentissage, de transmission et de
+                reconstruction, destiné notamment à des <strong>personnes en
                 réinsertion</strong>, ou un atelier occupationnel afin d’offrir à
                 certaines personnes la possibilité d’avoir une activité encadrée
-                par des personnes bienveillantes. À travers la pratique
-                artistique et les métiers qui l’entourent, cet atelier entend
-                redonner <strong>confiance, compétences et dignité</strong>, et
-                développer la créativité de chaque participant.
+                par des personnes bienveillantes.
+              </p>
+              <p>
+                À travers la pratique artistique et les métiers qui l’entourent,
+                cet atelier entend redonner <strong>confiance, compétences et
+                dignité</strong>, et développer la créativité de chaque participant.
               </p>
             </div>
-          </div>
-        </article>
-        <article class="mission-point window" data-accordion-item>
-          <h3 class="mission-point__title">
-            <button class="mission-point__toggle" type="button" aria-expanded="false" aria-controls="mission-panel-3" data-accordion-toggle>
-              <span class="mission-point__label">Une microéconomie culturelle</span>
-              <span class="mission-point__icon" aria-hidden="true">+</span>
-            </button>
-          </h3>
-          <div class="mission-point__panel" id="mission-panel-3">
-            <div class="mission-point__panel-inner">
-              <p class="mission-point__text">
+          </article>
+          <article class="card">
+            <div class="card__bar">
+              <h3 class="card__title">Une microéconomie culturelle</h3>
+            </div>
+            <div class="card__body">
+              <p>
                 En tissant des partenariats avec des entreprises sociales et des
                 acteurs locaux, l’Association aspire à faire émerger une
                 microéconomie culturelle <strong>respectueuse des artistes, des
-                individus et de l’environnement</strong>. Une économie à taille
-                humaine, où la musique redevient un langage partagé, un travail
-                reconnu, et un levier d’émancipation plutôt qu’une simple donnée
-                numérique qui s’efface au prochain clic.
+                individus et de l’environnement</strong>.
+              </p>
+              <p>
+                Une économie à taille humaine, où la musique redevient un langage
+                partagé, un travail reconnu, et un levier d’émancipation plutôt
+                qu’une simple donnée numérique qui s’efface au prochain clic.
               </p>
             </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel__section credits hinged" aria-labelledby="team-title">
+        <h2 id="team-title" class="title-2 credits__title ruled ruled--top">Les fondateur·ice·s</h2>
+        <ul class="credits__list">
+          <li class="credits__item"><span class="credits__name">Kidan Odbang</span><span class="credits__role">Membre fondateur·ice</span></li>
+          <li class="credits__item"><span class="credits__name">Yann Fabroni</span><span class="credits__role">Membre fondateur·ice</span></li>
+          <li class="credits__item"><span class="credits__name">Sarah Schera</span><span class="credits__role">Membre fondateur·ice</span></li>
+        </ul>
+      </section>
+
+      <section class="panel__section quad" aria-labelledby="places-title">
+        <h2 id="places-title" class="title-2 quad__title ruled ruled--top">Les lieux et les statuts</h2>
+        <article class="card">
+          <div class="card__bar">
+            <h3 class="card__title">Le siège</h3>
+          </div>
+          <div class="card__body">
+            <dl class="meta-list">
+              <div><dt>Adresse</dt><dd>Escaliers du Marché 11, 1003 Lausanne</dd></div>
+            </dl>
+            <p>
+              Le cœur de l’association&#8239;: c’est ici que se préparent les
+              événements, la boutique solidaire et les projets à venir.
+            </p>
+            <p class="card__links"><span class="caret" aria-hidden="true"></span><a href="mailto:hello@45syndicate.ch">Nous écrire</a></p>
           </div>
         </article>
-    </div>
+        <article class="card">
+          <div class="card__bar">
+            <h3 class="card__title">L’atelier social</h3>
+            <span class="tag">En projet</span>
+          </div>
+          <div class="card__body">
+            <dl class="meta-list">
+              <div><dt>Ouverture</dt><dd>À annoncer</dd></div>
+            </dl>
+            <p>
+              Un lieu où la musique se fabriquera de bout en bout&#8239;: de
+              l’enregistrement à la presse du disque, avec et pour des personnes
+              en réinsertion.
+            </p>
+          </div>
+        </article>
+        <article class="card card--wash">
+          <div class="card__bar">
+            <h3 class="card__title">Les statuts officiels</h3>
+            <span class="tag">PDF</span>
+          </div>
+          <div class="card__body">
+            <p>
+              Par transparence, les statuts sont consultables librement. Ils
+              définissent notre but non lucratif, notre fonctionnement et nos organes.
+            </p>
+            <a class="btn btn--small" href="./assets/documents/statuts-45-syndicate.pdf" download>Télécharger les statuts</a>
+          </div>
+        </article>
+      </section>
 
-    <section class="statement window" aria-label="Notre raison d’être">
-      <div class="statement__inner">
-        <p class="section-label">Notre raison d’être</p>
-        <p class="statement__text">
-          Redonner aux musiciennes et musiciens la maîtrise de leurs
-          œuvres et de leurs revenus.
+      <section id="soutenir" class="panel__section manifesto" aria-labelledby="donate-title">
+        <div class="manifesto__sheet donate__sheet">
+          <div class="donate__intro">
+            <h2 id="donate-title" class="title-2">Soutenir 45&nbsp;Syndicate</h2>
+            <p>
+              Chaque don finance directement les projets de l’association&#8239;:
+              ateliers, événements, soutien aux artistes. Merci&#8239;!
+            </p>
+          </div>
+          <article class="card">
+            <div class="card__bar">
+              <h3 class="card__title">Par virement bancaire</h3>
+            </div>
+            <div class="card__body">
+              <dl class="meta-list">
+                <div><dt>Bénéficiaire</dt><dd>45 Syndicate, Escaliers du Marché 11, 1003 Lausanne</dd></div>
+                <div><dt>IBAN</dt><dd><code id="iban-don">CH79 0900 0000 1686 9617 7</code></dd></div>
+              </dl>
+              <button class="btn copy-button" type="button" data-copy-target="#iban-don">Copier l’IBAN</button>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__bar">
+              <h3 class="card__title">Par QR-facture ou Twint</h3>
+            </div>
+            <div class="card__body">
+              <div class="donate__qr">
+                <p class="placeholder-note">[QR de paiement à fournir]</p>
+              </div>
+              <p class="donate__note">À scanner avec votre app bancaire ou Twint.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer panel hinged hinged--single">
+      <div class="footer__grid">
+        <div class="footer__radio">
+          <p class="footer__radio-name">Webradio 45 Syndicate</p>
+          <p><span class="tag">Bientôt en ondes</span></p>
+        </div>
+        <nav class="footer__nav" aria-label="Pied de page">
+          <ul class="footer__links">
+            <li><a href="./association.html">L’association</a></li>
+            <li><a href="./shop.html">Boutique</a></li>
+            <li><a href="./agenda.html">Agenda</a></li>
+            <li><a href="./assets/documents/statuts-45-syndicate.pdf" download>Statuts (PDF)</a></li>
+            <li><a href="mailto:hello@45syndicate.ch">hello@45syndicate.ch</a></li>
+          </ul>
+        </nav>
+        <p class="footer__cta"><a class="btn btn--solid" href="./association.html#soutenir">Faire un don</a></p>
+        <p class="footer__legal">
+          <img src="./assets/logo-mark-bordeaux.png" alt="" width="22" height="22" loading="lazy" />
+          Association 45 Syndicate, Escaliers du Marché 11, 1003 Lausanne. Association à but non lucratif.
         </p>
       </div>
-    </section>
-
-    <section class="founders window" aria-labelledby="founders-title">
-      <p class="section-label">L’équipe</p>
-      <div class="section-head">
-        <h2 id="founders-title" class="section-title">Les fondateur·ice·s</h2>
-      </div>
-    </section>
-
-    <div class="founders__grid">
-        <article class="founder-card window">
-          <div class="founder-card__portrait" aria-hidden="true"><span>KO</span></div>
-          <h3 class="founder-card__name">Kidan Odbang</h3>
-          <p class="founder-card__role">Membre fondateur·ice</p>
-        </article>
-        <article class="founder-card window">
-          <div class="founder-card__portrait" aria-hidden="true"><span>YF</span></div>
-          <h3 class="founder-card__name">Yann Fabroni</h3>
-          <p class="founder-card__role">Membre fondateur·ice</p>
-        </article>
-        <article class="founder-card window">
-          <div class="founder-card__portrait" aria-hidden="true"><span>SS</span></div>
-          <h3 class="founder-card__name">Sarah Schera</h3>
-          <p class="founder-card__role">Membre fondateur·ice</p>
-        </article>
-    </div>
-
-    <section class="places window" aria-labelledby="places-title">
-      <p class="section-label">Les lieux</p>
-      <div class="section-head">
-        <h2 id="places-title" class="section-title">Où ça se passe</h2>
-      </div>
-      <div class="places__grid">
-        <article class="place">
-          <h3 class="place__name">Le siège</h3>
-          <p class="place__city">Lausanne, Suisse</p>
-          <p class="place__desc">
-            Le cœur de l’association&nbsp;: c’est ici que se préparent les
-            événements, la boutique solidaire et les projets à venir.
-          </p>
-          <a class="link-arrow" href="mailto:hello@45syndicate.ch">Nous écrire</a>
-        </article>
-        <article class="place">
-          <h3 class="place__name">L’atelier social</h3>
-          <p class="place__city">Ouverture à annoncer</p>
-          <p class="place__desc">
-            Un lieu où la musique se fabriquera de bout en bout&nbsp;: de
-            l’enregistrement à la presse du disque, avec et pour des personnes
-            en réinsertion.
-          </p>
-          <span class="place__tag">En projet</span>
-        </article>
-      </div>
-    </section>
-
-    <section class="statutes window" aria-labelledby="statutes-title">
-      <div class="statutes__inner">
-        <div>
-          <p class="section-label">Transparence</p>
-          <h2 id="statutes-title" class="section-title">Les statuts officiels</h2>
-          <p>
-            Par transparence, les statuts de l’association sont consultables
-            librement. Ils définissent notre but non lucratif, notre
-            fonctionnement et nos organes.
-          </p>
-        </div>
-        <a class="btn btn--primary" href="./assets/documents/statuts-45-syndicate.pdf" download>
-          Télécharger les statuts (PDF)
-        </a>
-      </div>
-    </section>
-
-    <section id="soutenir" class="donate window" aria-labelledby="donate-title">
-      <p class="section-label">Soutenir</p>
-      <h2 id="donate-title" class="donate__title">Soutenir 45 Syndicate</h2>
-      <p class="donate__lead">
-        Chaque don finance directement les projets de l’association&nbsp;:
-        ateliers, événements, soutien aux artistes. Merci&nbsp;!
-      </p>
-    </section>
-
-    <div class="donate__grid">
-        <div class="donate__block window">
-          <h3 class="donate__block-title">Par virement bancaire</h3>
-          <dl class="donate__details">
-            <dt>Bénéficiaire</dt>
-            <dd>45 Syndicate<br />Escaliers du Marché 11<br />1003 Lausanne</dd>
-            <dt>IBAN</dt>
-            <dd><code id="iban-don">CH79 0900 0000 1686 9617 7</code></dd>
-          </dl>
-          <button class="copy-button" type="button" data-copy-target="#iban-don">Copier l’IBAN</button>
-        </div>
-        <div class="donate__block window">
-          <h3 class="donate__block-title">Par QR-facture ou Twint</h3>
-          <div class="donate__qr" role="img" aria-label="Emplacement du QR-code de paiement, bientôt disponible">
-            <span>QR de paiement<br />bientôt ici</span>
-          </div>
-          <p class="donate__note">Scannez avec votre app bancaire ou Twint.</p>
-        </div>
-    </div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer__radio">
-      <span class="footer__radio-dot" aria-hidden="true"></span>
-      Webradio 45 Syndicate&#8239;: bientôt en ondes
-    </div>
-    <div class="footer__main">
-      <p class="footer__tagline">La musique<br />qui rassemble</p>
-      <nav class="footer__block" aria-label="Navigation secondaire">
-        <p class="footer__block-title">Navigation</p>
-        <ul class="footer__list">
-          <li><a href="./association.html">L’association</a></li>
-          <li><a href="./shop.html">Boutique</a></li>
-          <li><a href="./agenda.html">Agenda</a></li>
-          <li><a href="./association.html#soutenir">Faire un don</a></li>
-        </ul>
-      </nav>
-      <div class="footer__block">
-        <p class="footer__block-title">Contact</p>
-        <ul class="footer__list">
-          <li><a href="mailto:hello@45syndicate.ch">hello@45syndicate.ch</a></li>
-          <li>Lausanne, Suisse</li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer__legal">
-      <p>© 2026 Association 45 Syndicate, Lausanne</p>
-      <p>Association à but non lucratif</p>
-    </div>
-    <p class="footer__brandmark" aria-hidden="true"><span>45</span> SYNDICATE</p>
-  </footer>
+    </footer>
+  </div>
 
   <script type="module" src="./js/main.js"></script>
 </body>

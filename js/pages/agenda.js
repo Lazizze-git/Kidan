@@ -1,16 +1,16 @@
-// Page agenda : liste complète des événements à venir
+// @ts-check
+// Page agenda : tous les événements à venir, en cartes
 import { getUpcomingEvents } from "../data/events.js";
-import { createEventCard, renderInto } from "../render.js";
+import { createEventCard } from "../event-card.js";
+import { renderInto } from "../render.js";
+
+const EMPTY_MESSAGE =
+  "Aucun événement programmé pour le moment. Revenez bientôt, ou écrivez-nous pour proposer une date.";
 
 export function initAgenda() {
   const container = document.querySelector("[data-events-list]");
   if (!container) {
     return;
   }
-  const cards = getUpcomingEvents().map((event) => createEventCard(event, { detailed: true }));
-  renderInto(
-    container,
-    cards,
-    "Aucun événement programmé pour le moment. Revenez bientôt, ou écrivez-nous pour proposer une date."
-  );
+  renderInto(container, getUpcomingEvents().map(createEventCard), EMPTY_MESSAGE);
 }

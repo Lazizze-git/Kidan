@@ -1,6 +1,8 @@
+// @ts-check
 // Boutons « Copier » : copient le texte d'un élément (l'IBAN) dans le presse-papiers
 const FEEDBACK_MS = 2000;
 
+/** @param {string} text */
 async function writeToClipboard(text) {
   if (navigator.clipboard && window.isSecureContext) {
     await navigator.clipboard.writeText(text);
@@ -21,8 +23,13 @@ async function writeToClipboard(text) {
   }
 }
 
+/** @type {WeakMap<HTMLElement, () => void>} */
 const resetters = new WeakMap();
 
+/**
+ * @param {HTMLElement} button
+ * @param {string} message
+ */
 function announce(button, message) {
   const status = button.nextElementSibling;
   if (status?.getAttribute("role") === "status") {
@@ -30,17 +37,22 @@ function announce(button, message) {
   }
 }
 
-// Remet le bouton à son état d'origine (libellé, couleur, annonce)
+/**
+ * Remet le bouton à son état d'origine (libellé, couleur, annonce)
+ * @param {HTMLElement} button
+ */
 function resetButton(button) {
-  const reset = resetters.get(button);
-  if (reset) {
-    reset();
-  }
+  resetters.get(button)?.();
 }
 
+/**
+ * @param {HTMLElement} button
+ * @param {string} label
+ * @param {string} message
+ */
 function flashLabel(button, label, message) {
   resetButton(button);
-  const idle = button.textContent;
+  const idle = button.textContent ?? "";
   let timer = 0;
   const reset = () => {
     window.clearTimeout(timer);
@@ -55,6 +67,7 @@ function flashLabel(button, label, message) {
   timer = window.setTimeout(reset, FEEDBACK_MS);
 }
 
+/** @param {HTMLElement} button */
 async function copyFrom(button) {
   const source = document.querySelector(button.dataset.copyTarget ?? "");
   const text = source?.textContent?.trim() ?? "";
@@ -67,26 +80,34 @@ async function copyFrom(button) {
     button.classList.add("is-copied");
   } catch {
     // La copie a échoué : l'IBAN reste affiché, on invite à le sélectionner
-    flashLabel(
-      button,
-      "Copie impossible",
-      "La copie a échoué. Sélectionnez l’IBAN à la main."
-    );
+    flashLabel(button, "Copie impossible", "La copie a échoué. Sélectionnez l’IBAN à la main.");
   }
 }
 
-// À rappeler quand une zone contenant un bouton est réaffichée
+/** @param {ParentNode} root */
+function copyButtonsIn(root) {
+  return [...root.querySelectorAll("[data-copy-target]")].filter(
+    /** @returns {button is HTMLElement} */ (button) => button instanceof HTMLElement
+  );
+}
+
+/**
+ * À rappeler quand une zone contenant un bouton est réaffichée
+ * @param {ParentNode} root
+ */
 export function resetCopyButtons(root) {
-  root.querySelectorAll("[data-copy-target]").forEach(resetButton);
+  copyButtonsIn(root).forEach(resetButton);
 }
 
 export function initCopyButtons() {
-  document.querySelectorAll("[data-copy-target]").forEach((button) => {
+  copyButtonsIn(document).forEach((button) => {
     // Zone d'annonce voisine, invisible : le libellé du bouton reste court
     const status = document.createElement("span");
     status.className = "visually-hidden";
     status.setAttribute("role", "status");
     button.insertAdjacentElement("afterend", status);
-    button.addEventListener("click", () => copyFrom(button));
+    button.addEventListener("click", () => {
+      void copyFrom(button);
+    });
   });
 }

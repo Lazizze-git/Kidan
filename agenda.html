@@ -2,118 +2,116 @@
 <html lang="fr-CH">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agenda &amp; événements | 45 Syndicate, Lausanne</title>
-  <meta name="description" content="L’agenda de l’association 45 Syndicate à Lausanne : cours de production musicale, scènes ouvertes, concerts et événements. Dates, horaires et lieux." />
-  <link rel="icon" type="image/png" href="./assets/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agenda | 45 Syndicate, Lausanne</title>
+  <meta name="description" content="Ateliers DJ et production, scènes ouvertes, sorties de vinyles : les prochaines dates de 45 Syndicate à Lausanne." />
+  <meta property="og:title" content="Agenda | 45 Syndicate, Lausanne" />
+  <meta property="og:description" content="Ateliers, scènes ouvertes et sorties de vinyles à Lausanne." />
+  <meta property="og:locale" content="fr_CH" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#5a0416" />
+  <link rel="icon" type="image/png" href="./assets/favicon-bordeaux.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&amp;family=Space+Mono&amp;display=swap" />
   <link rel="stylesheet" href="./css/jetons.css" />
   <link rel="stylesheet" href="./css/reset.css" />
   <link rel="stylesheet" href="./css/base.css" />
-  <link rel="stylesheet" href="./css/poster.css" />
-  <link rel="stylesheet" href="./css/paper-texture.css" />
+  <link rel="stylesheet" href="./css/frame.css" />
+  <link rel="stylesheet" href="./css/lines.css" />
   <link rel="stylesheet" href="./css/buttons.css" />
-  <link rel="stylesheet" href="./css/papers.css" />
-  <link rel="stylesheet" href="./css/nav-papers.css" />
-  <link rel="stylesheet" href="./css/nav.css" />
-  <link rel="stylesheet" href="./css/nav-menu.css" />
-  <link rel="stylesheet" href="./css/nav-flyers.css" />
-  <link rel="stylesheet" href="./css/nav-desktop.css" />
-  <link rel="stylesheet" href="./css/hero.css" />
+  <link rel="stylesheet" href="./css/plate.css" />
+  <link rel="stylesheet" href="./css/plate-menu.css" />
+  <link rel="stylesheet" href="./css/deck.css" />
+  <link rel="stylesheet" href="./css/opening.css" />
+  <link rel="stylesheet" href="./css/cards.css" />
   <link rel="stylesheet" href="./css/agenda.css" />
-  <link rel="stylesheet" href="./css/event-detail.css" />
-  <link rel="stylesheet" href="./css/cta.css" />
   <link rel="stylesheet" href="./css/footer.css" />
 </head>
 <body data-page="agenda">
   <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <canvas class="waveform" data-field aria-hidden="true"></canvas>
 
-  <header class="site-header">
-    <nav class="nav" aria-label="Navigation principale">
-      <a class="nav__logo" href="./index.html"><img class="nav__logo-mark" src="./assets/logo-mark.png" alt="" width="30" height="30" />45 SYNDICATE</a>
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
-        <span class="nav__toggle-lines" aria-hidden="true">
-          <span class="nav__toggle-line"></span>
-          <span class="nav__toggle-line"></span>
-        </span>
-        <span class="nav__toggle-label">Menu</span>
-      </button>
-      <ul id="nav-menu" class="nav__menu">
-        <li><a href="./index.html">Accueil</a></li>
-        <li><a href="./association.html">L’association</a></li>
-        <li><a href="./shop.html">Boutique <span class="nav__cart-count" data-cart-count hidden>0</span></a></li>
-        <li><a href="./agenda.html" aria-current="page">Agenda</a></li>
-        <li class="nav__item-cta"><a class="nav__cta" href="./association.html#soutenir">Soutenir</a></li>
-        <li class="nav__menu-meta">
-          <a href="mailto:hello@45syndicate.ch">hello@45syndicate.ch</a>
-          <span>Lausanne, Suisse</span>
-        </li>
-      </ul>
-    </nav>
-  </header>
-
-  <main id="contenu" tabindex="-1">
-    <section class="page-hero window">
-      <div class="page-hero__topline">
-        <p class="hero__kicker">Agenda &amp; événements</p>
+  <div class="site">
+    <header class="plate hinged hinged--single">
+      <div class="plate__strip">
+        <a class="plate__brand" href="./index.html">45 Syndicate</a>
+        <img class="plate__mark" src="./assets/logo-mark-bordeaux.png" alt="" width="30" height="30" />
+        <div class="plate__end">
+          <nav aria-label="Navigation principale">
+            <button class="plate__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+            <ul id="nav-menu" class="plate__menu">
+              <li><a href="./association.html">L’association</a></li>
+              <li><a href="./shop.html">Boutique<span class="plate__count" data-cart-count hidden>0</span></a></li>
+              <li><a href="./agenda.html" aria-current="page">Agenda</a></li>
+              <li class="plate__menu-cta"><a class="btn btn--solid btn--small" href="./association.html#soutenir">Soutenir</a></li>
+            </ul>
+          </nav>
+          <button class="deck" type="button" data-field-toggle aria-pressed="false" hidden>
+            <span class="deck__icon" aria-hidden="true"></span>
+            <span class="visually-hidden" data-field-toggle-label>Mettre la piste du fond en pause</span>
+          </button>
+        </div>
       </div>
-      <h1 class="page-hero__title">Ce qui se prépare</h1>
-      <p class="page-hero__lead">
-        Ateliers, scènes ouvertes, sorties de vinyles&nbsp;: tout ce que
-        l’association organise à Lausanne et alentours.
-      </p>
-    </section>
+    </header>
 
-    <section class="agenda window" aria-labelledby="agenda-title">
-      <p class="section-label">Prochaines dates</p>
-      <h2 id="agenda-title" class="visually-hidden">Les événements à venir</h2>
-      <div class="events-list" data-events-list>
-        <p class="empty-note">Chargement des événements…</p>
+    <main id="contenu" class="panel" tabindex="-1">
+      <section class="panel__section opening hinged" aria-labelledby="titre-page">
+        <div class="opening__title ruled ruled--top">
+          <h1 id="titre-page" class="title-1">Ce qui se prépare à Lausanne</h1>
+          <span class="arc arc--br" aria-hidden="true"></span>
+        </div>
+        <div class="opening__body ruled ruled--bottom">
+          <p class="lead">
+            Ateliers, scènes ouvertes, sorties de vinyles&#8239;: tout ce que
+            l’association organise à Lausanne et alentours.
+          </p>
+          <p class="actions">
+            <a class="btn btn--solid" href="#dates">Les prochaines dates</a>
+            <a class="btn" href="mailto:hello@45syndicate.ch">Proposer une date</a>
+          </p>
+          <span class="arc arc--tr" aria-hidden="true"></span>
+        </div>
+      </section>
+
+      <section id="dates" class="panel__section agenda hinged" aria-labelledby="agenda-title">
+        <div class="agenda__intro ruled ruled--top">
+          <h2 id="agenda-title" class="title-2">Prochaines dates</h2>
+          <p>
+            La programmation est ouverte&#8239;: artistes, curieux·ses et bonnes
+            volontés sont bienvenu·e·s.
+          </p>
+          <a class="btn btn--small" href="mailto:hello@45syndicate.ch">Nous écrire</a>
+        </div>
+        <div class="agenda__list ruled ruled--bottom" data-events-list>
+          <p class="empty-note">Les dates s’affichent avec JavaScript. Écrivez-nous à hello@45syndicate.ch pour connaître le programme.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer panel hinged hinged--single">
+      <div class="footer__grid">
+        <div class="footer__radio">
+          <p class="footer__radio-name">Webradio 45 Syndicate</p>
+          <p><span class="tag">Bientôt en ondes</span></p>
+        </div>
+        <nav class="footer__nav" aria-label="Pied de page">
+          <ul class="footer__links">
+            <li><a href="./association.html">L’association</a></li>
+            <li><a href="./shop.html">Boutique</a></li>
+            <li><a href="./agenda.html">Agenda</a></li>
+            <li><a href="./assets/documents/statuts-45-syndicate.pdf" download>Statuts (PDF)</a></li>
+            <li><a href="mailto:hello@45syndicate.ch">hello@45syndicate.ch</a></li>
+          </ul>
+        </nav>
+        <p class="footer__cta"><a class="btn btn--solid" href="./association.html#soutenir">Faire un don</a></p>
+        <p class="footer__legal">
+          <img src="./assets/logo-mark-bordeaux.png" alt="" width="22" height="22" loading="lazy" />
+          Association 45 Syndicate, Escaliers du Marché 11, 1003 Lausanne. Association à but non lucratif.
+        </p>
       </div>
-    </section>
-
-    <section class="page-cta window" aria-labelledby="agenda-cta-title">
-      <h2 id="agenda-cta-title" class="page-cta__title">Envie de jouer, d’apprendre ou de proposer une idée&nbsp;?</h2>
-      <p class="page-cta__text">
-        La programmation est ouverte&nbsp;: artistes, curieux·ses et bonnes
-        volontés sont bienvenu·e·s.
-      </p>
-      <a class="btn btn--primary" href="mailto:hello@45syndicate.ch">Nous écrire</a>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer__radio">
-      <span class="footer__radio-dot" aria-hidden="true"></span>
-      Webradio 45 Syndicate&#8239;: bientôt en ondes
-    </div>
-    <div class="footer__main">
-      <p class="footer__tagline">La musique<br />qui rassemble</p>
-      <nav class="footer__block" aria-label="Navigation secondaire">
-        <p class="footer__block-title">Navigation</p>
-        <ul class="footer__list">
-          <li><a href="./association.html">L’association</a></li>
-          <li><a href="./shop.html">Boutique</a></li>
-          <li><a href="./agenda.html">Agenda</a></li>
-          <li><a href="./association.html#soutenir">Faire un don</a></li>
-        </ul>
-      </nav>
-      <div class="footer__block">
-        <p class="footer__block-title">Contact</p>
-        <ul class="footer__list">
-          <li><a href="mailto:hello@45syndicate.ch">hello@45syndicate.ch</a></li>
-          <li>Lausanne, Suisse</li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer__legal">
-      <p>© 2026 Association 45 Syndicate, Lausanne</p>
-      <p>Association à but non lucratif</p>
-    </div>
-    <p class="footer__brandmark" aria-hidden="true"><span>45</span> SYNDICATE</p>
-  </footer>
+    </footer>
+  </div>
 
   <script type="module" src="./js/main.js"></script>
 </body>

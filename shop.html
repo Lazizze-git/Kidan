@@ -2,231 +2,227 @@
 <html lang="fr-CH">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Boutique solidaire | 45 Syndicate, Lausanne</title>
-  <meta name="description" content="La boutique solidaire de 45 Syndicate : vinyles d’artistes indépendants lausannois, vendus sans but lucratif pour soutenir directement la scène locale." />
-  <link rel="icon" type="image/png" href="./assets/favicon.png" />
+  <meta name="description" content="Vinyles solidaires de 45 Syndicate : l’intégralité du prix soutient les artistes indépendants. Commande en ligne, paiement par virement ou Twint." />
+  <meta property="og:title" content="Boutique solidaire | 45 Syndicate, Lausanne" />
+  <meta property="og:description" content="Des vinyles qui font vivre les artistes indépendants." />
+  <meta property="og:locale" content="fr_CH" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#5a0416" />
+  <link rel="icon" type="image/png" href="./assets/favicon-bordeaux.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&amp;family=Space+Mono&amp;display=swap" />
   <link rel="stylesheet" href="./css/jetons.css" />
   <link rel="stylesheet" href="./css/reset.css" />
   <link rel="stylesheet" href="./css/base.css" />
-  <link rel="stylesheet" href="./css/poster.css" />
-  <link rel="stylesheet" href="./css/paper-texture.css" />
+  <link rel="stylesheet" href="./css/frame.css" />
+  <link rel="stylesheet" href="./css/lines.css" />
   <link rel="stylesheet" href="./css/buttons.css" />
-  <link rel="stylesheet" href="./css/papers.css" />
-  <link rel="stylesheet" href="./css/nav-papers.css" />
-  <link rel="stylesheet" href="./css/nav.css" />
-  <link rel="stylesheet" href="./css/nav-menu.css" />
-  <link rel="stylesheet" href="./css/nav-flyers.css" />
-  <link rel="stylesheet" href="./css/nav-desktop.css" />
-  <link rel="stylesheet" href="./css/hero.css" />
-  <link rel="stylesheet" href="./css/donate.css" />
+  <link rel="stylesheet" href="./css/plate.css" />
+  <link rel="stylesheet" href="./css/plate-menu.css" />
+  <link rel="stylesheet" href="./css/deck.css" />
+  <link rel="stylesheet" href="./css/opening.css" />
   <link rel="stylesheet" href="./css/shop.css" />
-  <link rel="stylesheet" href="./css/vinyl.css" />
   <link rel="stylesheet" href="./css/dialog.css" />
-  <link rel="stylesheet" href="./css/order.css" />
   <link rel="stylesheet" href="./css/forms.css" />
-  <link rel="stylesheet" href="./css/cta.css" />
+  <link rel="stylesheet" href="./css/cards.css" />
   <link rel="stylesheet" href="./css/footer.css" />
 </head>
 <body data-page="shop">
   <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <canvas class="waveform" data-field aria-hidden="true"></canvas>
 
-  <header class="site-header">
-    <nav class="nav" aria-label="Navigation principale">
-      <a class="nav__logo" href="./index.html"><img class="nav__logo-mark" src="./assets/logo-mark.png" alt="" width="30" height="30" />45 SYNDICATE</a>
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
-        <span class="nav__toggle-lines" aria-hidden="true">
-          <span class="nav__toggle-line"></span>
-          <span class="nav__toggle-line"></span>
-        </span>
-        <span class="nav__toggle-label">Menu</span>
-      </button>
-      <ul id="nav-menu" class="nav__menu">
-        <li><a href="./index.html">Accueil</a></li>
-        <li><a href="./association.html">L’association</a></li>
-        <li><a href="./shop.html" aria-current="page">Boutique <span class="nav__cart-count" data-cart-count hidden>0</span></a></li>
-        <li><a href="./agenda.html">Agenda</a></li>
-        <li class="nav__item-cta"><a class="nav__cta" href="./association.html#soutenir">Soutenir</a></li>
-        <li class="nav__menu-meta">
-          <a href="mailto:hello@45syndicate.ch">hello@45syndicate.ch</a>
-          <span>Lausanne, Suisse</span>
-        </li>
-      </ul>
-    </nav>
-  </header>
-
-  <main id="contenu" tabindex="-1">
-    <section class="page-hero window">
-      <div class="page-hero__topline">
-        <p class="hero__kicker">Boutique solidaire</p>
-      </div>
-      <h1 class="page-hero__title">Des vinyles qui font vivre les artistes</h1>
-      <p class="page-hero__lead">
-        Vente sans but lucratif&nbsp;: l’intégralité du prix soutient les artistes
-        indépendants et leur évite d’accumuler du stock. Commandez, on s’occupe du reste.
-      </p>
-    </section>
-
-    <section class="shop" aria-labelledby="shop-title">
-      <p class="section-label">Catalogue</p>
-      <h2 id="shop-title" class="visually-hidden">Les vinyles disponibles</h2>
-      <div class="shop-grid" data-shop-grid>
-        <p class="empty-note">Chargement de la boutique…</p>
-      </div>
-    </section>
-
-    <dialog class="product-dialog window" data-product-dialog aria-labelledby="product-dialog-title">
-      <div class="window-bar">
-        <span data-dialog-ref>Fiche</span>
-        <button class="product-dialog__close" type="button" data-dialog-close >Fermer<span class="visually-hidden"> la fiche</span></button>
-      </div>
-      <div class="product-dialog__body">
-        <div class="vinyl" aria-hidden="true">
-          <div class="vinyl__disc"></div>
-          <div class="vinyl__label" data-dialog-initial></div>
-        </div>
-        <p class="product-card__artist" data-dialog-artist></p>
-        <h3 id="product-dialog-title" class="product-dialog__title" data-dialog-title></h3>
-        <p class="product-dialog__desc" data-dialog-desc></p>
-        <div class="product-dialog__footer">
-          <p class="product-card__price" data-dialog-price></p>
-          <button class="btn btn--primary" type="button" data-dialog-add>Ajouter</button>
-          <p class="product-card__soldout" data-dialog-soldout hidden>Épuisé</p>
+  <div class="site">
+    <header class="plate hinged hinged--single">
+      <div class="plate__strip">
+        <a class="plate__brand" href="./index.html">45 Syndicate</a>
+        <img class="plate__mark" src="./assets/logo-mark-bordeaux.png" alt="" width="30" height="30" />
+        <div class="plate__end">
+          <nav aria-label="Navigation principale">
+            <button class="plate__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+            <ul id="nav-menu" class="plate__menu">
+              <li><a href="./association.html">L’association</a></li>
+              <li><a href="./shop.html" aria-current="page">Boutique<span class="plate__count" data-cart-count hidden>0</span></a></li>
+              <li><a href="./agenda.html">Agenda</a></li>
+              <li class="plate__menu-cta"><a class="btn btn--solid btn--small" href="./association.html#soutenir">Soutenir</a></li>
+            </ul>
+          </nav>
+          <button class="deck" type="button" data-field-toggle aria-pressed="false" hidden>
+            <span class="deck__icon" aria-hidden="true"></span>
+            <span class="visually-hidden" data-field-toggle-label>Mettre la piste du fond en pause</span>
+          </button>
         </div>
       </div>
-    </dialog>
+    </header>
 
-    <div class="cart-bar" data-cart-bar hidden>
-      <p class="cart-bar__summary" data-cart-summary aria-live="polite"></p>
-      <button class="btn btn--accent" type="button" data-open-order>Passer commande</button>
-    </div>
+    <main id="contenu" class="panel" tabindex="-1">
+      <section class="panel__section opening hinged" aria-labelledby="titre-page">
+        <div class="opening__title ruled ruled--top">
+          <h1 id="titre-page" class="title-1">Des vinyles qui font vivre les artistes</h1>
+          <span class="arc arc--br" aria-hidden="true"></span>
+        </div>
+        <div class="opening__body ruled ruled--bottom">
+          <p class="lead">
+            Vente sans but lucratif&#8239;: l’intégralité du prix soutient les
+            artistes indépendants et leur évite d’accumuler du stock.
+            Commandez, on s’occupe du reste.
+          </p>
+          <p class="actions">
+            <a class="btn btn--solid" href="#catalogue">Voir le catalogue</a>
+            <a class="btn" href="mailto:hello@45syndicate.ch">Poser une question</a>
+          </p>
+          <span class="arc arc--tr" aria-hidden="true"></span>
+        </div>
+      </section>
 
-    <dialog id="commande" class="order-dialog window" aria-labelledby="order-title" data-order-section>
-      <div class="window-bar">
-        <span id="order-title">Votre commande</span>
-        <button class="product-dialog__close" type="button" data-order-close >Fermer<span class="visually-hidden"> la commande</span></button>
-      </div>
-      <div class="order-dialog__body">
-
-      <ul class="order__lines" data-cart-lines></ul>
-      <p class="order__total">Total&nbsp;: <strong data-cart-total></strong></p>
-
-      <form class="order-form" data-order-form novalidate>
-        <p class="order-form__intro">
-          Vos coordonnées servent uniquement à la livraison. Tous les champs sont obligatoires, sauf les remarques.
-        </p>
-        <div class="order-form__grid">
-          <div class="field">
-            <label for="of-firstname">Prénom</label>
-            <input id="of-firstname" name="firstname" type="text" autocomplete="given-name" required aria-describedby="of-firstname-error" />
-            <p class="field__error" id="of-firstname-error" hidden></p>
+      <section id="catalogue" class="panel__section catalog hinged" aria-labelledby="catalog-title">
+        <div class="catalog__head ruled ruled--top">
+          <div>
+            <h2 id="catalog-title" class="title-2">Le catalogue</h2>
+            <p class="catalog__lead">
+              Choisissez vos vinyles, puis passez commande&#8239;: vous réglez
+              par virement ou Twint, les disques partent dès réception du paiement.
+            </p>
           </div>
-          <div class="field">
-            <label for="of-lastname">Nom</label>
-            <input id="of-lastname" name="lastname" type="text" autocomplete="family-name" required aria-describedby="of-lastname-error" />
-            <p class="field__error" id="of-lastname-error" hidden></p>
-          </div>
-          <div class="field field--full">
-            <label for="of-street">Rue et numéro</label>
-            <input id="of-street" name="street" type="text" autocomplete="street-address" required aria-describedby="of-street-error" />
-            <p class="field__error" id="of-street-error" hidden></p>
-          </div>
-          <div class="field">
-            <label for="of-zip">NPA</label>
-            <input id="of-zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" required aria-describedby="of-zip-error" />
-            <p class="field__error" id="of-zip-error" hidden></p>
-          </div>
-          <div class="field">
-            <label for="of-city">Localité</label>
-            <input id="of-city" name="city" type="text" autocomplete="address-level2" required aria-describedby="of-city-error" />
-            <p class="field__error" id="of-city-error" hidden></p>
-          </div>
-          <div class="field">
-            <label for="of-email">Email</label>
-            <input id="of-email" name="email" type="email" autocomplete="email" required aria-describedby="of-email-error" />
-            <p class="field__error" id="of-email-error" hidden></p>
-          </div>
-          <div class="field">
-            <label for="of-phone">Téléphone</label>
-            <input id="of-phone" name="phone" type="tel" autocomplete="tel" required aria-describedby="of-phone-error" />
-            <p class="field__error" id="of-phone-error" hidden></p>
-          </div>
-          <div class="field field--full">
-            <label for="of-notes">Remarques <span class="field__optional">(facultatif)</span></label>
-            <textarea id="of-notes" name="notes" rows="3"></textarea>
+          <a class="btn btn--small" href="mailto:hello@45syndicate.ch">Une question&#8239;?</a>
+        </div>
+        <div class="catalog__frame">
+          <div class="catalog__grid" data-shop-grid>
+            <p class="empty-note">Le catalogue s’affiche avec JavaScript. Pour commander sans, écrivez à hello@45syndicate.ch.</p>
           </div>
         </div>
-        <p class="order-form__error" data-form-error role="alert" hidden></p>
-        <button class="btn btn--primary order-form__submit" type="submit">
-          Envoyer la commande
-        </button>
-      </form>
+      </section>
 
-      <div class="order-confirm" data-order-confirm hidden>
-        <h3 class="order-confirm__title" data-confirm-title tabindex="-1">Merci, votre commande est envoyée</h3>
-        <p data-confirm-text>
-          Pour la finaliser, réglez le montant total par virement ou Twint.
-          Vos vinyles partiront dès réception du paiement.
+      <dialog class="sheet" data-product-dialog aria-labelledby="product-dialog-title">
+        <div class="sheet__bar">
+          <p class="sheet__label">Fiche vinyle</p>
+          <button class="sheet__close" type="button" data-dialog-close>Fermer<span class="visually-hidden"> la fiche</span></button>
+        </div>
+        <div class="sheet__body sheet__body--product">
+          <div class="sheet__cover" data-dialog-cover></div>
+          <div class="sheet__text">
+            <p class="product__artist" data-dialog-artist></p>
+            <h2 id="product-dialog-title" class="sheet__title" data-dialog-title></h2>
+            <p data-dialog-desc></p>
+            <div class="product__foot">
+              <p class="product__price" data-dialog-price></p>
+              <button class="btn btn--solid" type="button" data-dialog-add>Ajouter au panier</button>
+              <p class="tag" data-dialog-soldout hidden>Épuisé</p>
+            </div>
+          </div>
+        </div>
+      </dialog>
+
+      <div class="cart-bar hinged hinged--single" data-cart-bar hidden>
+        <p class="cart-bar__summary" data-cart-summary aria-live="polite"></p>
+        <button class="btn btn--solid" type="button" data-open-order>Passer commande</button>
+      </div>
+
+      <dialog id="commande" class="sheet" aria-labelledby="order-title" data-order-section>
+        <div class="sheet__bar">
+          <h2 id="order-title" class="sheet__label">Votre commande</h2>
+          <button class="sheet__close" type="button" data-order-close>Fermer<span class="visually-hidden"> la commande</span></button>
+        </div>
+        <div class="sheet__body">
+          <ul class="order__lines" data-cart-lines></ul>
+          <p class="order__total">Total&#8239;: <strong data-cart-total></strong></p>
+
+          <form class="order-form" data-order-form novalidate>
+            <p class="order-form__intro">
+              Vos coordonnées servent uniquement à la livraison. Tous les champs
+              sont obligatoires, sauf les remarques.
+            </p>
+            <div class="order-form__grid">
+              <div class="form-field">
+                <label for="of-firstname">Prénom</label>
+                <input id="of-firstname" name="firstname" type="text" autocomplete="given-name" required aria-describedby="of-firstname-error" />
+                <p class="form-field__error" id="of-firstname-error" hidden></p>
+              </div>
+              <div class="form-field">
+                <label for="of-lastname">Nom</label>
+                <input id="of-lastname" name="lastname" type="text" autocomplete="family-name" required aria-describedby="of-lastname-error" />
+                <p class="form-field__error" id="of-lastname-error" hidden></p>
+              </div>
+              <div class="form-field form-field--full">
+                <label for="of-street">Rue et numéro</label>
+                <input id="of-street" name="street" type="text" autocomplete="street-address" required aria-describedby="of-street-error" />
+                <p class="form-field__error" id="of-street-error" hidden></p>
+              </div>
+              <div class="form-field">
+                <label for="of-zip">NPA</label>
+                <input id="of-zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" required aria-describedby="of-zip-error" />
+                <p class="form-field__error" id="of-zip-error" hidden></p>
+              </div>
+              <div class="form-field">
+                <label for="of-city">Localité</label>
+                <input id="of-city" name="city" type="text" autocomplete="address-level2" required aria-describedby="of-city-error" />
+                <p class="form-field__error" id="of-city-error" hidden></p>
+              </div>
+              <div class="form-field">
+                <label for="of-email">Email</label>
+                <input id="of-email" name="email" type="email" autocomplete="email" required aria-describedby="of-email-error" />
+                <p class="form-field__error" id="of-email-error" hidden></p>
+              </div>
+              <div class="form-field">
+                <label for="of-phone">Téléphone</label>
+                <input id="of-phone" name="phone" type="tel" autocomplete="tel" required aria-describedby="of-phone-error" />
+                <p class="form-field__error" id="of-phone-error" hidden></p>
+              </div>
+              <div class="form-field form-field--full">
+                <label for="of-notes">Remarques <span class="form-field__optional">(facultatif)</span></label>
+                <textarea id="of-notes" name="notes" rows="3"></textarea>
+              </div>
+            </div>
+            <p class="order-form__error" data-form-error role="alert" hidden></p>
+            <button class="btn btn--solid order-form__submit" type="submit">Envoyer la commande</button>
+          </form>
+
+          <div class="order-confirm" data-order-confirm hidden>
+            <h3 class="order-confirm__title" data-confirm-title tabindex="-1">Merci, votre commande est envoyée</h3>
+            <p data-confirm-text>
+              Pour la finaliser, réglez le montant total par virement ou Twint.
+              Vos vinyles partiront dès réception du paiement.
+            </p>
+            <dl class="meta-list">
+              <div><dt>Bénéficiaire</dt><dd data-confirm-beneficiary></dd></div>
+              <div><dt>IBAN</dt><dd><code id="iban-commande" data-confirm-iban></code></dd></div>
+              <div><dt>Montant</dt><dd><strong data-confirm-total></strong></dd></div>
+            </dl>
+            <button class="btn copy-button" type="button" data-copy-target="#iban-commande">Copier l’IBAN</button>
+            <p class="order-confirm__note">
+              Une question&#8239;? Écrivez-nous&#8239;:
+              <a class="link" data-confirm-email href="mailto:hello@45syndicate.ch">hello@45syndicate.ch</a>
+            </p>
+          </div>
+        </div>
+      </dialog>
+    </main>
+
+    <footer class="site-footer panel hinged hinged--single">
+      <div class="footer__grid">
+        <div class="footer__radio">
+          <p class="footer__radio-name">Webradio 45 Syndicate</p>
+          <p><span class="tag">Bientôt en ondes</span></p>
+        </div>
+        <nav class="footer__nav" aria-label="Pied de page">
+          <ul class="footer__links">
+            <li><a href="./association.html">L’association</a></li>
+            <li><a href="./shop.html">Boutique</a></li>
+            <li><a href="./agenda.html">Agenda</a></li>
+            <li><a href="./assets/documents/statuts-45-syndicate.pdf" download>Statuts (PDF)</a></li>
+            <li><a href="mailto:hello@45syndicate.ch">hello@45syndicate.ch</a></li>
+          </ul>
+        </nav>
+        <p class="footer__cta"><a class="btn btn--solid" href="./association.html#soutenir">Faire un don</a></p>
+        <p class="footer__legal">
+          <img src="./assets/logo-mark-bordeaux.png" alt="" width="22" height="22" loading="lazy" />
+          Association 45 Syndicate, Escaliers du Marché 11, 1003 Lausanne. Association à but non lucratif.
         </p>
-        <dl class="donate__details">
-          <dt>Bénéficiaire</dt>
-          <dd data-confirm-beneficiary></dd>
-          <dt>IBAN</dt>
-          <dd><code id="iban-commande" data-confirm-iban></code></dd>
-          <dt>Montant</dt>
-          <dd><strong data-confirm-total></strong></dd>
-        </dl>
-        <button class="copy-button" type="button" data-copy-target="#iban-commande">Copier l’IBAN</button>
-        <p class="donate__note">
-          Une question&nbsp;? Écrivez-nous&nbsp;:
-          <a data-confirm-email href="mailto:hello@45syndicate.ch">hello@45syndicate.ch</a>
-        </p>
       </div>
-      </div>
-    </dialog>
-
-    <section class="page-cta window" aria-labelledby="shop-cta-title">
-      <h2 id="shop-cta-title" class="page-cta__title">Une question sur une commande&nbsp;?</h2>
-      <p class="page-cta__text">
-        On répond vite et avec plaisir. Pas de robot au bout de la ligne.
-      </p>
-      <a class="btn btn--primary" href="mailto:hello@45syndicate.ch">Nous écrire</a>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer__radio">
-      <span class="footer__radio-dot" aria-hidden="true"></span>
-      Webradio 45 Syndicate&#8239;: bientôt en ondes
-    </div>
-    <div class="footer__main">
-      <p class="footer__tagline">La musique<br />qui rassemble</p>
-      <nav class="footer__block" aria-label="Navigation secondaire">
-        <p class="footer__block-title">Navigation</p>
-        <ul class="footer__list">
-          <li><a href="./association.html">L’association</a></li>
-          <li><a href="./shop.html">Boutique</a></li>
-          <li><a href="./agenda.html">Agenda</a></li>
-          <li><a href="./association.html#soutenir">Faire un don</a></li>
-        </ul>
-      </nav>
-      <div class="footer__block">
-        <p class="footer__block-title">Contact</p>
-        <ul class="footer__list">
-          <li><a href="mailto:hello@45syndicate.ch">hello@45syndicate.ch</a></li>
-          <li>Lausanne, Suisse</li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer__legal">
-      <p>© 2026 Association 45 Syndicate, Lausanne</p>
-      <p>Association à but non lucratif</p>
-    </div>
-    <p class="footer__brandmark" aria-hidden="true"><span>45</span> SYNDICATE</p>
-  </footer>
+    </footer>
+  </div>
 
   <script type="module" src="./js/main.js"></script>
 </body>

@@ -61,3 +61,8 @@ a {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Un élément caché reste caché, quel que soit son style d'affichage */
+[hidden] {
+  display: none !important;
+}

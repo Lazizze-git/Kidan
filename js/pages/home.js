@@ -1,19 +1,13 @@
-// Page d'accueil : platine de la tracklist et teaser agenda
+// @ts-check
+// Accueil : la carte « Prochaine date » à côté des rubriques
 import { getUpcomingEvents } from "../data/events.js";
-import { createEventCard, renderInto } from "../render.js";
-import { initTracklist } from "../tracklist.js";
+import { renderNextEvent } from "../next-event.js";
 
 export function initHome() {
-  initTracklist();
-
-  const eventsContainer = document.querySelector("[data-events-teaser]");
-  if (!eventsContainer) {
+  const container = document.querySelector("[data-next-event]");
+  if (!container) {
     return;
   }
-  const cards = getUpcomingEvents(2).map(createEventCard);
-  renderInto(
-    eventsContainer,
-    cards,
-    "Aucun événement programmé pour le moment. Revenez bientôt, ou écrivez-nous pour proposer une date."
-  );
+  const [next] = getUpcomingEvents(1);
+  renderNextEvent(container, next);
 }

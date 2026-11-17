@@ -1,3 +1,4 @@
+// @ts-check
 // Agenda de l'association.
 // Pour ajouter un événement : copier un bloc, changer les valeurs, sauvegarder.
 // Les événements passés disparaissent automatiquement du site.
@@ -5,6 +6,24 @@
 //   program : liste de { title, points } (déroulé de l'atelier)
 //   link    : { href, label } (inscription, billetterie…)
 //   poster  : { src, alt } (affiche, ouverte en grand au clic)
+
+/**
+ * @typedef {object} AgendaEvent
+ * @property {string} id
+ * @property {string} title
+ * @property {string} tag
+ * @property {string} date AAAA-MM-JJ
+ * @property {string} timeStart
+ * @property {string} timeEnd
+ * @property {string} place
+ * @property {string} description
+ * @property {string} price
+ * @property {{ title: string, points: string[] }[]} [program]
+ * @property {{ href: string, label: string }} [link]
+ * @property {{ src: string, alt: string }} [poster]
+ */
+
+/** @type {AgendaEvent[]} */
 export const EVENTS = [
   {
     id: "atelier-dj-mao-11",
@@ -19,7 +38,7 @@ export const EVENTS = [
     price: "Inscription via QR code",
     program: [
       {
-        title: "DJ — cours sur la DDJ-RX3",
+        title: "DJ : cours sur la DDJ-RX3",
         points: [
           "Choisir un son dans une playlist et le charger sur une piste",
           "Régler le BPM",
@@ -28,7 +47,7 @@ export const EVENTS = [
         ],
       },
       {
-        title: "MAO — cours sur la MPC Live 2",
+        title: "MAO : cours sur la MPC Live 2",
         points: [
           "Importer un sample sur une piste",
           "Adapter et créer une loop",
@@ -83,6 +102,10 @@ export const EVENTS = [
   },
 ];
 
+/**
+ * @param {number} [limit]
+ * @returns {AgendaEvent[]}
+ */
 export function getUpcomingEvents(limit = Infinity) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);

@@ -1,221 +1,157 @@
-/* Page L'association : chaque section est une affiche du mur ----- */
-
-/* Fiche signalétique : petite affiche blanche à droite */
-.specs {
-  --poster-w: min(46rem, calc(100% - 2 * var(--frame-inline)));
-  --tilt: 1deg;
-
-  margin-top: calc(var(--space-section) * 0.5);
-  margin-left: auto;
-  margin-right: max(var(--frame-inline), 8%);
-  padding: clamp(1.5rem, 4vw, 2rem);
+/* L'ASSOCIATION : fiche d'identité, générique des fondateur·ice·s comme
+   au dos d'une pochette, lieux et statuts en cartes, feuille des dons. */
+.facts {
+  padding-block: 0 var(--s-1);
 }
 
-/* Manifeste : affiche jaune à gauche (les engagements sont des
-   affiches séparées, voir mission.css) */
-.about-mission {
-  --poster-w: min(46rem, calc(100% - 2 * var(--frame-inline)));
-  --tilt: -0.8deg;
-
-  margin-top: calc(var(--space-section) * 0.75);
-  margin-left: max(var(--frame-inline), 4%);
-  margin-right: auto;
-  padding: clamp(1.5rem, 4vw, 2.5rem);
-}
-
-/* Équipe : petite affiche-titre bleue, puis un portrait par affiche */
-.founders {
-  --poster-w: min(28rem, calc(100% - 2 * var(--frame-inline)));
-  --tilt: 0.9deg;
-
-  margin-top: calc(var(--space-section) * 0.6);
-  margin-left: auto;
-  margin-right: max(var(--frame-inline), 14%);
-  padding: clamp(1.25rem, 3.5vw, 1.75rem);
-}
-
-.founders .section-head {
-  margin-bottom: 0;
-}
-
-/* Lieux : affiche verte à gauche */
-.places {
-  --poster-w: min(52rem, calc(100% - 2 * var(--frame-inline)));
-  --tilt: -1.2deg;
-
-  margin-top: calc(var(--space-section) * 0.65);
-  margin-left: max(var(--frame-inline), 7%);
-  margin-right: auto;
-  padding: clamp(1.5rem, 4vw, 2.25rem);
-}
-
-/* Statuts : petite affiche blanche à droite */
-.statutes {
-  --poster-w: min(46rem, calc(100% - 2 * var(--frame-inline)));
-  --tilt: 0.8deg;
-
-  margin-top: calc(var(--space-section) * 0.55);
-  margin-left: auto;
-  margin-right: max(var(--frame-inline), 10%);
-  padding: clamp(1.5rem, 4vw, 2.25rem);
-}
-
-/* Mobile : affiches compactes */
-@media (max-width: 899px) {
-  .specs,
-  .about-mission,
-  .founders,
-  .places,
-  .statutes {
-    padding: 1.5rem 1.35rem;
-  }
-
-  .spec dt {
-    font-size: var(--fs-micro);
-  }
-
-  .spec dd {
-    font-size: 0.9rem;
-  }
-
-  .donate__block {
-    padding: 1.2rem 1rem;
-  }
-
-  .donate__details dd {
-    font-size: 0.85rem;
-  }
-}
-
-/* Fondateurs : trois petites affiches-portraits en quinconce -- */
-.founders__grid {
+.facts__grid {
   display: grid;
-  gap: clamp(1.25rem, 3vw, 2rem);
-  width: var(--frame-width);
-  margin: 1.75rem auto 0;
-  align-items: start;
+  border-top: 1px solid var(--c-hinge-ring);
 }
 
-.founders__grid .founder-card {
-  width: auto;
-  margin: 0;
-  padding: 1.75rem 1.5rem;
+.facts__item {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid var(--line-quiet);
 }
 
-.founders__grid .founder-card:nth-child(1) {
-  --tilt: -1.1deg;
-}
-
-.founders__grid .founder-card:nth-child(2) {
-  --tilt: 0.8deg;
-}
-
-.founders__grid .founder-card:nth-child(3) {
-  --tilt: 1.3deg;
-}
-
-@media (min-width: 720px) {
-  .founders__grid .founder-card:nth-child(2) {
-    margin-top: 1.75rem;
-  }
-
-  .founders__grid .founder-card:nth-child(3) {
-    margin-top: 0.75rem;
-  }
-}
-
-/* Mobile : portraits côte à côte, en deux colonnes compactes */
-@media (max-width: 719px) {
-  .founders__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    width: calc(100% - 2rem);
-  }
-
-  .founders__grid .founder-card {
-    padding: 1.1rem 0.9rem;
-  }
-
-  .founders__grid .founder-card:nth-child(2) {
-    margin-top: 1.25rem;
-  }
-
-  .founders__grid .founder-card:nth-child(3) {
-    margin-top: -0.25rem;
-  }
-
-  .founder-card__portrait {
-    width: 3.25rem;
-    height: 3.25rem;
-    margin-bottom: 0.9rem;
-    font-size: 0.9rem;
-  }
-
-  .founder-card__name {
-    font-size: 0.95rem;
-  }
-
-  .founder-card__role {
-    font-size: var(--fs-micro);
-    margin: 0.25rem 0 0;
-  }
-}
-
-.founder-card__portrait {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 5rem;
-  height: 5rem;
-  margin-bottom: 1.5rem;
-  border-radius: 50%;
-  background: var(--color-ink);
-  color: var(--color-paper);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-paper) 65%, transparent),
-    0 6px 14px rgba(20, 20, 15, 0.2);
-  font-weight: 700;
-  font-size: 1.25rem;
-  letter-spacing: 0.06em;
-}
-
-.founder-card__name {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: -0.03em;
-  line-height: 1;
-}
-
-.founder-card__role {
+.facts__item dt {
+  font-family: var(--font-mono);
   font-size: var(--fs-micro);
-  font-weight: 700;
-  letter-spacing: var(--tracking-label);
-  color: var(--color-gray);
-  margin: 0.5rem 0 1rem;
 }
 
-@media (min-width: 720px) {
-  .founders__grid {
-    grid-template-columns: repeat(3, 1fr);
+.facts__item dd {
+  font-size: var(--fs-row);
+  font-weight: 500;
+}
+
+/* Générique */
+.credits {
+  display: grid;
+  gap: var(--s-1);
+}
+
+.credits__list {
+  border-top: 1px solid var(--c-hinge-ring);
+}
+
+.credits__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid var(--line-quiet);
+}
+
+.credits__name {
+  font-size: var(--fs-h3);
+  font-weight: var(--weight-title);
+  line-height: var(--lh-title);
+}
+
+.credits__role {
+  font-size: var(--fs-small);
+}
+
+/* Lieux et statuts : le titre, puis une carte par sujet */
+.quad {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.quad__title {
+  margin-bottom: var(--s-half);
+}
+
+/* Dons : les deux moyens de paiement en cartes sur la feuille rose */
+.donate__intro {
+  display: grid;
+  align-content: start;
+  gap: var(--s-half);
+  max-width: 30rem;
+}
+
+.donate__sheet .meta-list {
+  width: 100%;
+}
+
+.donate__qr {
+  width: 10rem;
+  aspect-ratio: 1;
+}
+
+.donate__qr .placeholder-note {
+  height: 100%;
+}
+
+.donate__note {
+  font-size: var(--fs-small);
+}
+
+@media (min-width: 40rem) {
+  .facts__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-/* Statuts --------------------------------------------------- */
-.statutes__inner {
-  display: grid;
-  gap: 2rem;
-  align-items: center;
+@media (min-width: 48rem) {
+  .quad {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .quad__title,
+  .donate__intro {
+    grid-column: 1 / -1;
+  }
 }
 
-.statutes__inner p {
-  max-width: 52ch;
-  margin-top: 1rem;
-  color: var(--color-gray);
-}
+@media (min-width: 60rem) {
+  .facts__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-bottom: 1px solid var(--c-hinge-ring);
+  }
 
-@media (min-width: 900px) {
-  .statutes__inner {
-    grid-template-columns: 1fr auto;
+  .facts__item {
+    padding-inline: var(--rule-pad);
+    border-bottom: 0;
+  }
+
+  .facts__item + .facts__item {
+    border-inline-start: 1px solid var(--line-quiet);
+  }
+
+  .credits,
+  .quad {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    padding-block: var(--s-2);
+  }
+
+  .credits {
+    gap: 0;
+  }
+
+  .credits__title,
+  .quad__title {
+    grid-column: auto;
+    margin-bottom: 0;
+    padding-inline-end: var(--s-1);
+  }
+
+  .credits__list {
+    grid-column: 2 / -1;
+    margin-top: var(--s-half);
+  }
+
+  .donate__sheet {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .donate__intro {
+    grid-column: 1 / 3;
+    padding-inline-end: var(--sheet-pad);
   }
 }

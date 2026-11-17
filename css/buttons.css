@@ -1,102 +1,81 @@
-/* Boutons : un aplat d'encre, des angles nets. Au survol la couleur
-   s'inverse ; à la pression le bouton s'enfonce de 3 %. ------------ */
+/* BOUTONS : contour d'encre, ou plein pour l'action principale */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
-  min-height: var(--target-min);
-  white-space: nowrap;
-  padding: 0.75rem 1.5rem;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: var(--fs-meta);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-label);
+  gap: 0.5rem;
+  min-height: var(--target);
+  padding: 0 1rem;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--ink);
   text-decoration: none;
-  border-radius: 0;
-  border: 2px solid var(--color-ink);
-  transition: background-color var(--transition), color var(--transition),
-    border-color var(--transition), scale 100ms var(--ease-out);
+  white-space: nowrap;
+  background-color: transparent;
+  border: var(--rule);
+  border-radius: var(--radius-button);
+  transition:
+    background-color var(--dur-hover) ease,
+    color var(--dur-hover) ease,
+    transform var(--dur-press) var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn:active {
-  scale: 0.97;
+  transform: scale(0.97);
 }
 
-.btn:disabled {
+.btn--solid {
+  color: var(--on-ink);
+  background-color: var(--ink);
+}
+
+.btn--small {
+  min-height: 2rem;
+  padding: 0 0.75rem;
+  font-size: var(--fs-small);
+  border-radius: 999px;
+}
+
+.btn[disabled],
+.btn[aria-disabled="true"] {
   opacity: 0.55;
-  cursor: progress;
-}
-
-.btn--primary {
-  background: var(--color-ink);
-  color: var(--color-paper);
-}
-
-.btn--accent {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-paper);
+  cursor: not-allowed;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  /* Le bouton plein s'évide : l'encre repasse en texte sur le papier,
-     la paire reste lisible sur tous les fonds */
-  .btn--primary:hover {
-    background: var(--color-paper);
-    color: var(--color-ink);
+  .btn:hover {
+    background-color: var(--tint-hover);
   }
 
-  .btn--accent:hover {
-    background: var(--color-ink);
-    border-color: var(--color-ink);
-    color: var(--color-paper);
+  .btn--solid:hover {
+    background-color: var(--ink-strong);
   }
 }
 
-/* Liens fléchés : la flèche avance, le filet se déroule ------- */
-.link-arrow {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
+.actions {
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
-  min-height: var(--target-min);
-  font-weight: 700;
-  font-size: var(--fs-meta);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-label);
-  text-decoration: none;
 }
 
-.link-arrow::before {
-  content: "→";
-  transition: transform var(--transition);
+/* Bouton « Copier l'IBAN » (classes btn copy-button) : retour visible
+   quand la copie a réussi */
+.copy-button.is-copied {
+  color: var(--on-ink);
+  background-color: var(--ink);
 }
 
-.link-arrow::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0.5rem;
-  height: 2px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--transition-slow);
-}
-
-.link-arrow:focus-visible::after {
-  transform: scaleX(1);
+/* Lien de texte : souligné, plus appuyé au survol */
+.link {
+  color: var(--ink);
+  text-decoration-color: var(--line-quiet);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .link-arrow:hover::before {
-    transform: translateX(4px);
-  }
-
-  .link-arrow:hover::after {
-    transform: scaleX(1);
+  .link:hover {
+    text-decoration-color: var(--ink);
   }
 }

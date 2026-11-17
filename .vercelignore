@@ -1,0 +1,12 @@
+# Fichiers de travail du studio : ils ne partent pas en ligne
+.DS_Store
+.gitignore
+.anti-slop-exceptions
+.impeccable
+.vscode
+DIRECTION-ARTISTIQUE.md
+README.md
+jsconfig.json
+paires.txt
+.env*
+.vercel

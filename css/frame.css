@@ -1,0 +1,119 @@
+/* CADRE : la piste en fond, les rails, le panneau et ses charnières */
+
+/* La piste : un canvas fixe derrière tout (dessiné par js/field.js).
+   Sans JavaScript, le fond reste un bordeaux uni. */
+.waveform {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.site {
+  position: relative;
+  z-index: 1;
+  max-width: var(--site-max);
+  margin-inline: auto;
+  padding: var(--field-top) var(--field-gutter) var(--s-4);
+}
+
+/* Rails : deux montants clairs dans la marge, sur toute la hauteur */
+@media (min-width: 48rem) {
+  .site::before,
+  .site::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--rail-width);
+    background-color: var(--c-rail);
+    border-inline: 1px solid var(--c-hinge-ring);
+  }
+
+  .site::before {
+    left: calc(var(--field-gutter) * 0.3);
+  }
+
+  .site::after {
+    right: calc(var(--field-gutter) * 0.3);
+  }
+}
+
+/* Panneau : la surface grise où tout se lit */
+.panel {
+  position: relative;
+  display: block;
+  background-color: var(--paper);
+  border: 1px solid var(--c-hinge-ring);
+}
+
+.panel + .panel {
+  margin-top: var(--s-3);
+}
+
+.panel__section {
+  position: relative;
+  padding: var(--s-3) var(--panel-inset);
+}
+
+.panel__section + .panel__section {
+  padding-top: var(--s-1);
+}
+
+/* Charnières : une barre claire part du rail et finit sur un pion.
+   Dessinées en dégradés pour lire les jetons de couleur. */
+.hinged {
+  --pin-w: 1.0625rem;
+  --pin-h: 1.3125rem;
+  --bar-x: calc(var(--field-gutter) * 0.22);
+  --hinge-w: calc(var(--field-gutter) + var(--hinge-reach));
+}
+
+.hinged::before,
+.hinged::after {
+  content: "";
+  position: absolute;
+  top: var(--hinge-top, var(--s-1));
+  z-index: 2;
+  width: var(--hinge-w);
+  height: calc(var(--pin-h) * 2 + 0.5rem);
+  pointer-events: none;
+  background:
+    radial-gradient(closest-side, var(--ink) 72%, var(--c-hinge-ring) 76%, var(--c-hinge-ring) 96%, transparent)
+      right 0 top 0 / var(--pin-w) var(--pin-h) no-repeat,
+    radial-gradient(closest-side, var(--ink) 72%, var(--c-hinge-ring) 76%, var(--c-hinge-ring) 96%, transparent)
+      right 0 top calc(var(--pin-h) + 0.5rem) / var(--pin-w) var(--pin-h) no-repeat,
+    linear-gradient(var(--c-rail), var(--c-rail))
+      left calc(var(--bar-x) + 1px) top calc(var(--pin-h) / 2 - 4px) /
+      calc(100% - var(--bar-x) - var(--pin-w) / 2 - 2px) 8px no-repeat,
+    linear-gradient(var(--c-hinge-ring), var(--c-hinge-ring))
+      left var(--bar-x) top calc(var(--pin-h) / 2 - 5px) /
+      calc(100% - var(--bar-x) - var(--pin-w) / 2) 10px no-repeat;
+}
+
+.hinged::before {
+  left: calc(-1 * var(--field-gutter) - 1px);
+}
+
+.hinged::after {
+  right: calc(-1 * var(--field-gutter) - 1px);
+  transform: scaleX(-1);
+}
+
+/* Une seule charnière, sans second pion (plaque, pied de page) */
+.hinged--single::before,
+.hinged--single::after {
+  height: var(--pin-h);
+  background:
+    radial-gradient(closest-side, var(--ink) 72%, var(--c-hinge-ring) 76%, var(--c-hinge-ring) 96%, transparent)
+      right 0 top 0 / var(--pin-w) var(--pin-h) no-repeat,
+    linear-gradient(var(--c-rail), var(--c-rail))
+      left calc(var(--bar-x) + 1px) top calc(var(--pin-h) / 2 - 4px) /
+      calc(100% - var(--bar-x) - var(--pin-w) / 2 - 2px) 8px no-repeat,
+    linear-gradient(var(--c-hinge-ring), var(--c-hinge-ring))
+      left var(--bar-x) top calc(var(--pin-h) / 2 - 5px) /
+      calc(100% - var(--bar-x) - var(--pin-w) / 2) 10px no-repeat;
+}

@@ -1,101 +1,112 @@
-/* JETONS — toutes les valeurs de base du site (palette, rôles, échelle,
-   espacements, mouvement). Les thèmes de papier sont dans papers.css. */
+/* JETONS : toutes les valeurs du site. Origine de chaque choix dans
+   DIRECTION-ARTISTIQUE.md (§ 5 à 8). Les composants lisent les rôles
+   (--ink, --paper…), jamais une teinte directement. */
 :root {
-  /* Palette de référence — douze couleurs de sérigraphie.
-     Les composants ne les posent jamais au hasard : elles servent aux
-     thèmes de papier (css/papers.css) et aux rôles ci-dessous. Un
-     composant lit un rôle (--color-ink, --color-accent…), pas une teinte. */
-  --c-green: #116b09; /* Green House   */
-  --c-flossy: #ff7fab; /* Flossy        */
-  --c-hotpink: #ff4283; /* Hot Pink      */
-  --c-deepred: #c60707; /* Deep Red      */
-  --c-berry: #1f6bed; /* Kind Berry    */
-  --c-mellow: #f4ff1e; /* Mellow        */
-  --c-magenta: #ff1ec7; /* Magenta       */
-  --c-mutedblue: #518dff; /* Muted Blue    */
-  --c-cherry: #6e1221; /* Velvet Cherry */
-  --c-taffy: #e76290; /* Taffy         */
-  --c-vinyl: #0759a2; /* Blue Vinyl    */
-  --c-riviera: #5196e8; /* Riviera       */
+  /* Palette : le Velvet Cherry de la DA sérigraphie et ses gris */
+  --c-cherry: #6e1221;
+  --c-cherry-deep: #490c15;
+  --c-field: #5a0416;
+  --c-panel: #ece8e8;
+  --c-panel-light: #f8f6f6;
+  --c-plate: #dcd8d8;
+  --c-wash: #eaccca;
+  --c-rail: #f5f3f3;
+  --c-hinge-ring: #34080e;
+  --c-deepred: #b00818;
+  --c-white: #ffffff;
 
-  /* Rôles par défaut : encre bordeaux sur papier blanc.
-     Plus de noir pur nulle part — l'encre la plus sombre du site
-     est le Velvet Cherry. */
-  --color-ink: var(--c-cherry);
-  --color-paper: #f7f6f1;
-  --color-accent: var(--c-deepred);
-  --color-accent-bright: var(--c-hotpink);
-  --disc-color: var(--c-flossy);
+  /* La piste du fond (lue par js/field.js) */
+  --wave-outer: #811c2b;
+  --wave-core: #b13d54;
+  --wave-peak: #da748c;
+  --wave-grid: rgba(245, 243, 243, 0.2);
 
-  /* Le mur de grillage : un gris chaud, qui tient avec le bordeaux */
-  --color-bg: #9c968d;
-  --color-bg-deep: #857f76;
+  /* Rôles */
+  --ink: var(--c-cherry);
+  --ink-strong: var(--c-cherry-deep);
+  --paper: var(--c-panel);
+  --paper-raised: var(--c-panel-light);
+  --paper-plate: var(--c-plate);
+  --paper-wash: var(--c-wash);
+  /* Sur la feuille rose, le texte passe au bordeaux profond (APCA Lc 76) */
+  --ink-on-wash: var(--c-cherry-deep);
+  --paper-card: var(--c-white);
+  --field: var(--c-field);
+  --on-ink: var(--c-panel-light);
+  --line: var(--c-cherry);
+  --line-quiet: color-mix(in oklab, var(--c-cherry) 32%, var(--c-panel));
+  --tint-hover: color-mix(in oklab, var(--c-cherry) 8%, var(--c-panel-light));
+  --error: var(--c-deepred);
+  --focus: var(--c-cherry);
+  --shadow-float: 0 1px 2px rgba(52, 8, 14, 0.12), 0 12px 32px rgba(52, 8, 14, 0.14);
 
-  /* Bordeaux poussé au noir : la base sur laquelle la page se pose */
-  --color-ink-deep: #4b0c16;
-
-  /* Texte secondaire et filets : de l'encre diluée dans le papier,
-     comme une couche d'impression plus légère. Le taux s'adapte
-     par thème (--ink-soft / --ink-line) pour rester lisible aussi
-     bien sur papier clair que sur fond saturé. */
-  --ink-soft: 78%;
-  --ink-line: 24%;
-
+  /* Polices */
+  --font-sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "Space Mono", "Courier New", monospace;
-  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
 
-  /* Échelle typographique ------------------------------------- */
-  --fs-display: clamp(2.6rem, 7vw, 5.25rem);
-  --fs-h1: clamp(2.1rem, 5.4vw, 4rem);
-  --fs-h2: clamp(1.65rem, 3.4vw, 2.6rem);
-  --fs-h3: clamp(1.15rem, 2.1vw, 1.45rem);
-  --fs-lead: clamp(1rem, 1.4vw, 1.15rem);
-  --fs-body: 1rem;
-  --fs-meta: 0.875rem;
-  --fs-micro: 0.75rem;
+  /* Échelle (texte courant 16 → 20 px, rapport titre / texte 2 → 2,4) */
+  --fs-micro: 0.8125rem;
+  --fs-small: 0.9375rem;
+  --fs-body: clamp(1rem, 0.93rem + 0.35vw, 1.25rem);
+  --fs-row: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --fs-h3: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --fs-h2: clamp(1.625rem, 1.4rem + 1vw, 2.25rem);
+  --fs-h1: clamp(2rem, 1.6rem + 1.75vw, 3rem);
+  --lh-body: 1.4;
+  --lh-title: 1.12;
+  /* Citations en grand, sur plusieurs lignes : plus ouvertes qu'un titre */
+  --lh-quote: 1.3;
+  --weight-title: 600;
 
-  --space-section: clamp(3.5rem, 7vw, 5.75rem);
-  --space-gutter: clamp(1.25rem, 4vw, 3rem);
-  --max-width: 72rem;
+  /* Espacements : multiples de l'interligne du texte courant */
+  --unit: calc(var(--fs-body) * var(--lh-body));
+  --s-half: calc(var(--unit) * 0.5);
+  --s-1: var(--unit);
+  --s-2: calc(var(--unit) * 2);
+  --s-3: calc(var(--unit) * 3);
+  --s-4: calc(var(--unit) * 4);
 
-  /* Affiches : angles nets, papier mat, ombre en couches ------ */
-  --radius-card: 0;
-  --border-frame: 2px solid var(--color-ink);
-  --frame-inline: clamp(1.4rem, 3vw, 2rem);
-  --frame-width: min(calc(100% - 2 * var(--frame-inline)), var(--max-width));
+  /* Cadre : marge de la piste autour du panneau, retrait du contenu */
+  --site-max: 92rem;
+  --field-gutter: 0.75rem;
+  --field-top: 7rem;
+  --panel-inset: 1.25rem;
+  --rule-pad: 1rem;
+  --rail-width: 0.6875rem;
+  --hinge-reach: 1.75rem;
 
-  /* Ombre d'affiche : un contact serré + une diffusion large.
-     C'est ce qui fait décoller le papier du grillage. */
-  --shadow-poster: 0 1px 1px rgba(20, 20, 15, 0.1),
-    0 3px 5px rgba(20, 20, 15, 0.1), 0 10px 18px rgba(20, 20, 15, 0.14),
-    0 26px 44px rgba(20, 20, 15, 0.16);
-  --shadow-chip: 0 1px 1px rgba(20, 20, 15, 0.12),
-    0 4px 10px rgba(20, 20, 15, 0.18);
+  /* Traits */
+  --rule: 1px solid var(--line);
+  --terminal: 0.4375rem;
+  --radius-window: 0.75rem;
+  --radius-button: 0.5rem;
+  --radius-tag: 0.1875rem;
 
-  /* Grain de papier : une trame de bruit posée en multiply sur
-     chaque affiche, pour qu'elle ne soit pas un aplat numérique */
-  --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)' opacity='0.16'/%3E%3C/svg%3E");
-
-  /* Mouvement : une seule courbe de décélération, des durées courtes.
-     Rien ne dépasse 300 ms ; sous prefers-reduced-motion tout est coupé
-     (voir reset.css). */
+  /* Mouvement */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-settle: cubic-bezier(0.23, 1, 0.32, 1);
-  --transition: 160ms var(--ease-out);
-  --transition-slow: 250ms var(--ease-out);
+  --dur-press: 120ms;
+  --dur-hover: 160ms;
+  --dur-enter: 200ms;
+  --dur-exit: 150ms;
 
-  /* Disques vinyle et platine : noirs chauds et sillons */
-  --disc-black: #17170f;
-  --disc-groove: #232319;
-  --deck-black: #191917;
-  --deck-groove: #26261f;
-  --deck-groove-light: #2a2a25;
+  /* Cibles */
+  --target: 2.75rem;
+  --target-min: 1.5rem;
+}
 
-  /* Rôles utilitaires : plus aucune couleur en dur dans les composants */
-  --color-on-accent: #fff;
-  --color-field: #fff;
-  --color-placeholder: #6b6a63;
-  --color-error: var(--c-deepred);
-  --tracking-label: 0.06em;
-  --target-min: 2.75rem;
+@media (min-width: 48rem) {
+  :root {
+    --field-gutter: 2.375rem;
+    --field-top: 6.75rem;
+    --panel-inset: 2.5rem;
+    --rule-pad: 1.5rem;
+    --hinge-reach: 2rem;
+  }
+}
+
+@media (min-width: 75rem) {
+  :root {
+    --panel-inset: 4.6875rem;
+    --rule-pad: 1.75rem;
+  }
 }

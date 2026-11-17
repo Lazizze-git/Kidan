@@ -1,133 +1,114 @@
-// Petites briques de rendu partagées entre les pages
+// @ts-check
+// Briques de rendu partagées : prix, pochettes, fiches vinyles, listes
 import { el } from "./dom.js";
-import { createEventExtras } from "./event-extras.js";
 
 export { el };
 
-const priceFormatter = new Intl.NumberFormat("fr-CH", {
-  style: "currency",
-  currency: "CHF",
-});
+/** @typedef {import("./data/products.js").Product} Product */
 
+const THOUSANDS = /\B(?=(\d{3})+(?!\d))/g;
+
+/**
+ * Montant au format suisse : « CHF 1’250.00 »
+ * @param {number} value
+ */
 export function formatPrice(value) {
-  return priceFormatter.format(value);
+  const [whole = "0", cents = "00"] = value.toFixed(2).split(".");
+  return `CHF ${whole.replace(THOUSANDS, "’")}.${cents}`;
 }
 
-function eventDateParts(isoDate) {
-  const date = new Date(`${isoDate}T12:00:00`);
-  const day = new Intl.DateTimeFormat("fr-CH", { day: "numeric" }).format(date);
-  const month = new Intl.DateTimeFormat("fr-CH", { month: "short" }).format(date);
-  const full = new Intl.DateTimeFormat("fr-CH", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(date);
-  return { day, month, full };
-}
-
-export function createEventCard(event, options = {}) {
-  const card = el("article", "event-card");
-  const { day, month, full } = eventDateParts(event.date);
-
-  const dateBlock = el("time", "event-card__date");
-  dateBlock.dateTime = event.date;
-  dateBlock.setAttribute("aria-label", full);
-  dateBlock.append(
-    el("span", "event-card__day", day),
-    el("span", "event-card__month", month)
-  );
-
-  const body = el("div", "event-card__body");
-  body.append(el("h3", "event-card__title", event.title));
-
-  const meta = el("p", "event-card__meta");
-  meta.append(
-    el("span", "", `${event.timeStart} – ${event.timeEnd}`),
-    el("span", "", event.place),
-    el("span", "", event.price)
-  );
-  body.append(meta, el("p", "event-card__desc", event.description));
-  if (options.detailed) {
-    body.append(...createEventExtras(event));
+/**
+ * Pochette du vinyle, ou un emplacement visible tant qu'elle manque
+ * @param {Product} product
+ */
+export function createCover(product) {
+  const frame = el("div", "cover");
+  if (product.cover) {
+    const image = el("img");
+    image.src = product.cover.src;
+    image.alt = product.cover.alt;
+    image.width = 600;
+    image.height = 600;
+    image.loading = "lazy";
+    frame.append(image);
+    return frame;
   }
-
-  card.append(dateBlock, body, el("span", "event-card__tag", event.tag));
-  return card;
-}
-
-export function createVinylVisual(labelInitial) {
-  const vinyl = el("div", "vinyl");
-  vinyl.setAttribute("aria-hidden", "true");
-  vinyl.append(el("div", "vinyl__disc"), el("div", "vinyl__label", labelInitial));
-  return vinyl;
+  frame.append(el("p", "placeholder-note", "[Pochette à fournir]"));
+  return frame;
 }
 
 const ADDED_FEEDBACK_MS = 1500;
 
-// Le bouton dit « Ajouté » un instant : le panier a bien reçu le vinyle
+/**
+ * Le bouton dit « Ajouté » un instant : le panier a bien reçu le vinyle
+ * @param {HTMLElement} button
+ * @param {string} title
+ */
 function confirmAdded(button, title) {
-  const idleLabel = `Ajouter ${title} au panier`;
   button.textContent = "Ajouté";
   button.setAttribute("aria-label", `${title} ajouté au panier`);
   window.setTimeout(() => {
     button.textContent = "Ajouter";
-    button.setAttribute("aria-label", idleLabel);
+    button.setAttribute("aria-label", `Ajouter ${title} au panier`);
   }, ADDED_FEEDBACK_MS);
 }
 
-export function createProductCard(product, onAdd, index, onOpen) {
-  const card = el("article", "product-card window");
-  const refCode = `Ref 45S-${String(index + 1).padStart(2, "0")}`;
-
-  const footer = el("div", "product-card__footer");
-  footer.append(el("p", "product-card__price", formatPrice(product.price)));
-
+/**
+ * @param {Product} product
+ * @param {() => void} onAdd
+ */
+function createProductFooter(product, onAdd) {
+  const footer = el("div", "product__foot");
+  footer.append(el("p", "product__price", formatPrice(product.price)));
   if (!product.available) {
-    footer.append(el("p", "product-card__soldout", "Épuisé"));
-  } else {
-    const button = el("button", "btn btn--primary product-card__add", "Ajouter");
-    button.type = "button";
-    button.setAttribute("aria-label", `Ajouter ${product.title} au panier`);
-    button.addEventListener("click", () => {
-      onAdd(product);
-      confirmAdded(button, product.title);
-    });
-    footer.append(button);
+    footer.append(el("p", "tag", "Épuisé"));
+    return footer;
   }
+  const button = el("button", "btn btn--small btn--solid", "Ajouter");
+  button.type = "button";
+  button.setAttribute("aria-label", `Ajouter ${product.title} au panier`);
+  button.addEventListener("click", () => {
+    onAdd();
+    confirmAdded(button, product.title);
+  });
+  footer.append(button);
+  return footer;
+}
 
-  // Le titre est un vrai bouton : accessible au clavier, il ouvre la fiche
-  const title = el("h3", "product-card__title");
-  const titleButton = el("button", "product-card__more", product.title);
-  titleButton.type = "button";
-  titleButton.addEventListener("click", () => onOpen(product, refCode));
-  title.append(titleButton);
+/**
+ * Fiche d'un vinyle dans le catalogue. Le titre est un vrai bouton :
+ * accessible au clavier, il ouvre la fiche détaillée.
+ * @param {Product} product
+ * @param {() => void} onAdd
+ * @param {(product: Product) => void} onOpen
+ */
+export function createProductCard(product, onAdd, onOpen) {
+  const card = el("article", "product");
+  const title = el("h3", "product__title");
+  const open = el("button", "product__open", product.title);
+  open.type = "button";
+  open.addEventListener("click", () => onOpen(product));
+  title.append(open);
 
   card.append(
-    createVinylVisual(product.labelInitial),
-    el("p", "product-card__ref", refCode),
-    el("p", "product-card__artist", product.artist),
+    createCover(product),
+    el("p", "product__artist", product.artist),
     title,
-    el("p", "product-card__desc", product.description),
-    footer
+    el("p", "product__desc", product.description),
+    createProductFooter(product, onAdd)
   );
-
-  // Toute la carte est cliquable, sauf le bouton d'ajout au panier
-  card.addEventListener("click", (event) => {
-    if (event.target.closest(".product-card__add, .product-card__more")) {
-      return;
-    }
-    onOpen(product, refCode);
-  });
-
   return card;
 }
 
+/**
+ * @param {Element} container
+ * @param {Node[]} nodes
+ * @param {string} emptyMessage
+ */
 export function renderInto(container, nodes, emptyMessage) {
-  container.replaceChildren();
   if (nodes.length === 0) {
-    container.append(el("p", "empty-note", emptyMessage));
+    container.replaceChildren(el("p", "empty-note", emptyMessage));
     return;
   }
-  container.append(...nodes);
+  container.replaceChildren(...nodes);
 }

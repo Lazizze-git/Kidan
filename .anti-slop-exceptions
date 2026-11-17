@@ -1,3 +1,14 @@
 # ID | fichier concerné (ou *) | raison et source
-CT-21 | * | Archivo + Space Mono : polices de la direction artistique « sérigraphie deux couleurs » (commit d400233). Demande écrite du propriétaire pour cette mission : garder la DA existante, Archivo + Space Mono. Chargées depuis Google Fonts faute de pouvoir télécharger les fichiers ici : à héberger sur le site avant la mise en ligne.
-CT-28 | * | Space Mono en texte courant : même raison, c'est la voix technique de la DA existante (demande du propriétaire).
+CT-21 | * | Archivo + Space Mono : polices de l'identité existante de 45 Syndicate (DA « sérigraphie deux couleurs », commit d400233), conservées dans la refonte « panneau sur piste » du 17.11.2026. Chargées depuis Google Fonts parce que le téléchargement des fichiers a été refusé pendant la session : à héberger sur le site avant la mise en ligne.
+CT-28 | * | Space Mono limitée aux étiquettes, à la fiche tamponnée, aux libellés heure / lieu / accès et au nom dans la plaque : c'est la voix « matériel » de l'identité existante (même source que CT-21).
+CT-20b | css/jetons.css | Helvetica Neue et Arial seulement en repli derrière Archivo, au cas où la police ne charge pas.
+MV-06 | * | Forme d'onde qui défile en continu derrière le panneau : demandée par écrit par Eliott le 17.11.2026 (« Oui, en continu »). Bouton pause dans la plaque, arrêt en mouvement réduit et quand l'onglet est caché.
+CO-10 | * | Grille de beats en pointillés derrière la forme d'onde : elle fait partie de la piste de platine DJ choisie par Eliott le 17.11.2026 (« Forme d'onde de platine DJ »), ce n'est pas un fond de grille posé pour décorer.
+CT-13 | * | Filets fins, terminaux carrés et colonnes : système repris de la référence operate.so qu'Eliott a demandé par écrit d'approcher « le plus possible » (17.11.2026), appliqué au contenu réel de l'association.
+CT-03b | * | Dégradés « à une couleur » qui dessinent des formes (charnières, pions, filets de colonnes, rivets, icône pause), sans transition de teinte : ce ne sont pas des dégradés décoratifs.
+CT-25b | css/plate.css | Capitales espacées sur le seul nom « 45 Syndicate » dans la plaque d'en-tête : c'est le logotype en police machine de la référence demandée, pas un sur-titre.
+IM-07b | * | alt vide uniquement sur le pictogramme du logo placé juste à côté du nom écrit « 45 Syndicate » (plaque, fenêtre, carte, pied de page, manifeste) : le nom est déjà lu, l'image est décorative.
+MV-16 | * | Opacité 0 seulement sur l'état fermé des fenêtres (élément dialog, de toute façon caché fermé) et sur le menu mobile replié ; sans JavaScript, le menu s'affiche déplié (@media scripting: none).
+ST-04 | * | Trois colonnes pour le catalogue (des vinyles, objets qu'on ajoute au panier, même structure par nature) et pour la fiche tamponnée (formulaire Fondation / Siège / Statut).
+TE-24 | css/base.css | outline: none seulement sur main:focus, la zone qui reçoit le focus par « Aller au contenu » ; tous les éléments interactifs gardent leur contour :focus-visible.
+CO-09 | * | Textes rangés en cartes : demandé par écrit par Eliott le 17.11.2026 (« il faut mieux disposer les textes, dans des cartes »). Cartes de tailles et de fonds différents selon l'importance du contenu, sans ombre ni icône.

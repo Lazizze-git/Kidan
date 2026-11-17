@@ -1,6 +1,23 @@
+// @ts-check
 // Catalogue de la boutique solidaire.
 // Pour ajouter un vinyle : copier un bloc, changer les valeurs, sauvegarder.
 // `available: false` affiche le produit comme épuisé.
+// `cover` (facultatif) : { src: "./assets/pochettes/xxx.jpg", alt: "Pochette de …" },
+// image carrée de 600 × 600 px au moins. Sans pochette, le site affiche
+// « [Pochette à fournir] ».
+
+/**
+ * @typedef {object} Product
+ * @property {string} id
+ * @property {string} artist
+ * @property {string} title
+ * @property {string} description
+ * @property {number} price
+ * @property {boolean} available
+ * @property {{ src: string, alt: string }} [cover]
+ */
+
+/** @type {Product[]} */
 export const PRODUCTS = [
   {
     id: "vinyle-01",
@@ -9,7 +26,6 @@ export const PRODUCTS = [
     description:
       "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
     price: 30,
-    labelInitial: "A",
     available: true,
   },
   {
@@ -19,7 +35,6 @@ export const PRODUCTS = [
     description:
       "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
     price: 28,
-    labelInitial: "B",
     available: true,
   },
   {
@@ -29,7 +44,6 @@ export const PRODUCTS = [
     description:
       "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
     price: 32,
-    labelInitial: "C",
     available: true,
   },
   {
@@ -39,7 +53,6 @@ export const PRODUCTS = [
     description:
       "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
     price: 25,
-    labelInitial: "D",
     available: true,
   },
   {
@@ -49,7 +62,6 @@ export const PRODUCTS = [
     description:
       "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
     price: 35,
-    labelInitial: "E",
     available: true,
   },
   {
@@ -59,11 +71,14 @@ export const PRODUCTS = [
     description:
       "Courte description du vinyle : style musical, année, anecdote. Deux phrases suffisent.",
     price: 30,
-    labelInitial: "F",
     available: false,
   },
 ];
 
+/**
+ * @param {string} id
+ * @returns {Product | null}
+ */
 export function findProduct(id) {
   return PRODUCTS.find((product) => product.id === id) ?? null;
 }

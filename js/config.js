@@ -1,3 +1,4 @@
+// @ts-check
 // Coordonnées de l'association
 export const CONFIG = {
   // Email qui reçoit les commandes et les questions

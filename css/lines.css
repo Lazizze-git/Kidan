@@ -1,0 +1,87 @@
+/* TRAITS : filets à terminaisons carrées, arcs, lignes d'écriture.
+   La structure se montre : chaque bloc de texte est tenu par un filet. */
+
+.ruled {
+  position: relative;
+  padding-inline-start: var(--rule-pad);
+  border-inline-start: var(--rule);
+}
+
+/* Terminaisons carrées, posées contre le filet */
+.ruled--top::before,
+.ruled--bottom::after,
+.terminal {
+  content: "";
+  position: absolute;
+  width: var(--terminal);
+  height: var(--terminal);
+  background-color: var(--line);
+}
+
+.ruled--top::before {
+  top: 0;
+  left: -1px;
+}
+
+.ruled--bottom::after {
+  bottom: 0;
+  left: -1px;
+}
+
+/* Arcs : un quart de cercle qui relie deux blocs.
+   Chaque arc porte une terminaison sur son extrémité libre. */
+.arc {
+  position: absolute;
+  pointer-events: none;
+  border: 0 solid var(--line);
+}
+
+.arc::before {
+  content: "";
+  position: absolute;
+  width: var(--terminal);
+  height: var(--terminal);
+  background-color: var(--line);
+}
+
+.arc--br {
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-bottom-right-radius: 100% 100%;
+}
+
+.arc--br::before {
+  top: 0;
+  right: calc(-1 * var(--terminal) + 1px);
+}
+
+.arc--tr {
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-top-right-radius: 100% 6rem;
+}
+
+.arc--tr::before {
+  top: 0;
+  left: 0;
+}
+
+.arc--bl {
+  border-left-width: 1px;
+  border-bottom-width: 1px;
+  border-bottom-left-radius: 100% 100%;
+}
+
+.arc--bl::before {
+  bottom: -1px;
+  right: 0;
+  top: auto;
+}
+
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-block: 0.25rem solid transparent;
+  border-inline-start: 0.3125rem solid var(--ink);
+}

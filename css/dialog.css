@@ -1,81 +1,173 @@
-/* Fiche produit : fenêtre modale. */
-
-/* Fiche produit : fenêtre modale ------------------------------ */
-.product-dialog {
-  width: min(92vw, 25rem);
+/* FENÊTRES : fiche vinyle et commande. Une carte blanche avec sa bande
+   de titre ; elle apparaît en fondu depuis 96 %, et repart plus vite. */
+.sheet {
+  width: min(100% - 1.5rem, 46rem);
+  max-height: calc(100dvh - 1.5rem);
   margin: auto;
   padding: 0;
-  border: none;
+  overflow: auto;
+  overscroll-behavior: contain;
+  color: var(--ink);
+  background-color: var(--paper-card);
+  border: 1px solid var(--c-hinge-ring);
+  border-radius: var(--radius-window);
+  box-shadow: var(--shadow-float);
+  opacity: 0;
+  transform: scale(0.96);
+  transition:
+    opacity var(--dur-exit) ease,
+    transform var(--dur-exit) var(--ease-out),
+    overlay var(--dur-exit) allow-discrete,
+    display var(--dur-exit) allow-discrete;
 }
 
-.product-dialog,
-.order-dialog {
-  box-shadow: 0 8px 20px rgba(20, 20, 15, 0.3),
-    0 32px 60px rgba(20, 20, 15, 0.35);
+.sheet[open] {
+  opacity: 1;
+  transform: none;
+  transition-duration: var(--dur-enter);
 }
 
-.product-dialog::backdrop {
-  background: rgba(20, 20, 15, 0.6);
-}
-
-/* « Fermer » est écrit : un mot se lit, une croix se devine. La cible
-   fait 44 px de haut pour le doigt. */
-.product-dialog__close {
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--target-min);
-  padding: 0 0.25rem;
-  margin: -0.6rem -0.25rem -0.6rem 0;
-  font: inherit;
-  font-size: var(--fs-meta);
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: color var(--transition);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .product-dialog__close:hover {
-    color: var(--color-accent);
+@starting-style {
+  .sheet[open] {
+    opacity: 0;
+    transform: scale(0.96);
   }
 }
 
-.product-dialog__body {
-  display: grid;
-  gap: 0.4rem;
-  padding: clamp(1.25rem, 3.5vw, 1.6rem);
+.sheet::backdrop {
+  background-color: rgba(52, 8, 14, 0);
+  transition:
+    background-color var(--dur-exit) ease,
+    overlay var(--dur-exit) allow-discrete,
+    display var(--dur-exit) allow-discrete;
 }
 
-.product-dialog .vinyl {
-  margin-bottom: 1.25rem;
+.sheet[open]::backdrop {
+  background-color: rgba(52, 8, 14, 0.55);
 }
 
-.product-dialog__title {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
+@starting-style {
+  .sheet[open]::backdrop {
+    background-color: rgba(52, 8, 14, 0);
+  }
 }
 
-.product-dialog__desc {
-  margin-top: 0.5rem;
-  font-size: var(--fs-meta);
-  line-height: 1.75;
-  color: var(--color-gray);
-}
-
-.product-dialog__footer {
+.sheet__bar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--color-line);
+  padding: 0.375rem 0.5rem 0.375rem 1rem;
+  background-color: var(--paper-raised);
+  border-bottom: 1px solid var(--c-hinge-ring);
+}
+
+.sheet__label {
+  font-size: var(--fs-row);
+  font-weight: 600;
+}
+
+.sheet__close {
+  min-height: 2.25rem;
+  padding: 0 0.875rem;
+  font-size: var(--fs-small);
+  color: var(--ink);
+  border: var(--rule);
+  border-radius: 999px;
+  transition: background-color var(--dur-hover) ease;
+}
+
+.sheet__body {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.sheet__text {
+  display: grid;
+  align-content: start;
+  gap: 0.5rem;
+}
+
+.sheet__title {
+  font-size: var(--fs-h3);
+}
+
+.sheet__cover .cover {
+  margin: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sheet__close:hover {
+    background-color: var(--tint-hover);
+  }
+}
+
+@media (min-width: 40rem) {
+  .sheet__body {
+    padding: 1.25rem;
+  }
+
+  .sheet__body--product {
+    grid-template-columns: 15rem 1fr;
+  }
+}
+
+/* Lignes de la commande */
+.order__lines {
+  display: grid;
+  border-top: 1px solid var(--c-hinge-ring);
+}
+
+.order-line {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid var(--line-quiet);
+}
+
+.order-line__name {
+  grid-column: 1 / -1;
+}
+
+.order-line__qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.order-line__qty button {
+  display: inline-grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--ink);
+  border: var(--rule);
+  border-radius: 0.375rem;
+}
+
+.order-line__price,
+.order__total {
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+.order__total {
+  font-size: var(--fs-row);
+}
+
+@media (min-width: 40rem) {
+  .order-line {
+    grid-template-columns: 1fr auto 7rem;
+  }
+
+  .order-line__name {
+    grid-column: auto;
+  }
 }

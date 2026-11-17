@@ -1,31 +1,39 @@
-// Point d'entrée JS : initialise la navigation, les copies d'IBAN et la page courante
-import { initAccordions } from "./accordion.js";
-import { initNav } from "./nav.js";
+// @ts-check
+// Point d'entrée : la piste du fond, la navigation, la page courante
 import { initCopyButtons } from "./copy.js";
-import { initFence } from "./fence.js";
+import { initField } from "./field.js";
+import { initNav } from "./nav.js";
+import { initAgenda } from "./pages/agenda.js";
 import { initHome } from "./pages/home.js";
 import { initShop } from "./pages/shop.js";
-import { initAgenda } from "./pages/agenda.js";
 
-// Signale que le JS est actif : le menu mobile peut se replier sans risque
-// (sans JS, il reste ouvert et la navigation reste utilisable)
-document.documentElement.classList.add("js");
-
+/** @type {Record<string, () => void>} */
 const PAGE_INITS = {
   home: initHome,
   shop: initShop,
   agenda: initAgenda,
 };
 
-function start() {
-  initNav();
-  initAccordions();
-  initFence();
-  const initPage = PAGE_INITS[document.body.dataset.page];
-  if (initPage) {
-    initPage();
+/**
+ * Chaque module démarre seul : une erreur dans l'un est signalée au
+ * navigateur sans empêcher les autres de fonctionner.
+ * @param {() => void} init
+ */
+function run(init) {
+  try {
+    init();
+  } catch (error) {
+    window.reportError(error);
   }
-  initCopyButtons();
+}
+
+function start() {
+  const initPage = PAGE_INITS[document.body.dataset.page ?? ""];
+  [initField, initNav, initPage, initCopyButtons].forEach((init) => {
+    if (init) {
+      run(init);
+    }
+  });
 }
 
 if (document.readyState === "loading") {

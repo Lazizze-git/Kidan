@@ -1,142 +1,87 @@
-/* Pied de page : la dalle noire au bas du mur. Fond plein — le
-   grillage s'arrête là — pour que tout le texte reste lisible et que
-   la page se referme sur une note ferme. */
-
+/* PIED DE PAGE : un second panneau vissé sous le premier.
+   L'encadré de la webradio, les liens, le don, l'adresse. */
 .site-footer {
-  --footer-gutter: max(
-    var(--space-gutter),
-    calc((100% - var(--max-width)) / 2 + var(--space-gutter))
-  );
-
-  position: relative;
-  margin-top: var(--space-section);
-  background: var(--color-ink-deep);
-  color: var(--color-paper);
-  overflow: hidden;
+  --hinge-top: var(--s-1);
+  padding: var(--s-2) var(--panel-inset) var(--s-1);
 }
 
-/* Grain de papier journal sur la dalle : elle n'est pas un aplat */
-.site-footer::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: var(--paper-grain);
-  opacity: 0.28;
-  pointer-events: none;
+.footer__grid {
+  display: grid;
+  gap: var(--s-1) var(--s-2);
 }
 
-.site-footer > * {
-  position: relative;
-}
-
-/* Bandeau radio : le seul endroit rouge du pied de page */
 .footer__radio {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  padding: 1.1rem var(--footer-gutter);
-  border-bottom: 1px solid rgba(247, 246, 241, 0.16);
-  font-size: var(--fs-micro);
-  font-weight: 700;
-  letter-spacing: var(--tracking-label);
-  color: rgba(247, 246, 241, 0.9);
-}
-
-.footer__radio-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--c-hotpink);
-}
-
-.footer__main {
   display: grid;
-  gap: 2.5rem;
-  padding: clamp(2.75rem, 6vw, 4.5rem) var(--footer-gutter);
+  align-content: space-between;
+  gap: var(--s-1);
+  min-height: 8rem;
+  padding: 1rem;
+  color: var(--ink-on-wash);
+  background-color: var(--paper-wash);
 }
 
-.footer__tagline {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: -0.025em;
-  line-height: 1.02;
+.footer__radio-name {
+  font-size: var(--fs-row);
+  font-weight: 600;
 }
 
-.footer__block-title {
-  font-size: var(--fs-meta);
-  font-weight: 700;
-  color: var(--c-mellow);
-  margin-bottom: 0.75rem;
-}
-
-.footer__list {
+.footer__links {
   display: grid;
-  font-size: var(--fs-meta);
-  color: rgba(247, 246, 241, 0.82);
+  font-size: var(--fs-small);
 }
 
-.footer__list li {
-  display: flex;
+.footer__links a {
+  display: inline-flex;
   align-items: center;
   min-height: var(--target-min);
-}
-
-/* Les liens du pied sont soulignés en permanence : lisibles sans souris */
-.footer__list a {
-  color: var(--color-paper);
-  text-decoration: underline;
-  text-decoration-color: rgba(247, 246, 241, 0.4);
-  text-underline-offset: 4px;
-  transition: color var(--transition), text-decoration-color var(--transition);
+  padding-block: 0.25rem;
+  color: var(--ink);
+  text-decoration-color: var(--line-quiet);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .footer__list a:hover {
-    color: var(--c-mellow);
-    text-decoration-color: var(--c-mellow);
+  .footer__links a:hover {
+    text-decoration-color: var(--ink);
   }
 }
 
 .footer__legal {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.5rem 2rem;
-  padding: 1.25rem var(--footer-gutter);
-  border-top: 1px solid rgba(247, 246, 241, 0.16);
+  align-items: center;
+  gap: 0.625rem;
+  padding-top: var(--s-1);
   font-size: var(--fs-micro);
-  letter-spacing: 0.06em;
-  color: rgba(247, 246, 241, 0.82);
+  border-top: 1px solid var(--line-quiet);
 }
 
-/* Le 45 SYNDICATE géant : la signature, calée à gauche sur la grille,
-   coupée volontairement en bas comme une affiche qui déborde */
-.footer__brandmark {
-  padding: clamp(1.75rem, 4vw, 2.75rem) var(--footer-gutter) 0;
-  margin-bottom: -0.18em;
-  font-family: var(--font-display);
-  /* Le mot occupe 7,3 fois sa hauteur de corps : on cale la taille sur la
-     largeur utile pour qu'il tienne en entier, du plus petit mobile au bureau */
-  font-size: calc(
-    (min(100vw, var(--max-width)) - 2 * var(--space-gutter)) / 7.5
-  );
-  font-weight: 900;
-  line-height: 0.82;
-  letter-spacing: -0.045em;
-  white-space: nowrap;
-  color: rgba(247, 246, 241, 0.14);
-  user-select: none;
+.footer__legal img {
+  flex: none;
 }
 
-.footer__brandmark span {
-  color: var(--c-hotpink);
-}
+@media (min-width: 48rem) {
+  .footer__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: start;
+  }
 
-@media (min-width: 720px) {
-  .footer__main {
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 2rem;
+  .footer__radio {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    min-height: 10rem;
+  }
+
+  .footer__nav {
+    grid-column: 3 / 4;
+  }
+
+  .footer__cta {
+    grid-column: 4 / 5;
+    justify-self: end;
+  }
+
+  .footer__legal {
+    grid-column: 3 / 5;
+    border-top: 0;
+    padding-top: var(--s-2);
   }
 }

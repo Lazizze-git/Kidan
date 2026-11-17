@@ -1,0 +1,35 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-17T16:38:03.362Z",
+        "reason": "Claude measured in rendered page 17.11.2026: plate strip text sits 11.5-12.5px from its borders, manifesto sheet padding is 84px, mobile menu has s-half/s-1 padding; static detector cannot resolve CSS custom properties"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-17T16:38:03.397Z",
+        "reason": "Claude checked: --shadow-float is an offset elevation shadow (0 1px 2px, 0 12px 32px) at 12-14% of near-black bordeaux under a card that sits on the light gray panel, not a zero-offset halo on the dark field"
+      },
+      {
+        "rule": "radial-halo",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-17T16:38:03.430Z",
+        "reason": "Claude checked: radial-gradients draw the hard-edged hinge pins (ink to 72%, ring 76-96%, then transparent) of the operate.so-style panel requested by Eliott; no soft glow"
+      }
+    ]
+  }
+}

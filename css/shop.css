@@ -1,193 +1,169 @@
-/* Boutique : chaque vinyle est une petite affiche collée sur le
-   grillage, avec sa pochette imprimée ------------------------- */
-.shop {
-  width: var(--frame-width);
-  margin: clamp(2.5rem, 5vw, 3.5rem) auto 0;
-}
-
-/* Le label "Catalogue" : petite étiquette de papier scotchée */
-.shop .section-label {
-  display: inline-flex;
-  background-color: var(--color-paper);
-  background-image: var(--paper-grain);
-  background-blend-mode: multiply;
-  padding: 0.6rem 1rem;
-  margin-bottom: clamp(1.5rem, 4vw, 2.25rem);
-  box-shadow: var(--shadow-chip);
-  transform: rotate(-1.2deg);
-}
-
-/* Grille des affiches-vinyles : le grillage respire entre elles */
-.shop-grid {
+/* BOUTIQUE : le catalogue dans un grand cadre, une fiche par vinyle,
+   et la barre du panier vissée en bas de l'écran. */
+.catalog {
   display: grid;
-  gap: clamp(1.25rem, 3vw, 2.25rem);
-  grid-template-columns: repeat(2, 1fr);
-  align-items: start;
+  gap: var(--s-1);
 }
 
-@media (min-width: 960px) {
-  .shop-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* Carte produit = affiche ------------------------------------ */
-.product-card {
+.catalog__head {
   display: flex;
-  flex-direction: column;
-  padding: clamp(0.9rem, 2.2vw, 1.25rem);
-  cursor: pointer;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-half) var(--s-1);
+  padding-block: var(--s-half);
 }
 
-/* Dans la grille, c'est elle qui décide de la place */
-.shop-grid .product-card {
-  width: auto;
-  margin: 0;
+.catalog__lead {
+  max-width: 36rem;
+  margin-top: var(--s-half);
 }
 
-/* Couleurs, inclinaisons et hauteurs variées */
-.shop-grid .product-card:nth-child(6n + 1) {
-  --tilt: -1.2deg;
+.catalog__frame {
+  padding: 0.75rem;
+  border: 1px solid var(--c-hinge-ring);
+  border-radius: var(--radius-window);
 }
 
-.shop-grid .product-card:nth-child(6n + 2) {
-  --tilt: 0.9deg;
-
-  margin-top: 1.5rem;
+.catalog__grid {
+  display: grid;
+  gap: 0.75rem;
 }
 
-.shop-grid .product-card:nth-child(6n + 3) {
-  --tilt: 1.3deg;
-
-  margin-top: 0.5rem;
+.product {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  column-gap: 1rem;
+  align-content: start;
+  padding: 0.75rem;
+  background-color: var(--paper-raised);
+  border-radius: 0.5rem;
 }
 
-.shop-grid .product-card:nth-child(6n + 4) {
-  --tilt: 0.7deg;
-
-  margin-top: 0.75rem;
+.product > :not(.cover) {
+  grid-column: 2;
 }
 
-.shop-grid .product-card:nth-child(6n + 5) {
-  --tilt: -0.9deg;
-
-  margin-top: 1.75rem;
+.cover {
+  grid-row: 1 / span 4;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background-color: var(--paper);
+  border-radius: 0.375rem;
 }
 
-.shop-grid .product-card:nth-child(6n + 6) {
-  --tilt: -1.4deg;
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* Le titre est un bouton qui ouvre la fiche produit */
-.product-card__more {
-  font: inherit;
-  text-transform: inherit;
-  letter-spacing: inherit;
-  text-align: left;
-  color: inherit;
-  padding: 0;
-  background: none;
-  border: none;
-  cursor: pointer;
+.cover .placeholder-note {
+  height: 100%;
+  padding: 0.5rem;
 }
 
-/* Le titre porte un filet permanent : au toucher, rien ne se survole,
-   il faut que le lien se voie sans souris */
-.product-card__more {
+.product__artist {
+  font-size: var(--fs-small);
+}
+
+.product__title {
+  font-size: var(--fs-row);
+}
+
+.product__open {
+  min-height: var(--target-min);
+  font-weight: 600;
+  text-align: start;
   text-decoration: underline;
-  text-decoration-color: var(--color-line);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
-  transition: text-decoration-color var(--transition);
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--line-quiet);
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color var(--dur-hover) ease;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .product-card {
-    transition: transform var(--transition);
-  }
-
-  .product-card:hover {
-    --tilt: 0deg;
-  }
-
-  .product-card:hover .product-card__more {
-    text-decoration-color: currentColor;
-  }
+.product__desc {
+  font-size: var(--fs-small);
 }
 
-/* Référence catalogue façon pressage : REF 45S-01.
-   Masquée sur mobile — visible dans la fiche produit */
-.product-card__ref {
-  display: none;
-  font-size: var(--fs-micro);
-  font-weight: 700;
-  letter-spacing: var(--tracking-label);
-  color: var(--color-gray);
-  margin-bottom: 0.65rem;
-  font-variant-numeric: tabular-nums;
-}
-
-.product-card__artist {
-  font-size: var(--fs-micro);
-  font-weight: 700;
-  letter-spacing: var(--tracking-label);
-  color: var(--color-gray);
-}
-
-.product-card__title {
-  font-family: var(--font-display);
-  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  margin: 0.4rem 0 0.75rem;
-}
-
-/* Description masquée sur mobile — visible dans la fiche produit */
-.product-card__desc {
-  display: none;
-  font-size: var(--fs-meta);
-  line-height: 1.7;
-  color: var(--color-gray);
-  flex-grow: 1;
-}
-
-/* Sur grand écran, la carte affiche tout */
-@media (min-width: 960px) {
-  .product-card__ref,
-  .product-card__desc {
-    display: block;
-  }
-}
-
-.product-card__footer {
+.product__foot {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  margin-top: clamp(1rem, 2.5vw, 1.5rem);
-  padding-top: clamp(0.75rem, 2vw, 1rem);
-  border-top: 1px solid var(--color-line);
+  gap: 0.5rem 0.75rem;
+  margin-top: 0.75rem;
+  padding-top: 0.625rem;
+  border-top: 1px solid var(--line-quiet);
 }
 
-.product-card__price {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+.product__price {
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 
-.product-card__add {
-  padding: 0.55rem 1.1rem;
-  font-size: var(--fs-micro);
+@media (hover: hover) and (pointer: fine) {
+  .product__open:hover {
+    text-decoration-color: var(--ink);
+  }
 }
 
-.product-card__soldout {
-  font-size: var(--fs-micro);
-  font-weight: 700;
-  letter-spacing: var(--tracking-label);
-  color: var(--color-gray);
+@media (min-width: 40rem) {
+  .catalog__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .product {
+    grid-template-columns: 1fr;
+  }
+
+  .product > :not(.cover) {
+    grid-column: 1;
+  }
+
+  .cover {
+    grid-row: auto;
+    margin-bottom: 0.75rem;
+  }
+}
+
+@media (min-width: 60rem) {
+  .catalog__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .catalog__frame {
+    margin-inline-start: var(--s-1);
+  }
+}
+
+/* Barre du panier : une plaque fixée en bas, visible dès le premier ajout */
+.cart-bar {
+  position: fixed;
+  right: 0;
+  bottom: 0.75rem;
+  left: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  width: min(100% - 2 * var(--field-gutter), var(--site-max) - 2 * var(--field-gutter));
+  margin-inline: auto;
+  padding: 0.625rem 2.25rem;
+  background-color: var(--paper-plate);
+  border: 1px solid var(--c-hinge-ring);
+  --hinge-top: calc(50% - var(--pin-h) / 2);
+}
+
+
+.cart-bar__summary {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* La barre ne cache jamais la fin de la page */
+.catalog:has(~ .cart-bar:not([hidden])) {
+  padding-bottom: 6rem;
 }

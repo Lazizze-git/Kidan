@@ -1,0 +1,184 @@
+/* FENÊTRE : un écran posé sur le panneau (les rubriques du site),
+   et une carte flottante qui le chevauche (la prochaine date). */
+.rubriques__frame {
+  position: relative;
+  padding-inline-start: var(--rule-pad);
+  border-inline-start: var(--rule);
+}
+
+.rubriques__frame::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: var(--terminal);
+  height: var(--terminal);
+  background-color: var(--line);
+}
+
+.window {
+  padding: 0.75rem;
+  background-color: var(--paper);
+  border: 1px solid var(--c-hinge-ring);
+  border-radius: var(--radius-window);
+}
+
+.window__inner {
+  padding: 0.75rem 0.5rem 1rem;
+  background-color: var(--paper-raised);
+  border-radius: calc(var(--radius-window) - 0.375rem);
+}
+
+.window__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.5rem;
+  padding: 0 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--line-quiet);
+}
+
+.window__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--fs-small);
+  font-weight: 600;
+}
+
+.window__title {
+  font-size: var(--fs-small);
+  font-weight: 500;
+}
+
+.tracklist {
+  display: grid;
+}
+
+.track {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "title tag" "desc desc";
+  align-items: center;
+  gap: 0.125rem 0.75rem;
+  min-height: var(--target);
+  padding: 0.75rem 0.5rem;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-quiet);
+  transition: background-color var(--dur-hover) ease;
+}
+
+.track__title {
+  grid-area: title;
+  font-size: var(--fs-row);
+  font-weight: 600;
+}
+
+.track__desc {
+  grid-area: desc;
+  font-size: var(--fs-small);
+}
+
+.track .tag {
+  grid-area: tag;
+}
+
+.track--off {
+  color: var(--ink);
+}
+
+.track--off .track__title,
+.track--off .track__desc {
+  opacity: 0.72;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a.track:hover {
+    background-color: var(--tint-hover);
+  }
+
+  a.track:hover .track__title {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+}
+
+/* Carte flottante : blanche, ombrée, posée à cheval sur la fenêtre */
+.float-card {
+  position: relative;
+  margin: -1.5rem 0.75rem 0;
+  padding: 1rem;
+  background-color: var(--paper-card);
+  border: 1px solid var(--line-quiet);
+  border-radius: var(--radius-window);
+  box-shadow: var(--shadow-float);
+}
+
+.float-card__title {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 0.75rem;
+  font-size: var(--fs-row);
+}
+
+.float-card__box {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.875rem;
+  background-color: var(--paper-raised);
+  border-radius: 0.5rem;
+}
+
+.float-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--fs-small);
+}
+
+.float-card__event {
+  font-size: var(--fs-h3);
+}
+
+.float-card .meta-list {
+  margin-block: 0.75rem;
+}
+
+.float-card__desc {
+  font-size: var(--fs-small);
+}
+
+@media (min-width: 40rem) {
+  .track {
+    grid-template-columns: 9.5rem 1fr auto;
+    grid-template-areas: "title desc tag";
+  }
+}
+
+@media (min-width: 60rem) {
+  .rubriques__frame {
+    padding-inline-start: var(--s-1);
+  }
+
+  .window__inner {
+    min-height: 26rem;
+    padding: 1.25rem 1rem 1.5rem;
+  }
+
+  .tracklist,
+  .window__bar {
+    max-width: calc(100% - 24rem);
+  }
+
+  .float-card {
+    position: absolute;
+    top: 5rem;
+    right: calc(-1 * var(--s-1));
+    width: 25rem;
+    margin: 0;
+  }
+}
